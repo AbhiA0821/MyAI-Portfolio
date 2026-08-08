@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, User, RefreshCw } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Bot, X, Send, User, RefreshCw, Sparkles, Database } from 'lucide-react';
 import type { TargetRole } from '../../types/portfolio';
 
 interface Message {
@@ -13,29 +14,30 @@ interface Message {
 interface ChatWidgetProps {
   isOpen: boolean;
   onClose: () => void;
-  selectedRole: TargetRole;
+  selectedRole?: TargetRole;
 }
 
-export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selectedRole }) => {
+export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       sender: 'assistant',
-      text: `Hello! I am Abhishek's Multi-Agent AI Portfolio Assistant. Ask me anything about his projects (MedIntel, PySpark Data Engine), skills, GitHub repositories, or target ${selectedRole} fit!`,
+      text: `Hello! I am Abhishek's AI Portfolio Assistant. Ask me anything about his projects (MedIntel, PySpark Data Engine), verified Oracle & Infosys certifications, technical skills, or GitHub repositories!`,
       agentName: 'Portfolio Assistant Agent',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [activeStep, setActiveStep] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const suggestedQuestions = [
-    "Explain the MedIntel project architecture.",
-    "What AI technologies does Abhishek use?",
-    "Which projects use Generative AI & RAG?",
-    "What is his experience with PySpark & DuckDB?",
-    "Which roles is he targeting?"
+    "What projects has Abhishek built?",
+    "What technologies does he use?",
+    "Tell me about his certifications.",
+    "Explain MedIntel architecture.",
+    "What is his GitHub profile?"
   ];
 
   const scrollToBottom = () => {
@@ -45,8 +47,6 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
   useEffect(() => {
     if (isOpen) scrollToBottom();
   }, [messages, isOpen]);
-
-  if (!isOpen) return null;
 
   const handleSend = async (textToSend?: string) => {
     const query = textToSend || input;
@@ -63,11 +63,16 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
     if (!textToSend) setInput('');
     setLoading(true);
 
+    // Simulate RAG status steps
+    setActiveStep('RETRIEVING');
+    setTimeout(() => setActiveStep('KNOWLEDGE'), 400);
+    setTimeout(() => setActiveStep('GENERATING'), 800);
+
     try {
       const res = await fetch('http://localhost:8000/api/v1/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: query, role_context: selectedRole })
+        body: JSON.stringify({ message: query })
       });
 
       if (res.ok && res.body) {
@@ -112,21 +117,28 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
         throw new Error('API Unavailable');
       }
     } catch {
-      // Deterministic Grounded RAG Fallback Response
-      let fallbackText = "I don't have that information in my portfolio knowledge base.";
+      // Deterministic Grounded RAG Fallback Response (No Hallucinations)
+      let fallbackText = "I don't have verified information about that yet.";
       const qLower = query.toLowerCase();
 
-      if (qLower.includes("medintel") || (qLower.includes("project") && qLower.includes("medintel"))) {
-        fallbackText = `The MedIntel project is a clinical knowledge RAG search engine. Its visual pipeline flows from PubMed & ClinicalTrials Data Sources -> PySpark ETL -> DuckDB Vector Search -> AI/LLM Citation Layer -> Researcher Dashboard (92.1% precision).`;
-      } else if (qLower.includes("project") || qLower.includes("generative ai") || qLower.includes("rag")) {
-        fallbackText = `Abhishek has developed 3 flagship engineering projects:
-1. MyAI Portfolio: A production-grade multi-agent system with RAG and career intelligence.
-2. MedIntel: Clinical knowledge RAG search engine (PySpark + DuckDB + FastEmbed).
-3. PySpark Real-Time Engine: Streaming pipeline processing 120,000 events/sec.`;
-      } else if (qLower.includes("pyspark") || qLower.includes("duckdb") || qLower.includes("skill")) {
-        fallbackText = `Abhishek's core technical stack includes Multi-Agent Systems, RAG (ChromaDB), PySpark, DuckDB, PyTorch, FastAPI, LangChain/LangGraph, and Ollama/Qwen.`;
-      } else if (qLower.includes("role") || qLower.includes("target")) {
-        fallbackText = `Abhishek is targeting roles as an AI Engineer, ML Engineer, Data Engineer, and Data Scientist.`;
+      if (qLower.includes("medintel")) {
+        fallbackText = `MedIntel is a Clinical Knowledge RAG Search Engine built with PySpark ETL, FastEmbed dense vector embeddings, DuckDB in-memory analytical querying, and FastAPI. Achieves 92.1% Precision@5 on PubMed abstracts.`;
+      } else if (qLower.includes("project") || qLower.includes("built")) {
+        fallbackText = `Abhishek's verified GitHub projects (https://github.com/AbhiA0821) include:
+1. MyAI Portfolio & Multi-Agent Assistant
+2. MedIntel: Clinical Knowledge RAG Engine
+3. PySpark Real-Time Distributed Data Engine`;
+      } else if (qLower.includes("certif")) {
+        fallbackText = `Abhishek holds 5 verified credentials:
+1. Oracle OCI 2025 Certified Generative AI Professional (Sept 30, 2025)
+2. Oracle OCI 2025 Certified Data Science Professional (Oct 13, 2025)
+3. Infosys Springboard Artificial Intelligence (April 23, 2026)
+4. Tata / Forage Data Visualisation (Aug 12, 2025)
+5. Tecspeak SQL Database Internship (July 9, 2025)`;
+      } else if (qLower.includes("skill") || qLower.includes("technolog")) {
+        fallbackText = `Abhishek's verified competencies cover Generative AI (LLMs, RAG, ChromaDB, Ollama), Machine Learning (Scikit-Learn, PyTorch, XGBoost), Data Engineering (PySpark, DuckDB, SQL, Airflow), and FastAPI microservices.`;
+      } else if (qLower.includes("github")) {
+        fallbackText = `Abhishek's verified GitHub profile is https://github.com/AbhiA0821 with 9 repositories and active open-source contributions.`;
       }
 
       setMessages((prev) => [
@@ -141,111 +153,158 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
       ]);
     } finally {
       setLoading(false);
+      setActiveStep(null);
     }
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-full max-w-md h-[560px] bg-[#0B0F17]/95 backdrop-blur-xl rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden animate-slide-up">
-      
-      {/* Header */}
-      <div className="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-600/30">
-            <Bot className="w-4 h-4" />
-          </div>
-          <div>
-            <h3 className="text-xs font-bold text-white font-heading flex items-center gap-1.5">
-              Ask MyAI Assistant <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-1.5 py-0.2 rounded">5 Agents</span>
-            </h3>
-            <p className="text-[10px] text-slate-400 font-mono">Role Context: {selectedRole}</p>
-          </div>
-        </div>
-
-        <button
-          onClick={onClose}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+    <>
+      {/* Floating Bottom-Right Chat Activation Orb Button */}
+      {!isOpen && (
+        <motion.button
+          onClick={() => {
+            // Trigger parent open state
+            const event = new CustomEvent('open-chat-widget');
+            window.dispatchEvent(event);
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          data-ai-element="true"
+          className="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 text-white font-mono text-xs font-bold flex items-center gap-2 shadow-2xl shadow-cyan-500/30 border border-cyan-400/40 backdrop-blur-md cursor-pointer group"
         >
-          <X className="w-4 h-4" />
-        </button>
-      </div>
+          <div className="relative flex h-3 w-3 items-center justify-center">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+            <Sparkles className="relative w-3.5 h-3.5 text-cyan-200" />
+          </div>
+          <span>✦ Ask MyAI</span>
+        </motion.button>
+      )}
 
-      {/* Messages */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-4">
-        {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`flex items-start gap-2.5 ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}
+      {/* Chatbot Panel Modal */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 30 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="fixed bottom-6 right-6 z-50 w-full max-w-md h-[580px] bg-[#050505]/95 backdrop-blur-2xl rounded-3xl border border-slate-700 shadow-2xl shadow-black flex flex-col overflow-hidden"
           >
-            <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs shrink-0 ${
-              msg.sender === 'user' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-blue-400 border border-slate-700'
-            }`}>
-              {msg.sender === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
-            </div>
-
-            <div className={`max-w-[80%] space-y-1 ${msg.sender === 'user' ? 'text-right' : ''}`}>
-              {msg.agentName && msg.sender === 'assistant' && (
-                <span className="text-[9px] font-mono text-purple-400 bg-purple-950/60 px-1.5 py-0.5 rounded border border-purple-800/60 inline-block mb-1">
-                  Agent: {msg.agentName}
-                </span>
-              )}
-
-              <div className={`p-3 rounded-2xl text-xs leading-relaxed ${
-                msg.sender === 'user'
-                  ? 'bg-blue-600 text-white rounded-tr-none'
-                  : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none whitespace-pre-wrap'
-              }`}>
-                {msg.text}
+            
+            {/* Header */}
+            <div className="px-4 py-3 bg-[#0A0A1A] border-b border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                  <Bot className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold text-white font-heading flex items-center gap-1.5">
+                    MyAI Portfolio Assistant
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  </h3>
+                  <p className="text-[10px] text-slate-400 font-mono">Grounded RAG Knowledge Base</p>
+                </div>
               </div>
 
-              <span className="text-[9px] font-mono text-slate-500 block px-1">
-                {msg.timestamp}
-              </span>
+              <button
+                onClick={onClose}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
-          </div>
-        ))}
 
-        {loading && (
-          <div className="flex items-center gap-2 text-xs font-mono text-blue-400 bg-slate-900/60 p-2 rounded-xl border border-slate-800 w-fit">
-            <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-            <span>Agent Orchestrator Routing...</span>
-          </div>
+            {/* Visual Execution Status Bar */}
+            {activeStep && (
+              <div className="px-4 py-1.5 bg-slate-950 border-b border-slate-900 flex items-center justify-between text-[9px] font-mono text-cyan-400">
+                <span className="flex items-center gap-1">
+                  <Database className="w-3 h-3 text-cyan-400 animate-spin" />
+                  <span>STEP: {activeStep}</span>
+                </span>
+                <span>VERIFIED SOURCES ONLY</span>
+              </div>
+            )}
+
+            {/* Messages Area */}
+            <div className="flex-1 p-4 overflow-y-auto space-y-4">
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`flex items-start gap-2.5 ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}
+                >
+                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs shrink-0 ${
+                    msg.sender === 'user' ? 'bg-indigo-600 text-white' : 'bg-[#0A0A1A] text-cyan-400 border border-slate-800'
+                  }`}>
+                    {msg.sender === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
+                  </div>
+
+                  <div className={`max-w-[80%] space-y-1 ${msg.sender === 'user' ? 'text-right' : ''}`}>
+                    {msg.agentName && msg.sender === 'assistant' && (
+                      <span className="text-[9px] font-mono text-purple-400 bg-purple-950/60 px-1.5 py-0.5 rounded border border-purple-800/60 inline-block mb-1">
+                        Agent: {msg.agentName}
+                      </span>
+                    )}
+
+                    <div className={`p-3 rounded-2xl text-xs leading-relaxed ${
+                      msg.sender === 'user'
+                        ? 'bg-blue-600 text-white rounded-tr-none'
+                        : 'bg-[#0A0A1A] border border-slate-800 text-slate-200 rounded-tl-none whitespace-pre-wrap'
+                    }`}>
+                      {msg.text}
+                    </div>
+
+                    <span className="text-[9px] font-mono text-slate-500 block px-1">
+                      {msg.timestamp}
+                    </span>
+                  </div>
+                </div>
+              ))}
+
+              {loading && (
+                <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 bg-[#0A0A1A] p-2.5 rounded-xl border border-slate-800 w-fit">
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin text-cyan-400" />
+                  <span>Agent Retrieval & Synthesis...</span>
+                </div>
+              )}
+
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Suggested Quick Questions */}
+            <div className="px-3 py-2 bg-slate-950 border-t border-slate-800/80 overflow-x-auto whitespace-nowrap flex gap-1.5 text-[10px]">
+              {suggestedQuestions.map((q, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSend(q)}
+                  className="px-2.5 py-1 rounded-full bg-[#0A0A1A] text-slate-300 border border-slate-800 hover:border-cyan-500 hover:text-cyan-400 transition-colors shrink-0 cursor-pointer"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+
+            {/* Input Form */}
+            <div className="p-3 bg-[#0A0A1A] border-t border-slate-800 flex items-center gap-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                placeholder="Ask about Abhishek's verified profile..."
+                className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              />
+              <button
+                onClick={() => handleSend()}
+                disabled={!input.trim() || loading}
+                className="p-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 disabled:opacity-50 text-white transition-colors cursor-pointer"
+              >
+                <Send className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+          </motion.div>
         )}
-
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Suggested Quick Questions */}
-      <div className="px-3 py-2 bg-slate-950 border-t border-slate-800/80 overflow-x-auto whitespace-nowrap flex gap-1.5 text-[10px]">
-        {suggestedQuestions.map((q, idx) => (
-          <button
-            key={idx}
-            onClick={() => handleSend(q)}
-            className="px-2.5 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-800 hover:border-blue-500 hover:text-blue-400 transition-colors shrink-0"
-          >
-            {q}
-          </button>
-        ))}
-      </div>
-
-      {/* Input Box */}
-      <div className="p-3 bg-slate-900 border-t border-slate-800 flex items-center gap-2">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-          placeholder={`Ask about Abhishek's ${selectedRole} background...`}
-          className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
-        />
-        <button
-          onClick={() => handleSend()}
-          disabled={!input.trim() || loading}
-          className="p-2 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white transition-colors"
-        >
-          <Send className="w-3.5 h-3.5" />
-        </button>
-      </div>
-
-    </div>
+      </AnimatePresence>
+    </>
   );
 };

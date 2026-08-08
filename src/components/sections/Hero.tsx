@@ -1,241 +1,200 @@
-import React, { useState } from 'react';
-import { Bot, Sparkles, ArrowRight, GitBranch, Globe, FileText, CheckCircle2, ShieldCheck, Terminal, Cpu, Database, Network } from 'lucide-react';
-import type { Profile, TargetRole } from '../../types/portfolio';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Bot, Sparkles, Terminal, FileText, ArrowRight, Database, Cpu } from 'lucide-react';
+import type { Profile } from '../../types/portfolio';
 
 interface HeroProps {
   profile: Profile;
-  selectedRole: TargetRole;
   onOpenChat: () => void;
+  onOpenResume?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat }) => {
-  const [activePipelineStep, setActivePipelineStep] = useState<number>(1);
-
-  const roleBadges: Record<TargetRole, string[]> = {
-    'AI Engineer': ['Multi-Agent Systems', 'RAG Pipelines', 'LangGraph', 'Local LLMs (Ollama)', 'Tool Execution', 'FastAPI'],
-    'ML Engineer': ['PyTorch', 'Model Alignment', 'Scikit-Learn', 'NLP', 'Model Evaluation', 'FastAPI'],
-    'Data Engineer': ['PySpark', 'DuckDB', 'Apache Airflow', 'ETL Pipelines', 'SQL', 'PostgreSQL'],
-    'Data Scientist': ['Statistical Modeling', 'Scikit-Learn', 'PyTorch', 'NLP', 'Data Pipelines', 'Python']
+export const Hero: React.FC<HeroProps> = ({
+  profile,
+  onOpenChat,
+  onOpenResume
+}) => {
+  const scrollToProjects = () => {
+    const el = document.getElementById('projects');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const pipelineSteps = [
-    { id: 1, label: "User Query", sub: "Natural Language Input", icon: Terminal, color: "text-blue-400 border-blue-500/40 bg-blue-950/60" },
-    { id: 2, label: "AI Orchestrator", sub: "Master Intent Router", icon: Network, color: "text-indigo-400 border-indigo-500/40 bg-indigo-950/60" },
-    { id: 3, label: "Intent Router", sub: "5 Specialized Agents", icon: Cpu, color: "text-purple-400 border-purple-500/40 bg-purple-950/60" },
-    { id: 4, label: "RAG & Tools", sub: "ChromaDB / GitHub API", icon: Database, color: "text-emerald-400 border-emerald-500/40 bg-emerald-950/60" },
-    { id: 5, label: "LLM Engine", sub: "Ollama Qwen2.5 / Groq", icon: Sparkles, color: "text-amber-400 border-amber-500/40 bg-amber-950/60" },
-    { id: 6, label: "Grounded Response", sub: "Zero-Hallucination Stream", icon: CheckCircle2, color: "text-cyan-400 border-cyan-500/40 bg-cyan-950/60" }
-  ];
-
   return (
-    <section className="relative pt-32 pb-24 md:pt-36 md:pb-28 overflow-hidden bg-[#0F0E0E]">
-      
-      {/* Background Cinematic Lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-gradient-to-tr from-blue-600/20 via-indigo-600/15 to-purple-600/20 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute top-20 right-10 w-96 h-96 bg-blue-500/10 blur-[110px] rounded-full pointer-events-none" />
+    <section id="hero" className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#050505]">
+      {/* Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-      {/* Floating Corner Metadata Tags (Reference Polish) */}
-      <div className="absolute left-[4%] top-[18%] hidden xl:block max-w-[240px] text-left select-none pointer-events-none font-mono text-[10px] leading-relaxed tracking-wider text-slate-500 uppercase">
-        ABHISHEK AINAPURE • BUILDING INTELLIGENT,<br/>MULTI-AGENT AI ARCHITECTURES WITH FASTAPI & RAG.
-      </div>
-      <div className="absolute right-[4%] top-[18%] hidden xl:block max-w-[240px] text-right select-none pointer-events-none font-mono text-[10px] leading-relaxed tracking-wider text-slate-500 uppercase">
-        CRAFTING PRODUCTION-GRADE LLM PIPELINES<br/>POWERED BY PYTHON, PYSPARK & CHROMADB.
-      </div>
+      {/* Atmospheric Light Leaks (Purple & Cyan Radial Glows) */}
+      <div className="absolute top-1/4 left-1/6 w-[450px] h-[450px] bg-purple-600/15 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/6 w-[450px] h-[450px] bg-cyan-600/15 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Left Column: Kinetic Hero Copy */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            
-            {/* System Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs font-mono shadow-sm">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          {/* Left Content Column */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 space-y-6 text-left"
+          >
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0A0A1A] border border-slate-800 backdrop-blur-md shadow-lg shadow-black/40">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span className="text-slate-300">Target Role:</span>
-              <span className="text-blue-400 font-semibold">{selectedRole}</span>
+              <span className="text-xs font-mono text-slate-300 font-medium tracking-wide">
+                AI & DATA SCIENCE SPECIALIST • {profile.availability}
+              </span>
             </div>
 
-            {/* High-Impact Kinetic Headline */}
-            <div className="space-y-1">
-              <span className="text-sm font-mono text-slate-400 uppercase tracking-widest block">Hello, I'm {profile.name}</span>
-              <h1 className="hero-kinetic-title text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
-                AI &amp; DATA SCIENCE <br />
-                <span className="gradient-text">ENGINEER</span>
+            {/* Main Title & Headline */}
+            <div>
+              <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-[1.1] mb-4">
+                Hello, I'm{' '}
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  {profile.name}
+                </span>
               </h1>
+
+              <p className="text-xl sm:text-2xl font-semibold text-slate-200 leading-snug">
+                Building intelligent systems with Machine Learning, Generative AI and modern data technologies.
+              </p>
             </div>
 
-            {/* Positioning Statement */}
-            <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl">
-              Architecting production-grade <span className="text-white font-semibold">Generative AI</span>, <span className="text-white font-semibold">LLM Applications</span>, <span className="text-white font-semibold">RAG Pipelines</span>, <span className="text-white font-semibold">Multi-Agent Systems</span>, and scalable <span className="text-white font-semibold">Data Engineering</span> workflows.
+            {/* Profile Bio */}
+            <p className="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+              Experienced in engineering production RAG search engines, multi-agent frameworks, PySpark ETL pipelines, and high-throughput FastAPI backends.
             </p>
-
-            <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
-              {profile.bio}
-            </p>
-
-            {/* Core Technical Stack Badges */}
-            <div className="space-y-2 pt-1">
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block">Core Technical Focus for {selectedRole}:</span>
-              <div className="flex flex-wrap gap-2">
-                {roleBadges[selectedRole].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 rounded-lg bg-slate-900/90 border border-slate-800 text-xs font-medium text-blue-300 hover:border-blue-500/40 transition-colors"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 flex flex-wrap items-center gap-4">
-              <a
-                href="#projects"
-                className="glowing-border-btn px-6 py-3.5 text-white font-semibold text-sm transition-all flex items-center gap-2 group cursor-pointer"
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button
+                onClick={scrollToProjects}
+                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold text-sm flex items-center gap-2 shadow-xl shadow-blue-500/20 transition-all hover:scale-[1.02] cursor-pointer"
               >
-                <span className="relative z-10">View Projects</span>
-                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+                <span>EXPLORE MY WORK</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
 
               <button
                 onClick={onOpenChat}
-                className="px-6 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-100 font-semibold text-sm border border-slate-700 transition-all flex items-center gap-2 shadow-sm"
+                className="px-6 py-3.5 rounded-xl bg-[#0A0A1A] border border-slate-700/80 hover:border-slate-500 text-slate-200 hover:text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-black/50 backdrop-blur-md transition-all hover:scale-[1.02] cursor-pointer"
               >
-                <Bot className="w-4 h-4 text-blue-400" />
-                <span>Ask MyAI</span>
+                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <span>ASK MYAI</span>
               </button>
 
-              <a
-                href="#experience"
-                className="px-5 py-3.5 rounded-full bg-slate-900/60 hover:bg-slate-800/80 text-slate-300 text-sm font-medium border border-slate-800 transition-all flex items-center gap-2"
-              >
-                <FileText className="w-4 h-4 text-purple-400" />
-                <span>View Resume</span>
-              </a>
+              {onOpenResume && (
+                <button
+                  onClick={onOpenResume}
+                  className="px-5 py-3.5 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-slate-600 text-slate-300 hover:text-white font-semibold text-sm flex items-center gap-2 transition-all cursor-pointer"
+                >
+                  <FileText className="w-4 h-4 text-slate-400" />
+                  <span>VIEW RESUME</span>
+                </button>
+              )}
             </div>
 
-            {/* Social Links */}
-            <div className="pt-2 flex items-center gap-4 text-slate-400 text-xs font-mono">
-              <a href={profile.githubUrl} target="_blank" rel="noreferrer" className="hover:text-white flex items-center gap-1 transition-colors">
-                <GitBranch className="w-4 h-4" /> GitHub
-              </a>
-              <span className="text-slate-700">•</span>
-              <a href={profile.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-white flex items-center gap-1 transition-colors">
-                <Globe className="w-4 h-4" /> LinkedIn
-              </a>
-              <span className="text-slate-700">•</span>
-              <span className="text-slate-400">{profile.location}</span>
-            </div>
+          </motion.div>
 
-          </div>
-
-          {/* Right Column: Futuristic "MyAI Engine" Pipeline Visualization */}
-          <div className="lg:col-span-5">
-            <div className="glass-panel p-6 rounded-2xl border border-slate-800 shadow-2xl relative space-y-4">
+          {/* Right Visual Element (2.5D Layered Preview Cards) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 relative"
+          >
+            <div className="relative w-full aspect-[4/4] max-w-lg mx-auto flex items-center justify-center">
               
-              {/* Header Status Bar */}
-              <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                  <span className="text-xs font-mono text-slate-400 ml-2">myai_engine_pipeline</span>
+              {/* Back Card (Layer 1) */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-4 left-4 right-8 bottom-12 p-6 rounded-2xl bg-[#0A0A1A]/80 border border-slate-800/80 backdrop-blur-xl shadow-2xl space-y-4 pointer-events-none opacity-60 transform -rotate-3"
+              >
+                <div className="flex items-center gap-2 text-xs font-mono text-purple-400">
+                  <Database className="w-4 h-4" />
+                  <span>Distributed PySpark & DuckDB Engine</span>
                 </div>
-                <div className="flex items-center gap-2 text-[10px] font-mono">
-                  <span className="text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800">
-                    SYSTEM ONLINE
+                <div className="h-2 rounded-full bg-slate-800 w-3/4" />
+                <div className="h-2 rounded-full bg-slate-800 w-1/2" />
+              </motion.div>
+
+              {/* Middle Card (Layer 2) */}
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute top-10 left-8 right-4 bottom-6 p-6 rounded-2xl bg-[#0A0A1A]/90 border border-purple-500/30 backdrop-blur-xl shadow-2xl space-y-4 pointer-events-none transform rotate-2"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-mono text-cyan-400">
+                    <Bot className="w-4 h-4" />
+                    <span>MyAI Multi-Agent System</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded">
+                    5 NODES ACTIVE
                   </span>
-                  <span className="text-blue-400 bg-blue-950/80 px-2 py-0.5 rounded border border-blue-800">
-                    RAG ACTIVE
+                </div>
+                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-300">
+                    <span>Intent Router</span>
+                    <span className="text-purple-400">Classified</span>
+                  </div>
+                  <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div className="w-4/5 h-full bg-gradient-to-r from-blue-500 to-cyan-400" />
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Front Card (Main 2.5D Layer) */}
+              <motion.div
+                whileHover={{ scale: 1.02, rotate: 0 }}
+                transition={{ duration: 0.3 }}
+                className="relative z-10 w-full p-6 rounded-2xl bg-[#0A0A1A] border border-cyan-500/40 backdrop-blur-2xl shadow-2xl shadow-black space-y-5 transform hover:shadow-cyan-500/20"
+              >
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400">
+                      <Terminal className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-mono font-bold uppercase text-white">
+                        MedIntel Clinical RAG
+                      </h3>
+                      <p className="text-[10px] font-mono text-slate-400">PubMed & Vector Pipeline</p>
+                    </div>
+                  </div>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-950 text-blue-300 border border-blue-800">
+                    Precision 92.1%
                   </span>
                 </div>
-              </div>
 
-              {/* Status Indicator Badges */}
-              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
-                <div className="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between">
-                  <span className="text-slate-400">AGENT ROUTER:</span>
-                  <span className="text-purple-400 font-bold">READY</span>
+                <div className="space-y-2 text-xs font-mono text-slate-300">
+                  <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+                    <span>Embedding Index:</span>
+                    <span className="text-cyan-400">FastEmbed Dense</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+                    <span>Query Throughput:</span>
+                    <span className="text-purple-400">120 QPS</span>
+                  </div>
                 </div>
-                <div className="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between">
-                  <span className="text-slate-400">LLM PROVIDER:</span>
-                  <span className="text-amber-400 font-bold">OLLAMA / GROQ</span>
+
+                <div className="pt-2 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                  <span className="flex items-center gap-1">
+                    <Cpu className="w-3.5 h-3.5 text-emerald-400" /> Grounded Generation
+                  </span>
+                  <span className="text-blue-400">PySpark + DuckDB</span>
                 </div>
-              </div>
-
-              {/* Visual Pipeline Interactive Steps */}
-              <div className="space-y-2 pt-2">
-                <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider font-semibold">
-                  Interactive AI System Architecture:
-                </p>
-
-                <div className="space-y-2">
-                  {pipelineSteps.map((step) => {
-                    const StepIcon = step.icon;
-                    const isActive = activePipelineStep === step.id;
-                    return (
-                      <div
-                        key={step.id}
-                        onMouseEnter={() => setActivePipelineStep(step.id)}
-                        className={`p-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
-                          isActive
-                            ? 'bg-slate-900/90 border-blue-500/60 shadow-lg shadow-blue-500/10 translate-x-1'
-                            : 'bg-slate-950/60 border-slate-800/80 hover:bg-slate-900/40'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`p-1.5 rounded-lg border text-xs ${step.color}`}>
-                            <StepIcon className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <span className="text-xs font-bold text-slate-200 block font-heading">{step.label}</span>
-                            <span className="text-[10px] font-mono text-slate-400 block">{step.sub}</span>
-                          </div>
-                        </div>
-
-                        {isActive && (
-                          <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Engine Footer */}
-              <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Grounded RAG
-                </span>
-                <span className="text-blue-400 font-semibold cursor-pointer hover:underline" onClick={onOpenChat}>
-                  Test Live Engine →
-                </span>
-              </div>
+              </motion.div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
-
-      {/* Horizon Glow SVG Curve (Reference Aesthetics) */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none overflow-hidden opacity-40">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-full">
-          <defs>
-            <linearGradient id="horizonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0" />
-              <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#EC4899" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path d="M 0 100 Q 600 20 1200 100" fill="none" stroke="url(#horizonGrad)" strokeWidth="3" />
-        </svg>
-      </div>
-
     </section>
   );
 };

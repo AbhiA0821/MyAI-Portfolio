@@ -1,5 +1,5 @@
 export type TargetRole = 'AI Engineer' | 'ML Engineer' | 'Data Engineer' | 'Data Scientist';
-export type SkillProficiency = 'Advanced' | 'Proficient' | 'Intermediate';
+export type SkillProficiency = 'Learning' | 'Working Knowledge' | 'Hands-on' | 'Strong' | 'Proficient' | 'Advanced';
 
 export interface Profile {
   name: string;
@@ -22,6 +22,19 @@ export interface SkillCategory {
     iconName?: string;
     roles: TargetRole[];
   }[];
+}
+
+export interface ExpertiseItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  iconName: string;
+  technologies: string[];
+  proficiencyLabel: SkillProficiency;
+  detailedOverview: string;
+  keyCapabilities: string[];
+  targetRoles: TargetRole[];
 }
 
 export interface PipelineNode {
@@ -47,6 +60,7 @@ export interface Project {
   demoUrl?: string;
   featured: boolean;
   targetRoles: TargetRole[];
+  category: 'AI / GenAI' | 'Machine Learning' | 'Data Engineering' | 'Web / Software';
 }
 
 export interface ExperienceItem {
@@ -94,3 +108,32 @@ export interface GitHubStats {
     updatedAt: string;
   }[];
 }
+
+export interface TimelineMilestone {
+  year: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: string[];
+  technologies: string[];
+  status: 'Completed' | 'In Progress' | 'Future Focus';
+}
+
+export interface StatItem {
+  id: string;
+  label: string;
+  numericValue: number;
+  suffix: string;
+  description: string;
+  iconName: string;
+}
+
+export interface WorkflowStep {
+  stepNumber: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  techStack: string[];
+  statusBadge: string;
+}
+

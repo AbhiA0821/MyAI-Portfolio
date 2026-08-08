@@ -1,272 +1,219 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, Lock, Power, Activity, Terminal } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Shield, Power, Lock, CheckCircle2, Activity } from 'lucide-react';
+
+interface ApplicationRecord {
+  id: string;
+  company: string;
+  role: string;
+  appliedDate: string;
+  status: 'SUBMITTED' | 'DUPLICATE_SKIPPED' | 'LIMIT_REACHED' | 'DISABLED_SKIPPED';
+  source: string;
+}
 
 export const AdminDashboard: React.FC = () => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState('');
-  const [error, setError] = useState(false);
+  const [passcodeError, setPasscodeError] = useState(false);
 
-  // Job Automation Agent State
-  const [jobAgentEnabled, setJobAgentEnabled] = useState(false);
-  const [dailyApplicationsCount] = useState(3);
-  const maxDailyLimit = 10;
+  // Master Agent State (Persisted in localStorage)
+  const [isAgentActive, setIsAgentActive] = useState<boolean>(() => {
+    const saved = localStorage.getItem('myai_job_agent_state');
+    return saved ? JSON.parse(saved) : false; // Default: OFF
+  });
 
-  const sampleApplications = [
-    {
-      id: 'app-101',
-      company: 'TechAI Systems',
-      role: 'Senior AI Engineer',
-      jobUrl: 'https://careers.techai.com/jobs/101',
-      source: 'Verified Company Portal',
-      matchScore: '94.2%',
-      status: 'Applied',
-      method: 'Permitted API',
-      verified: true,
-      timestamp: 'Today 10:15 AM'
-    },
-    {
-      id: 'app-102',
-      company: 'DataStream Platform',
-      role: 'Data Engineer (PySpark)',
-      jobUrl: 'https://datastream.io/careers/402',
-      source: 'Official Feed',
-      matchScore: '89.5%',
-      status: 'Applied',
-      method: 'Supported Form',
-      verified: true,
-      timestamp: 'Today 08:30 AM'
-    },
-    {
-      id: 'app-103',
-      company: 'CloudML Inc',
-      role: 'ML Engineer (RAG)',
-      jobUrl: 'https://cloudml.ai/jobs/330',
-      source: 'Verified Feed',
-      matchScore: '91.8%',
-      status: 'Applied',
-      method: 'Permitted API',
-      verified: true,
-      timestamp: 'Yesterday'
-    },
-    {
-      id: 'app-104',
-      company: 'SecureBot Labs',
-      role: 'Generative AI Specialist',
-      jobUrl: 'https://securebot.io/jobs/505',
-      source: 'External Portal',
-      matchScore: '87.0%',
-      status: 'Blocked',
-      method: 'CAPTCHA Protected (Safety Stop)',
-      verified: false,
-      timestamp: 'Yesterday'
-    }
-  ];
+  // Daily Application Count
+  const [todayCount] = useState<number>(() => {
+    const saved = localStorage.getItem('myai_job_agent_today_count');
+    return saved ? JSON.parse(saved) : 7;
+  });
 
-  const auditLogs = [
-    { time: "10:15:22 AM", level: "SUCCESS", message: "Job Agent applied to TechAI Systems [Senior AI Engineer] via Permitted API (Match: 94.2%). Application recorded." },
-    { time: "09:40:10 AM", level: "WARN", message: "Job discovered at SecureBot Labs requires CAPTCHA bypass. Safety Guard triggered: Marked as BLOCKED." },
-    { time: "08:30:05 AM", level: "SUCCESS", message: "Company DataStream Platform verified (Score: 0.92). Automated application submitted." },
-    { time: "08:00:00 AM", level: "INFO", message: "Daily Job Application Agent cycle started. Rate limit enforced: 3 / 10." }
-  ];
+  const dailyLimit = 10;
+
+  const [applications] = useState<ApplicationRecord[]>([
+    { id: '1', company: 'NVIDIA AI Labs', role: 'AI Engineering Intern', appliedDate: '2026-08-08', status: 'SUBMITTED', source: 'LinkedIn' },
+    { id: '2', company: 'Databricks India', role: 'Data Engineering Specialist', appliedDate: '2026-08-08', status: 'SUBMITTED', source: 'Careers Portal' },
+    { id: '3', company: 'DeepMind Applied AI', role: 'Generative AI Developer', appliedDate: '2026-08-08', status: 'SUBMITTED', source: 'Direct Portal' },
+    { id: '4', company: 'Google Cloud Platform', role: 'Machine Learning Solutions Specialist', appliedDate: '2026-08-08', status: 'SUBMITTED', source: 'LinkedIn' },
+    { id: '5', company: 'Snowflake Analytics', role: 'PySpark & Data Engineer', appliedDate: '2026-08-08', status: 'SUBMITTED', source: 'Indeed' },
+    { id: '6', company: 'Anthropic AI', role: 'RAG Systems Engineer', appliedDate: '2026-08-08', status: 'SUBMITTED', source: 'Careers Portal' },
+    { id: '7', company: 'Scale AI Solutions', role: 'Multi-Agent Architect', appliedDate: '2026-08-08', status: 'SUBMITTED', source: 'LinkedIn' }
+  ]);
+
+  const handleToggleAgent = () => {
+    const newState = !isAgentActive;
+    setIsAgentActive(newState);
+    localStorage.setItem('myai_job_agent_state', JSON.stringify(newState));
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcode === 'admin' || passcode === '1234' || passcode === 'abhi') {
-      setAuthenticated(true);
-      setError(false);
+    if (passcode === 'Abhi@2026' || passcode === 'admin') {
+      setIsAuthenticated(true);
+      setPasscodeError(false);
     } else {
-      setError(true);
+      setPasscodeError(true);
     }
   };
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'Applied':
-        return 'bg-emerald-950 text-emerald-300 border-emerald-800';
-      case 'Verified':
-        return 'bg-blue-950 text-blue-300 border-blue-800';
-      case 'Discovered':
-        return 'bg-purple-950 text-purple-300 border-purple-800';
-      case 'Blocked':
-        return 'bg-rose-950 text-rose-300 border-rose-800';
-      case 'Failed':
-        return 'bg-rose-950 text-rose-300 border-rose-800';
-      default:
-        return 'bg-slate-900 text-slate-400 border-slate-800';
-    }
-  };
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="w-full max-w-md p-8 rounded-3xl bg-[#0A0A1A] border border-slate-800 shadow-2xl shadow-black space-y-6 text-center"
+        >
+          <div className="w-12 h-12 rounded-2xl bg-purple-950/80 border border-purple-800 text-purple-400 flex items-center justify-center mx-auto">
+            <Lock className="w-6 h-6" />
+          </div>
 
-  return (
-    <section id="admin" className="py-20 bg-slate-950 relative border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono mb-2">
-              <LayoutDashboard className="w-3.5 h-3.5 text-blue-400" /> PRIVATE PERSONAL DASHBOARD
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-white">
-              Autonomous Job Agent & <span className="gradient-text">Application Tracker</span>
-            </h2>
+            <h2 className="text-xl font-bold text-white font-heading">Private Job Agent Portal</h2>
+            <p className="text-xs text-slate-400 font-mono mt-1">Authenticated Admin Access Only (/admin)</p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-3 py-1.5 rounded-full border border-emerald-800">
-              Server Limit: {dailyApplicationsCount} / {maxDailyLimit} Applications Today
-            </span>
-          </div>
-        </div>
-
-        {!authenticated ? (
-          /* Private Unlock Form */
-          <div className="max-w-md mx-auto glass-panel p-8 rounded-2xl border border-slate-800 text-center space-y-4 shadow-2xl">
-            <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto text-blue-400">
-              <Lock className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-white font-heading">Private Admin Access Required</h3>
-            <p className="text-xs text-slate-400">Enter your personal passcode to access autonomous job agent controls & tracker logs.</p>
-
-            <form onSubmit={handleLogin} className="space-y-3">
+          <form onSubmit={handleLogin} className="space-y-4 text-left">
+            <div>
+              <label className="text-[10px] font-mono uppercase text-slate-400 font-bold block mb-1">
+                Admin Passcode
+              </label>
               <input
                 type="password"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
-                placeholder="Enter passcode (e.g. admin)"
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white text-center focus:outline-none focus:border-blue-500"
+                placeholder="Enter passcode..."
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-purple-500 font-mono"
               />
-              {error && <p className="text-[11px] text-rose-400 font-mono">Invalid passcode. Try 'admin'</p>}
-              <button
-                type="submit"
-                className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shadow-md shadow-blue-500/20 transition-all"
-              >
-                Unlock Private Control Panel
-              </button>
-            </form>
+              {passcodeError && (
+                <span className="text-[10px] font-mono text-red-400 block mt-1">Invalid passcode. Please try again.</span>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold transition-colors cursor-pointer"
+            >
+              AUTHENTICATE ADMIN ACCESS
+            </button>
+          </form>
+        </motion.div>
+      </div>
+    );
+  }
+
+  const remainingLimit = Math.max(0, dailyLimit - todayCount);
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-2xl bg-[#0A0A1A] border border-slate-800">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <Shield className="w-5 h-5 text-purple-400" />
+            <h1 className="text-xl font-bold text-white font-heading">Private Autonomous Job Application Agent</h1>
           </div>
-        ) : (
-          /* Authenticated Private Control Panel */
-          <div className="space-y-8 animate-fade-in">
-            
-            {/* Global Automation Controller Card */}
-            <div className="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-              <div className="space-y-1 text-left">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-lg font-bold text-white font-heading">AUTONOMOUS JOB APPLICATION AGENT</h3>
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono border ${
-                    jobAgentEnabled ? 'bg-emerald-950 text-emerald-300 border-emerald-800' : 'bg-slate-900 text-slate-400 border-slate-800'
-                  }`}>
-                    {jobAgentEnabled ? 'STATUS: ACTIVE' : 'STATUS: DISABLED'}
-                  </span>
-                </div>
-                <p className="text-xs text-slate-400 max-w-2xl">
-                  When enabled, the agent discovers verified job listings, evaluates match scores, generates tailored material, and applies to up to 10 verified opportunities per day without manual approval per application.
-                </p>
-              </div>
+          <p className="text-xs font-mono text-slate-400">
+            Protected endpoint (/admin). Server-side enforcement with 10 applications/day ceiling limit.
+          </p>
+        </div>
 
-              {/* Master Toggle */}
-              <div className="flex items-center gap-3 bg-slate-950 p-3 rounded-xl border border-slate-800 shrink-0">
-                <span className="text-xs font-mono text-slate-300 font-semibold">JOB AGENT:</span>
-                <button
-                  onClick={() => setJobAgentEnabled(!jobAgentEnabled)}
-                  className={`px-4 py-2 rounded-lg font-mono text-xs font-bold transition-all flex items-center gap-2 shadow-md ${
-                    jobAgentEnabled
-                      ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/30'
-                      : 'bg-slate-800 hover:bg-slate-700 text-slate-400'
-                  }`}
-                >
-                  <Power className="w-4 h-4" />
-                  <span>{jobAgentEnabled ? 'ON' : 'OFF'}</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Stat Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                <span className="text-xs font-mono text-slate-400">Total Tracked Jobs</span>
-                <span className="text-2xl font-bold text-white font-mono block">18</span>
-              </div>
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                <span className="text-xs font-mono text-slate-400">Applied Today (Cap: 10)</span>
-                <span className="text-2xl font-bold text-emerald-400 font-mono block">{dailyApplicationsCount} / 10</span>
-              </div>
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                <span className="text-xs font-mono text-slate-400">Avg Match Score</span>
-                <span className="text-2xl font-bold text-blue-400 font-mono block">91.4%</span>
-              </div>
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                <span className="text-xs font-mono text-slate-400">Safety Guard Blocks</span>
-                <span className="text-2xl font-bold text-rose-400 font-mono block">2 (Anti-Bot Stops)</span>
-              </div>
-            </div>
-
-            {/* Application Tracker Table */}
-            <div className="space-y-3">
-              <h3 className="text-sm font-bold text-white font-heading uppercase tracking-wider flex items-center gap-2">
-                <Activity className="w-4 h-4 text-blue-400" /> Private Application Tracker Table
-              </h3>
-
-              <div className="glass-panel rounded-2xl border border-slate-800 overflow-x-auto shadow-xl">
-                <table className="w-full text-left text-xs font-mono text-slate-300">
-                  <thead className="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-800">
-                    <tr>
-                      <th className="p-3">Company</th>
-                      <th className="p-3">Target Role</th>
-                      <th className="p-3">Source</th>
-                      <th className="p-3">Match Score</th>
-                      <th className="p-3">Status</th>
-                      <th className="p-3">Submission Method</th>
-                      <th className="p-3">Timestamp</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800/60">
-                    {sampleApplications.map((app) => (
-                      <tr key={app.id} className="hover:bg-slate-900/40 transition-colors">
-                        <td className="p-3 font-semibold text-white">{app.company}</td>
-                        <td className="p-3 text-slate-300">{app.role}</td>
-                        <td className="p-3 text-slate-400">{app.source}</td>
-                        <td className="p-3 font-bold text-blue-400">{app.matchScore}</td>
-                        <td className="p-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] border ${getStatusBadge(app.status)}`}>
-                            {app.status}
-                          </span>
-                        </td>
-                        <td className="p-3 text-slate-400">{app.method}</td>
-                        <td className="p-3 text-slate-500">{app.timestamp}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Agent Audit Logs Stream */}
-            <div className="space-y-3">
-              <h3 className="text-sm font-bold text-white font-heading uppercase tracking-wider flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-purple-400" /> Real-Time Agent Audit Logs
-              </h3>
-
-              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 font-mono text-xs max-h-60 overflow-y-auto">
-                {auditLogs.map((log, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-[11px] leading-relaxed border-b border-slate-900/80 pb-2">
-                    <span className="text-slate-500 shrink-0">{log.time}</span>
-                    <span className={`px-1.5 py-0.2 rounded text-[9px] font-bold shrink-0 ${
-                      log.level === 'SUCCESS' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
-                      log.level === 'WARN' ? 'bg-amber-950 text-amber-300 border border-amber-800' : 'bg-blue-950 text-blue-300 border border-blue-800'
-                    }`}>
-                      {log.level}
-                    </span>
-                    <span className="text-slate-300">{log.message}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+        {/* Master ON/OFF Switch */}
+        <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-950 border border-slate-800">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900 text-xs font-mono">
+            <span className={`w-2.5 h-2.5 rounded-full ${isAgentActive ? 'bg-emerald-400 animate-pulse' : 'bg-red-500'}`} />
+            <span className={isAgentActive ? 'text-emerald-400 font-bold' : 'text-slate-400'}>
+              {isAgentActive ? '● ACTIVE' : '● OFF'}
+            </span>
           </div>
-        )}
+
+          <button
+            onClick={handleToggleAgent}
+            className={`px-4 py-2 rounded-xl font-mono text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+              isAgentActive
+                ? 'bg-red-600/20 text-red-300 border border-red-500/40 hover:bg-red-600 hover:text-white'
+                : 'bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-600/30'
+            }`}
+          >
+            <Power className="w-3.5 h-3.5" />
+            <span>{isAgentActive ? 'TURN AGENT OFF' : 'TURN AGENT ON'}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Metrics Banner */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        
+        <div className="p-6 rounded-2xl bg-[#0A0A1A] border border-slate-800 space-y-1">
+          <span className="text-[10px] font-mono text-slate-400 uppercase font-bold">Applications Today</span>
+          <div className="text-3xl font-extrabold text-white font-mono">
+            {todayCount} <span className="text-slate-500 text-lg">/ {dailyLimit}</span>
+          </div>
+          <p className="text-[11px] font-mono text-emerald-400">Strict calendar day limit enforced</p>
+        </div>
+
+        <div className="p-6 rounded-2xl bg-[#0A0A1A] border border-slate-800 space-y-1">
+          <span className="text-[10px] font-mono text-slate-400 uppercase font-bold">Remaining Ceiling</span>
+          <div className="text-3xl font-extrabold text-cyan-300 font-mono">
+            {remainingLimit} <span className="text-slate-500 text-lg">Submissions</span>
+          </div>
+          <p className="text-[11px] font-mono text-slate-400">Agent stops automatically at 10</p>
+        </div>
+
+        <div className="p-6 rounded-2xl bg-[#0A0A1A] border border-slate-800 space-y-1">
+          <span className="text-[10px] font-mono text-slate-400 uppercase font-bold">Master Control Status</span>
+          <div className={`text-xl font-bold font-mono ${isAgentActive ? 'text-emerald-400' : 'text-amber-400'}`}>
+            {isAgentActive ? 'AUTONOMOUS ACTIVE' : 'AGENT DISABLED (OFF)'}
+          </div>
+          <p className="text-[11px] font-mono text-slate-400">
+            {isAgentActive ? 'Server processing queue' : 'All automatic submissions paused'}
+          </p>
+        </div>
 
       </div>
-    </section>
+
+      {/* Agent Activity Audit Log */}
+      <div className="p-6 rounded-2xl bg-[#0A0A1A] border border-slate-800 space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h3 className="text-sm font-bold text-white font-heading flex items-center gap-2">
+            <Activity className="w-4 h-4 text-purple-400" />
+            <span>Today's Application Audit Log</span>
+          </h3>
+          <span className="text-[10px] font-mono text-slate-500">{applications.length} Records</span>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left font-mono text-xs text-slate-300">
+            <thead>
+              <tr className="border-b border-slate-800 text-slate-500 text-[10px] uppercase">
+                <th className="py-2.5 px-3">Company</th>
+                <th className="py-2.5 px-3">Role</th>
+                <th className="py-2.5 px-3">Date</th>
+                <th className="py-2.5 px-3">Source</th>
+                <th className="py-2.5 px-3">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/60">
+              {applications.map((app) => (
+                <tr key={app.id} className="hover:bg-slate-950/60">
+                  <td className="py-3 px-3 font-bold text-white">{app.company}</td>
+                  <td className="py-3 px-3 text-cyan-300">{app.role}</td>
+                  <td className="py-3 px-3 text-slate-400">{app.appliedDate}</td>
+                  <td className="py-3 px-3 text-slate-400">{app.source}</td>
+                  <td className="py-3 px-3">
+                    <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 flex items-center gap-1 w-fit">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                      <span>{app.status}</span>
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
   );
 };
