@@ -3,13 +3,13 @@
 @layer base {
   :root {
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-heading: 'Outfit', 'Inter', sans-serif;
+    --font-heading: 'Plus Jakarta Sans', 'Outfit', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
   
   body {
     font-family: var(--font-sans);
-    background-color: #0B0F17;
+    background-color: #0F0E0E;
     color: #F9FAFB;
     overflow-x: hidden;
   }
@@ -25,21 +25,21 @@
 
 /* Glassmorphism & Custom Effects */
 .glass-panel {
-  background: rgba(22, 31, 48, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 14, 14, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-hover:hover {
-  background: rgba(30, 41, 64, 0.8);
-  border-color: rgba(59, 130, 246, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
+  background: rgba(22, 22, 26, 0.85);
+  border-color: rgba(59, 130, 246, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px -5px rgba(59, 130, 246, 0.2);
 }
 
 .gradient-text {
@@ -48,11 +48,45 @@
   -webkit-text-fill-color: transparent;
 }
 
-.gradient-border {
+.hero-kinetic-title {
+  font-family: var(--font-heading);
+  letter-spacing: -0.04em;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+  text-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
+}
+
+/* Spinning Conic Border Animation for Floating Navbar */
+@keyframes navbar-border-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.animate-navbar-border-spin {
+  animation: navbar-border-spin 8s linear infinite;
+}
+
+/* Glowing Border Button */
+.glowing-border-btn {
   position: relative;
-  border-radius: 0.75rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(139, 92, 246, 0.5));
+  border-radius: 9999px;
+  background: rgba(15, 14, 14, 0.9);
   padding: 1px;
+}
+
+.glowing-border-btn::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899, #3B82F6);
+  background-size: 200% 200%;
+  animation: navbar-border-spin 6s linear infinite;
+  z-index: -1;
+  opacity: 0.75;
 }
 
 /* Custom Scrollbar */
@@ -62,7 +96,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0F17;
+  background: #0F0E0E;
 }
 
 ::-webkit-scrollbar-thumb {

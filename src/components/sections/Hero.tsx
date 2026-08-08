@@ -28,15 +28,24 @@ export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat })
   ];
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-36 md:pb-24 overflow-hidden">
-      {/* Background Cinematic Glow Effects */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-blue-600/20 via-indigo-600/15 to-purple-600/20 blur-[130px] rounded-full pointer-events-none" />
-      <div className="absolute top-20 right-10 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
+    <section className="relative pt-32 pb-24 md:pt-36 md:pb-28 overflow-hidden bg-[#0F0E0E]">
+      
+      {/* Background Cinematic Lighting */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-gradient-to-tr from-blue-600/20 via-indigo-600/15 to-purple-600/20 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-20 right-10 w-96 h-96 bg-blue-500/10 blur-[110px] rounded-full pointer-events-none" />
+
+      {/* Floating Corner Metadata Tags (Reference Polish) */}
+      <div className="absolute left-[4%] top-[18%] hidden xl:block max-w-[240px] text-left select-none pointer-events-none font-mono text-[10px] leading-relaxed tracking-wider text-slate-500 uppercase">
+        ABHISHEK AINAPURE • BUILDING INTELLIGENT,<br/>MULTI-AGENT AI ARCHITECTURES WITH FASTAPI & RAG.
+      </div>
+      <div className="absolute right-[4%] top-[18%] hidden xl:block max-w-[240px] text-right select-none pointer-events-none font-mono text-[10px] leading-relaxed tracking-wider text-slate-500 uppercase">
+        CRAFTING PRODUCTION-GRADE LLM PIPELINES<br/>POWERED BY PYTHON, PYSPARK & CHROMADB.
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Side: Hero Copy */}
+          {/* Left Column: Kinetic Hero Copy */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* System Status Pill */}
@@ -49,26 +58,25 @@ export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat })
               <span className="text-blue-400 font-semibold">{selectedRole}</span>
             </div>
 
-            {/* Main Title & Positioning */}
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading tracking-tight text-white leading-[1.12]">
-                Hello, I'm <span className="gradient-text">{profile.name}</span>
+            {/* High-Impact Kinetic Headline */}
+            <div className="space-y-1">
+              <span className="text-sm font-mono text-slate-400 uppercase tracking-widest block">Hello, I'm {profile.name}</span>
+              <h1 className="hero-kinetic-title text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
+                AI &amp; DATA SCIENCE <br />
+                <span className="gradient-text">ENGINEER</span>
               </h1>
-              <p className="text-xl sm:text-2xl text-blue-400 font-heading font-semibold tracking-wide">
-                AI Engineer & Data Science Professional
-              </p>
             </div>
 
             {/* Positioning Statement */}
             <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl">
-              Architecting production-grade <span className="text-white font-medium">Generative AI</span>, <span className="text-white font-medium">LLM Applications</span>, <span className="text-white font-medium">RAG Pipelines</span>, <span className="text-white font-medium">Multi-Agent Systems</span>, and scalable <span className="text-white font-medium">Data Engineering</span> workflows.
+              Architecting production-grade <span className="text-white font-semibold">Generative AI</span>, <span className="text-white font-semibold">LLM Applications</span>, <span className="text-white font-semibold">RAG Pipelines</span>, <span className="text-white font-semibold">Multi-Agent Systems</span>, and scalable <span className="text-white font-semibold">Data Engineering</span> workflows.
             </p>
 
             <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
               {profile.bio}
             </p>
 
-            {/* Role-Specific Core Stack Pills */}
+            {/* Core Technical Stack Badges */}
             <div className="space-y-2 pt-1">
               <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block">Core Technical Focus for {selectedRole}:</span>
               <div className="flex flex-wrap gap-2">
@@ -83,19 +91,19 @@ export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat })
               </div>
             </div>
 
-            {/* Hero Buttons */}
+            {/* Action Buttons */}
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <a
                 href="#projects"
-                className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-600/30 flex items-center gap-2 group"
+                className="glowing-border-btn px-6 py-3.5 text-white font-semibold text-sm transition-all flex items-center gap-2 group cursor-pointer"
               >
-                <span>View Projects</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10">View Projects</span>
+                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
               <button
                 onClick={onOpenChat}
-                className="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 font-semibold text-sm border border-slate-700 transition-all flex items-center gap-2 shadow-sm"
+                className="px-6 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-100 font-semibold text-sm border border-slate-700 transition-all flex items-center gap-2 shadow-sm"
               >
                 <Bot className="w-4 h-4 text-blue-400" />
                 <span>Ask MyAI</span>
@@ -103,7 +111,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat })
 
               <a
                 href="#experience"
-                className="px-5 py-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 text-slate-300 text-sm font-medium border border-slate-800 transition-all flex items-center gap-2"
+                className="px-5 py-3.5 rounded-full bg-slate-900/60 hover:bg-slate-800/80 text-slate-300 text-sm font-medium border border-slate-800 transition-all flex items-center gap-2"
               >
                 <FileText className="w-4 h-4 text-purple-400" />
                 <span>View Resume</span>
@@ -111,7 +119,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat })
             </div>
 
             {/* Social Links */}
-            <div className="pt-2 flex items-center gap-4 text-slate-400 text-xs">
+            <div className="pt-2 flex items-center gap-4 text-slate-400 text-xs font-mono">
               <a href={profile.githubUrl} target="_blank" rel="noreferrer" className="hover:text-white flex items-center gap-1 transition-colors">
                 <GitBranch className="w-4 h-4" /> GitHub
               </a>
@@ -125,7 +133,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat })
 
           </div>
 
-          {/* Right Side: Futuristic "MyAI Engine" Pipeline Visualization */}
+          {/* Right Column: Futuristic "MyAI Engine" Pipeline Visualization */}
           <div className="lg:col-span-5">
             <div className="glass-panel p-6 rounded-2xl border border-slate-800 shadow-2xl relative space-y-4">
               
@@ -213,6 +221,21 @@ export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat })
 
         </div>
       </div>
+
+      {/* Horizon Glow SVG Curve (Reference Aesthetics) */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none overflow-hidden opacity-40">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-full">
+          <defs>
+            <linearGradient id="horizonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0" />
+              <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#EC4899" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path d="M 0 100 Q 600 20 1200 100" fill="none" stroke="url(#horizonGrad)" strokeWidth="3" />
+        </svg>
+      </div>
+
     </section>
   );
 };
