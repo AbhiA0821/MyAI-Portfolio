@@ -33,6 +33,7 @@ import { GitHubSection } from './components/sections/GitHubSection';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ChatWidget } from './components/ai/ChatWidget';
 import { ResumeModal } from './components/sections/ResumeModal';
+import { SectionTransition } from './components/motion/SectionTransition';
 import { Bot, Mail, ArrowUpRight, Lock } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './components/common/SocialIcons';
 
@@ -84,7 +85,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-slate-100 font-sans selection:bg-blue-600 selection:text-white relative">
+    <div className="min-h-screen bg-[#050505] text-slate-100 font-sans selection:bg-blue-600 selection:text-white relative overflow-x-hidden">
       
       {/* Intelligent Custom Cursor */}
       <CustomCursor />
@@ -127,14 +128,16 @@ export function App() {
               onOpenResume={() => setIsResumeOpen(true)}
             />
 
-            {/* Marquee Strip 1 */}
+            {/* Transition: Hero -> About */}
+            <SectionTransition />
             <TextMarqueeStrip items={marqueeStrip1} direction="left" speed={30} />
-
-            {/* Stats Overview */}
             <StatsSection stats={statsData} />
 
             {/* 03. About Section */}
             <About profile={profileData} />
+
+            {/* Transition: About -> Skills */}
+            <SectionTransition />
 
             {/* 04. Technical Skills & Ecosystem */}
             <Skills
@@ -144,6 +147,9 @@ export function App() {
 
             {/* "WHAT I BUILD" Expertise Areas */}
             <ExpertiseSection expertiseList={expertiseData} />
+
+            {/* Transition: Skills -> Experience & Certifications */}
+            <SectionTransition />
 
             {/* 05. Experience & Verified Certifications */}
             <CertificationsSection />
@@ -158,17 +164,27 @@ export function App() {
             {/* Technology Arsenal Marquee */}
             <ArsenalMarquee />
 
+            {/* Transition: Experience -> Projects */}
+            <SectionTransition />
+
             {/* 06. Projects Engineering Case Studies */}
             <Projects projects={projectsData} />
 
+            {/* Transition: Projects -> GitHub */}
+            <SectionTransition />
+
             {/* 07. GitHub Repositories & Stats */}
             <GitHubSection stats={githubStatsData} />
+
+            {/* Transition: GitHub -> MyAI */}
+            <SectionTransition />
 
             {/* 08. MyAI Visual Architecture & Workflow */}
             <ScrollWorkflow />
             <SystemShowcase />
 
-            {/* Marquee Strip 2 */}
+            {/* Transition: MyAI -> Contact */}
+            <SectionTransition />
             <TextMarqueeStrip items={marqueeStrip2} direction="right" speed={35} />
           </>
         )}

@@ -1,6 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap, Target, Cpu, Code2, Award } from 'lucide-react';
+import { GraduationCap, Target, Cpu, Award } from 'lucide-react';
 import type { Profile } from '../../types/portfolio';
 import { RevealText } from '../motion/RevealText';
 import { TiltCard } from '../motion/TiltCard';
