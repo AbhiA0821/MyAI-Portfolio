@@ -8,7 +8,7 @@ export const AdminDashboard: React.FC = () => {
 
   // Job Automation Agent State
   const [jobAgentEnabled, setJobAgentEnabled] = useState(false);
-  const [dailyApplicationsCount, setDailyApplicationsCount] = useState(3);
+  const [dailyApplicationsCount] = useState(3);
   const maxDailyLimit = 10;
 
   const sampleApplications = [
