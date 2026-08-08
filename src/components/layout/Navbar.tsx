@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Bot, Sparkles, Code2, Briefcase, User, Cpu, LayoutDashboard, Menu, X } from 'lucide-react';
+import { Bot, Sparkles, Code2, Briefcase, User, Cpu, LayoutDashboard, GitBranch, Menu, X } from 'lucide-react';
 import type { TargetRole } from '../../types/portfolio';
 
 interface NavbarProps {
@@ -22,8 +22,10 @@ export const Navbar: React.FC<NavbarProps> = ({ selectedRole, onSelectRole, onOp
 
   const navLinks = [
     { name: 'About', href: '#about', icon: User },
-    { name: 'Skills', href: '#skills', icon: Cpu },
+    { name: 'Engineering', href: '#capabilities', icon: Cpu },
     { name: 'Projects', href: '#projects', icon: Code2 },
+    { name: 'Skills', href: '#skills', icon: Cpu },
+    { name: 'GitHub', href: '#github', icon: GitBranch },
     { name: 'Experience', href: '#experience', icon: Briefcase },
     { name: 'Career Intel', href: '#career', icon: Sparkles },
     { name: 'Admin', href: '#admin', icon: LayoutDashboard }
@@ -56,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ selectedRole, onSelectRole, onOp
         </a>
 
         {/* Target Role Selector Pills (Desktop) */}
-        <div className="hidden lg:flex items-center bg-slate-900/80 border border-slate-800 rounded-full p-1 shadow-inner">
+        <div className="hidden xl:flex items-center bg-slate-900/80 border border-slate-800 rounded-full p-1 shadow-inner">
           <span className="text-xs font-mono text-slate-400 px-3 py-1 flex items-center gap-1">
             <Sparkles className="w-3 h-3 text-amber-400" /> Mode:
           </span>
@@ -76,14 +78,14 @@ export const Navbar: React.FC<NavbarProps> = ({ selectedRole, onSelectRole, onOp
         </div>
 
         {/* Navigation Links (Desktop) */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-5">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-1.5"
+              className="text-xs font-medium text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-1"
             >
-              <link.icon className="w-4 h-4 text-slate-400" />
+              <link.icon className="w-3.5 h-3.5 text-slate-400" />
               {link.name}
             </a>
           ))}
@@ -91,15 +93,15 @@ export const Navbar: React.FC<NavbarProps> = ({ selectedRole, onSelectRole, onOp
           {/* Ask MyAI Trigger Button */}
           <button
             onClick={onOpenChat}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-semibold hover:opacity-95 transition-all shadow-md shadow-blue-500/20 flex items-center gap-2 group"
+            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-semibold hover:opacity-95 transition-all shadow-md shadow-blue-500/20 flex items-center gap-1.5 group"
           >
-            <Bot className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <Bot className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
             <span>Ask MyAI</span>
           </button>
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center gap-2">
+        <div className="lg:hidden flex items-center gap-2">
           <button
             onClick={onOpenChat}
             className="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold flex items-center gap-1.5"
@@ -118,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({ selectedRole, onSelectRole, onOp
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0B0F17]/95 backdrop-blur-xl border-b border-slate-800 px-4 pt-3 pb-6 space-y-4">
+        <div className="lg:hidden bg-[#0B0F17]/95 backdrop-blur-xl border-b border-slate-800 px-4 pt-3 pb-6 space-y-4">
           <div className="space-y-1">
             <p className="text-xs font-mono text-slate-400 px-2 mb-2">TARGET CAREER ROLE:</p>
             <div className="grid grid-cols-2 gap-2">
@@ -140,13 +142,13 @@ export const Navbar: React.FC<NavbarProps> = ({ selectedRole, onSelectRole, onOp
               ))}
             </div>
           </div>
-          <div className="pt-2 border-t border-slate-800 space-y-2">
+          <div className="pt-2 border-t border-slate-800 grid grid-cols-2 gap-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 text-slate-200 text-sm font-medium py-2 px-2 hover:bg-slate-800 rounded-lg"
+                className="flex items-center gap-2 text-slate-200 text-xs font-medium py-2 px-2 hover:bg-slate-800 rounded-lg"
               >
                 <link.icon className="w-4 h-4 text-blue-400" />
                 {link.name}

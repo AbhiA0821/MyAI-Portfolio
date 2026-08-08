@@ -21,8 +21,8 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
     {
       id: '1',
       sender: 'assistant',
-      text: `Hello! I am Abhishek's Multi-Agent AI Career Assistant. Ask me anything about his projects, skills, PySpark/RAG experience, or target ${selectedRole} fit!`,
-      agentName: 'Profile Agent',
+      text: `Hello! I am Abhishek's Multi-Agent AI Portfolio Assistant. Ask me anything about his projects (MedIntel, PySpark Data Engine), skills, GitHub repositories, or target ${selectedRole} fit!`,
+      agentName: 'Portfolio Assistant Agent',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -31,9 +31,10 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const suggestedQuestions = [
-    "What AI & RAG projects has Abhishek built?",
-    "What is his experience with PySpark and Data Pipelines?",
     "Explain the MedIntel project architecture.",
+    "What AI technologies does Abhishek use?",
+    "Which projects use Generative AI & RAG?",
+    "What is his experience with PySpark & DuckDB?",
     "Which roles is he targeting?"
   ];
 
@@ -63,7 +64,6 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
     setLoading(true);
 
     try {
-      // Streamed or Direct Local Assistant Engine API call
       const res = await fetch('http://localhost:8000/api/v1/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -95,7 +95,6 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
           const chunk = decoder.decode(value, { stream: true });
           assistantText += chunk;
 
-          // Parse Agent Badge if present
           if (assistantText.startsWith('[Agent: ') && assistantText.includes(']')) {
             const endIdx = assistantText.indexOf(']');
             agentName = assistantText.substring(8, endIdx);
@@ -112,18 +111,20 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
       } else {
         throw new Error('API Unavailable');
       }
-    } catch (err) {
-      // Deterministic RAG Fallback Response
-      let fallbackText = "I don't have that information in the portfolio knowledge base.";
+    } catch {
+      // Deterministic Grounded RAG Fallback Response
+      let fallbackText = "I don't have that information in my portfolio knowledge base.";
       const qLower = query.toLowerCase();
 
-      if (qLower.includes("project") || qLower.includes("medintel") || qLower.includes("pyspark")) {
-        fallbackText = `Abhishek has built 3 flagship projects: 
-1. MyAI Portfolio: A production multi-agent system with RAG and job matching.
-2. MedIntel: Clinical knowledge RAG search with citation guards (92.1% precision).
+      if (qLower.includes("medintel") || (qLower.includes("project") && qLower.includes("medintel"))) {
+        fallbackText = `The MedIntel project is a clinical knowledge RAG search engine. Its visual pipeline flows from PubMed & ClinicalTrials Data Sources -> PySpark ETL -> DuckDB Vector Search -> AI/LLM Citation Layer -> Researcher Dashboard (92.1% precision).`;
+      } else if (qLower.includes("project") || qLower.includes("generative ai") || qLower.includes("rag")) {
+        fallbackText = `Abhishek has developed 3 flagship engineering projects:
+1. MyAI Portfolio: A production-grade multi-agent system with RAG and career intelligence.
+2. MedIntel: Clinical knowledge RAG search engine (PySpark + DuckDB + FastEmbed).
 3. PySpark Real-Time Engine: Streaming pipeline processing 120,000 events/sec.`;
-      } else if (qLower.includes("skill") || qLower.includes("pyspark") || qLower.includes("rag")) {
-        fallbackText = `Abhishek specializes in Multi-Agent Systems, RAG vector search (ChromaDB), PySpark data engineering, PyTorch, FastAPI, and local LLMs (Ollama/Qwen).`;
+      } else if (qLower.includes("pyspark") || qLower.includes("duckdb") || qLower.includes("skill")) {
+        fallbackText = `Abhishek's core technical stack includes Multi-Agent Systems, RAG (ChromaDB), PySpark, DuckDB, PyTorch, FastAPI, LangChain/LangGraph, and Ollama/Qwen.`;
       } else if (qLower.includes("role") || qLower.includes("target")) {
         fallbackText = `Abhishek is targeting roles as an AI Engineer, ML Engineer, Data Engineer, and Data Scientist.`;
       }
@@ -134,7 +135,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
           id: Date.now().toString(),
           sender: 'assistant',
           text: fallbackText,
-          agentName: 'RAG Retriever Guard',
+          agentName: 'Portfolio Assistant Agent',
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
       ]);
@@ -144,9 +145,9 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-full max-w-md h-[550px] bg-[#0B0F17]/95 backdrop-blur-xl rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden animate-slide-up">
+    <div className="fixed bottom-6 right-6 z-50 w-full max-w-md h-[560px] bg-[#0B0F17]/95 backdrop-blur-xl rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden animate-slide-up">
       
-      {/* Widget Header */}
+      {/* Header */}
       <div className="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-600/30">
@@ -154,9 +155,9 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
           </div>
           <div>
             <h3 className="text-xs font-bold text-white font-heading flex items-center gap-1.5">
-              MyAI Assistant <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-1.5 py-0.2 rounded">RAG Active</span>
+              Ask MyAI Assistant <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-1.5 py-0.2 rounded">5 Agents</span>
             </h3>
-            <p className="text-[10px] text-slate-400 font-mono">Mode: {selectedRole}</p>
+            <p className="text-[10px] text-slate-400 font-mono">Role Context: {selectedRole}</p>
           </div>
         </div>
 
@@ -168,7 +169,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
         </button>
       </div>
 
-      {/* Messages Scroll Area */}
+      {/* Messages */}
       <div className="flex-1 p-4 overflow-y-auto space-y-4">
         {messages.map((msg) => (
           <div
@@ -206,7 +207,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose, selecte
         {loading && (
           <div className="flex items-center gap-2 text-xs font-mono text-blue-400 bg-slate-900/60 p-2 rounded-xl border border-slate-800 w-fit">
             <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-            <span>Agent Orchestrator Reasoning...</span>
+            <span>Agent Orchestrator Routing...</span>
           </div>
         )}
 

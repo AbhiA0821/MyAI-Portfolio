@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Project } from '../../types/portfolio';
-import { X, ExternalLink, GitBranch, CheckCircle, Zap, Layers } from 'lucide-react';
+import { X, ExternalLink, GitBranch, CheckCircle, Zap, Layers, ArrowRight } from 'lucide-react';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -13,7 +13,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
       <div 
-        className="glass-panel w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl border border-slate-700 shadow-2xl relative p-6 sm:p-8"
+        className="glass-panel w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl border border-slate-700 shadow-2xl relative p-6 sm:p-8 space-y-6"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -25,7 +25,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         </button>
 
         {/* Modal Header */}
-        <div className="space-y-3 mb-6">
+        <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             {project.targetRoles.map((role) => (
               <span key={role} className="px-2.5 py-0.5 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-[11px] font-mono">
@@ -45,7 +45,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
               <h3 className="text-xs font-mono text-rose-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
-                <X className="w-4 h-4" /> Technical Challenge
+                <X className="w-4 h-4" /> Technical Challenge / Problem
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">{project.problem}</p>
             </div>
@@ -58,25 +58,38 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </div>
           </div>
 
-          {/* Architecture Steps */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
-              <Layers className="w-4 h-4 text-purple-400" /> Pipeline Architecture
-            </h3>
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              {project.architecture.map((step, idx) => (
-                <div key={idx} className="flex items-start gap-2 text-xs font-mono text-slate-300">
-                  <span className="text-purple-400 font-bold">{idx + 1}.</span>
-                  <span>{step}</span>
+          {/* Visual Architecture Pipeline Diagram */}
+          {project.pipelineDiagram && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
+                <Layers className="w-4 h-4 text-purple-400" /> Interactive Data Flow Pipeline
+              </h3>
+
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {project.pipelineDiagram.map((node, idx) => (
+                    <div key={idx} className="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1 relative">
+                      <div className="flex items-center justify-between text-blue-400 text-xs font-mono font-bold">
+                        <span>{node.step}</span>
+                        {idx < project.pipelineDiagram!.length - 1 && (
+                          <ArrowRight className="w-3.5 h-3.5 text-slate-600 hidden lg:block" />
+                        )}
+                      </div>
+                      <p className="text-[11px] text-slate-300 leading-snug">{node.description}</p>
+                      <span className="inline-block text-[9px] font-mono text-purple-300 bg-purple-950/80 px-1.5 py-0.2 rounded border border-purple-800">
+                        {node.tech}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Key Metrics */}
           <div className="space-y-2">
             <h3 className="text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
-              <Zap className="w-4 h-4 text-amber-400" /> Performance Metrics
+              <Zap className="w-4 h-4 text-amber-400" /> Verified Performance Metrics
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {Object.entries(project.metrics).map(([key, val]) => (

@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import type { TargetRole } from './types/portfolio';
-import { profileData, skillCategoriesData, projectsData, experienceData, educationData, certificationsData } from './data/portfolioData';
+import { profileData, skillCategoriesData, projectsData, experienceData, educationData, certificationsData, githubStatsData } from './data/portfolioData';
 import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/sections/Hero';
 import { About } from './components/sections/About';
+import { EngineeringCapabilities } from './components/sections/EngineeringCapabilities';
 import { Projects } from './components/sections/Projects';
 import { Skills } from './components/sections/Skills';
+import { GitHubSection } from './components/sections/GitHubSection';
 import { Experience } from './components/sections/Experience';
-import { CareerIntel } from './components/career/CareerIntel';
+import { CareerIntelligence } from './components/career/CareerIntelligence';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ChatWidget } from './components/ai/ChatWidget';
 import { Bot } from 'lucide-react';
@@ -39,6 +41,8 @@ export function App() {
           selectedRole={selectedRole}
         />
 
+        <EngineeringCapabilities />
+
         <Projects
           projects={projectsData}
           selectedRole={selectedRole}
@@ -49,6 +53,8 @@ export function App() {
           selectedRole={selectedRole}
         />
 
+        <GitHubSection stats={githubStatsData} />
+
         <Experience
           experiences={experienceData}
           education={educationData}
@@ -56,7 +62,7 @@ export function App() {
           selectedRole={selectedRole}
         />
 
-        <CareerIntel
+        <CareerIntelligence
           selectedRole={selectedRole}
           skillCategories={skillCategoriesData}
         />

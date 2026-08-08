@@ -1,4 +1,5 @@
 export type TargetRole = 'AI Engineer' | 'ML Engineer' | 'Data Engineer' | 'Data Scientist';
+export type SkillProficiency = 'Advanced' | 'Proficient' | 'Intermediate';
 
 export interface Profile {
   name: string;
@@ -17,10 +18,16 @@ export interface SkillCategory {
   category: string;
   skills: {
     name: string;
-    level: 'Advanced' | 'Intermediate' | 'Proficient';
+    level: SkillProficiency;
     iconName?: string;
     roles: TargetRole[];
   }[];
+}
+
+export interface PipelineNode {
+  step: string;
+  description: string;
+  tech: string;
 }
 
 export interface Project {
@@ -32,6 +39,7 @@ export interface Project {
   problem: string;
   solution: string;
   architecture: string[];
+  pipelineDiagram?: PipelineNode[];
   technologies: string[];
   aiTechniques: string[];
   metrics: { [key: string]: string };
@@ -72,12 +80,17 @@ export interface CertificationItem {
   skills: string[];
 }
 
-export interface GitHubRepoSummary {
-  name: string;
-  description: string;
-  language: string;
-  stars: number;
-  forks: number;
-  url: string;
-  updatedAt: string;
+export interface GitHubStats {
+  publicRepos: number;
+  starsCount: number;
+  commitsThisYear: number;
+  topLanguages: { name: string; percentage: number; color: string }[];
+  featuredRepos: {
+    name: string;
+    description: string;
+    language: string;
+    stars: number;
+    url: string;
+    updatedAt: string;
+  }[];
 }
