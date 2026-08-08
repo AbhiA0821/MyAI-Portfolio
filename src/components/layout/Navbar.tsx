@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Bot, Sparkles, Code2, Briefcase, User, Cpu, LayoutDashboard, GitBranch, Menu, X, ChevronDown } from 'lucide-react';
 import type { TargetRole } from '../../types/portfolio';
 
