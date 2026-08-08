@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExperienceItem, EducationItem, CertificationItem, TargetRole } from '../../types/portfolio';
+import type { ExperienceItem, EducationItem, CertificationItem, TargetRole } from '../../types/portfolio';
 import { Briefcase, GraduationCap, Award, Calendar, MapPin, CheckCircle } from 'lucide-react';
 
 interface ExperienceProps {
@@ -12,8 +12,7 @@ interface ExperienceProps {
 export const Experience: React.FC<ExperienceProps> = ({
   experiences,
   education,
-  certifications,
-  selectedRole
+  certifications
 }) => {
   return (
     <section id="experience" className="py-20 relative">

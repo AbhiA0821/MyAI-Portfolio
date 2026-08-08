@@ -1,32 +1,68 @@
-# React + TypeScript + Vite
+# MyAI Portfolio — AI Engineering & Multi-Agent Career Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **Tagline**: *"AI-Powered Personal Portfolio & Multi-Agent Career Assistant"*
 
-Currently, two official plugins are available:
+MyAI Portfolio is a production-grade, zero-cost personal portfolio and autonomous career intelligence platform built for AI Engineers, ML Engineers, Data Engineers, and Data Scientists.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌟 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Role-Based Profile Selector**: Dynamically filter technical skills, project showcases, and career highlights tailored for **AI Engineer**, **ML Engineer**, **Data Engineer**, or **Data Scientist**.
+2. **Multi-Agent Orchestrator**: 6 specialized AI agents (Profile Agent, Project Agent, Resume Agent, Career Agent, Job Match Agent, Job Application Agent) routed by a Master Intent Classifier.
+3. **RAG Vector Search Engine**: Verified document retrieval over local knowledge bases eliminating hallucinations. Safe fallback response: *"I don't have that information in the portfolio knowledge base."*
+4. **Transparent Job Match Evaluator**: Real-time resume vs job description scoring using transparent multi-attribute weighting.
+5. **Permitted Job Application Tracker**: Rate-limited (10 applications/day cap) tracking system adhering strictly to website terms, anti-bot rules, and human safety controls.
+6. **Zero-Cost Infrastructure**: ₹0 cost setup powered by local open-source models (Ollama Qwen2.5 / Gemma 2), ChromaDB / SQLite-vec, FastAPI backend, and React 19 / Vite / Tailwind CSS frontend.
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 🏗️ Architecture Overview
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```
+User -> React 19 / Vite Frontend (Tailwind CSS, Glassmorphism)
+         │
+         ▼
+FastAPI Backend Gateway (REST & Server-Sent Events / Streaming)
+         │
+         ▼
+Multi-Agent Orchestrator (Intent Router)
+   ├── Profile Agent (RAG Vector Store)
+   ├── Project Agent (GitHub MCP / Projects RAG)
+   ├── Resume Agent (Resume Parser)
+   ├── Career Agent (Skill Matrix)
+   ├── Job Match Agent (Scoring Engine)
+   └── Job Application Agent (Permitted API Engine)
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+## 🚀 Quick Start (Local Development)
+
+### 1. Frontend Setup
+```bash
+npm install
+npm run dev
+```
+Open `http://localhost:5173`.
+
+### 2. Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+```
+API Documentation available at `http://localhost:8000/docs`.
+
+---
+
+## 🔮 Future Integration Plans
+
+- **Ralph Integration**: Autonomous subagent loop for automated code implementation, testing, and self-healing verification.
+- **CodeRabbit Integration**: Continuous code quality audits, pull request security reviews, and maintainability checks.
+
+---
+License: MIT  
+Author: Abhishek Ainapure (https://github.com/AbhiA0821)

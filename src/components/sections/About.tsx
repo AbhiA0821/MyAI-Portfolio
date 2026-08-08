@@ -1,5 +1,5 @@
 import React from 'react';
-import { Profile, TargetRole } from '../../types/portfolio';
+import type { Profile, TargetRole } from '../../types/portfolio';
 import { Bot, Cpu, Database, Network, ShieldCheck, Zap } from 'lucide-react';
 
 interface AboutProps {
@@ -7,7 +7,7 @@ interface AboutProps {
   selectedRole: TargetRole;
 }
 
-export const About: React.FC<AboutProps> = ({ profile, selectedRole }) => {
+export const About: React.FC<AboutProps> = ({ selectedRole }) => {
   const CorePillars = [
     {
       title: "Multi-Agent Orchestration",

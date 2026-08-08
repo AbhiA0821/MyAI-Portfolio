@@ -1,6 +1,6 @@
 import React from 'react';
-import { SkillCategory, TargetRole } from '../../types/portfolio';
-import { Cpu, CheckCircle2, Star } from 'lucide-react';
+import type { SkillCategory, TargetRole } from '../../types/portfolio';
+import { Cpu, CheckCircle2 } from 'lucide-react';
 
 interface SkillsProps {
   skillCategories: SkillCategory[];

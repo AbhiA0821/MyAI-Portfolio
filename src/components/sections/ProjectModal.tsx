@@ -1,6 +1,6 @@
 import React from 'react';
-import { Project } from '../../types/portfolio';
-import { X, ExternalLink, Github, CheckCircle, Cpu, Zap, Layers } from 'lucide-react';
+import type { Project } from '../../types/portfolio';
+import { X, ExternalLink, GitBranch, CheckCircle, Zap, Layers } from 'lucide-react';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -121,7 +121,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               rel="noreferrer"
               className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold border border-slate-700 flex items-center gap-2"
             >
-              <Github className="w-4 h-4" /> View GitHub Repository
+              <GitBranch className="w-4 h-4" /> View GitHub Repository
             </a>
 
             {project.demoUrl && project.demoUrl !== '#' && (

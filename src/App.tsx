@@ -1,122 +1,89 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import type { TargetRole } from './types/portfolio';
+import { profileData, skillCategoriesData, projectsData, experienceData, educationData, certificationsData } from './data/portfolioData';
+import { Navbar } from './components/layout/Navbar';
+import { Hero } from './components/sections/Hero';
+import { About } from './components/sections/About';
+import { Projects } from './components/sections/Projects';
+import { Skills } from './components/sections/Skills';
+import { Experience } from './components/sections/Experience';
+import { CareerIntel } from './components/career/CareerIntel';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { ChatWidget } from './components/ai/ChatWidget';
+import { Bot } from 'lucide-react';
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  const [selectedRole, setSelectedRole] = useState<TargetRole>('AI Engineer');
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen bg-[#0B0F17] text-slate-100 font-sans selection:bg-blue-600 selection:text-white">
+      
+      {/* Top Navbar */}
+      <Navbar
+        selectedRole={selectedRole}
+        onSelectRole={setSelectedRole}
+        onOpenChat={() => setIsChatOpen(true)}
+      />
 
-      <div className="ticks"></div>
+      {/* Main Content Sections */}
+      <main>
+        <Hero
+          profile={profileData}
+          selectedRole={selectedRole}
+          onOpenChat={() => setIsChatOpen(true)}
+        />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <About
+          profile={profileData}
+          selectedRole={selectedRole}
+        />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <Projects
+          projects={projectsData}
+          selectedRole={selectedRole}
+        />
+
+        <Skills
+          skillCategories={skillCategoriesData}
+          selectedRole={selectedRole}
+        />
+
+        <Experience
+          experiences={experienceData}
+          education={educationData}
+          certifications={certificationsData}
+          selectedRole={selectedRole}
+        />
+
+        <CareerIntel
+          selectedRole={selectedRole}
+          skillCategories={skillCategoriesData}
+        />
+
+        <AdminDashboard />
+      </main>
+
+      {/* Floating Chat Widget */}
+      <ChatWidget
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+        selectedRole={selectedRole}
+      />
+
+      {/* Footer */}
+      <footer className="py-8 bg-slate-950 border-t border-slate-800/80 text-center text-xs font-mono text-slate-400">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <Bot className="w-4 h-4 text-blue-400" />
+            <span>MyAI Portfolio Engine • Multi-Agent System</span>
+          </div>
+          <p>© {new Date().getFullYear()} Abhishek Ainapure. Zero-Cost Architecture.</p>
+        </div>
+      </footer>
+
+    </div>
+  );
 }
 
-export default App
+export default App;

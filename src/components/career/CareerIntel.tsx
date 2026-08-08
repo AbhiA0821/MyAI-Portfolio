@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TargetRole, SkillCategory } from '../../types/portfolio';
-import { Sparkles, FileText, CheckCircle2, AlertTriangle, ArrowRight, Zap, Target } from 'lucide-react';
+import type { TargetRole, SkillCategory } from '../../types/portfolio';
+import { Sparkles, FileText, CheckCircle2, AlertTriangle, Zap, Target } from 'lucide-react';
 
 interface CareerIntelProps {
   selectedRole: TargetRole;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Bot, Sparkles, Code2, Briefcase, User, FileText, Cpu, LayoutDashboard, Menu, X } from 'lucide-react';
-import { TargetRole } from '../../types/portfolio';
+import { Bot, Sparkles, Code2, Briefcase, User, Cpu, LayoutDashboard, Menu, X } from 'lucide-react';
+import type { TargetRole } from '../../types/portfolio';
 
 interface NavbarProps {
   selectedRole: TargetRole;

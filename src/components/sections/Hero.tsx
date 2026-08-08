@@ -1,6 +1,6 @@
 import React from 'react';
-import { Bot, Sparkles, ArrowRight, Github, Linkedin, FileText, CheckCircle2, ShieldCheck, Terminal } from 'lucide-react';
-import { Profile, TargetRole } from '../../types/portfolio';
+import { Bot, Sparkles, ArrowRight, GitBranch, Globe, FileText, CheckCircle2, ShieldCheck, Terminal } from 'lucide-react';
+import type { Profile, TargetRole } from '../../types/portfolio';
 
 interface HeroProps {
   profile: Profile;
@@ -98,11 +98,11 @@ export const Hero: React.FC<HeroProps> = ({ profile, selectedRole, onOpenChat })
             {/* Social Links */}
             <div className="pt-2 flex items-center gap-4 text-slate-400 text-xs">
               <a href={profile.githubUrl} target="_blank" rel="noreferrer" className="hover:text-white flex items-center gap-1 transition-colors">
-                <Github className="w-4 h-4" /> GitHub
+                <GitBranch className="w-4 h-4" /> GitHub
               </a>
               <span className="text-slate-700">•</span>
               <a href={profile.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-white flex items-center gap-1 transition-colors">
-                <Linkedin className="w-4 h-4" /> LinkedIn
+                <Globe className="w-4 h-4" /> LinkedIn
               </a>
               <span className="text-slate-700">•</span>
               <span className="text-slate-400">{profile.location}</span>

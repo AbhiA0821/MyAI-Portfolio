@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Project, TargetRole } from '../../types/portfolio';
+import type { Project, TargetRole } from '../../types/portfolio';
 import { ProjectModal } from './ProjectModal';
-import { Code2, ArrowUpRight, Github, Sparkles, Layers } from 'lucide-react';
+import { Code2, ArrowUpRight, Sparkles } from 'lucide-react';
 
 interface ProjectsProps {
   projects: Project[];

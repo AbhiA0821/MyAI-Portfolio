@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, Sparkles, User, RefreshCw, ShieldCheck, HelpCircle } from 'lucide-react';
-import { TargetRole } from '../../types/portfolio';
+import { Bot, X, Send, User, RefreshCw } from 'lucide-react';
+import type { TargetRole } from '../../types/portfolio';
 
 interface Message {
   id: string;

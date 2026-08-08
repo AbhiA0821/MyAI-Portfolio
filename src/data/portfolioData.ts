@@ -1,4 +1,4 @@
-import { Profile, SkillCategory, Project, ExperienceItem, EducationItem, CertificationItem, GitHubRepoSummary } from '../types/portfolio';
+import type { Profile, SkillCategory, Project, ExperienceItem, EducationItem, CertificationItem, GitHubRepoSummary } from '../types/portfolio';
 
 export const profileData: Profile = {
   name: "Abhishek Ainapure",
