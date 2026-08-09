@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Bot, Menu, X, Shield, Sparkles } from 'lucide-react';
+import { Bot, Menu, X, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
   onOpenChat: () => void;
-  onOpenAdmin?: () => void;
   onOpenResume?: () => void;
 }
 
@@ -22,7 +21,6 @@ const navLinks = [
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenChat,
-  onOpenAdmin,
   onOpenResume
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -88,29 +86,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Sparkles className="w-3.5 h-3.5" />
               <span>Ask MyAI</span>
             </button>
-
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                title="Private Job Agent Admin"
-                className="p-2 rounded-xl text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors cursor-pointer"
-              >
-                <Shield className="w-4 h-4 text-purple-400" />
-              </button>
-            )}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                className="p-2 rounded-lg text-slate-400 hover:text-white bg-slate-900 border border-slate-800"
-              >
-                <Shield className="w-4 h-4 text-purple-400" />
-              </button>
-            )}
-
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-slate-300 hover:text-white bg-slate-900 border border-slate-800"
