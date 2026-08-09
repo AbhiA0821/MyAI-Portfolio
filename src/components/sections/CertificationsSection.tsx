@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, CheckCircle2, X, ZoomIn, Calendar, Key, ShieldCheck } from 'lucide-react';
+import { ExternalLink, CheckCircle2, X, ZoomIn, ZoomOut, Calendar, Key, ShieldCheck, Award } from 'lucide-react';
 import { verifiedCertifications, type VerifiedCertification } from '../../data/certificationsData';
 
 export const CertificationsSection: React.FC = () => {
   const [selectedCert, setSelectedCert] = useState<VerifiedCertification | null>(null);
+  const [isZoomed, setIsZoomed] = useState(false);
+
+  // Reset zoom on modal close or change
+  useEffect(() => {
+    setIsZoomed(false);
+  }, [selectedCert]);
 
   // ESC key handler for lightbox
   useEffect(() => {
@@ -35,7 +41,7 @@ export const CertificationsSection: React.FC = () => {
             </span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Continuous learning across Generative AI, Machine Learning, Data Engineering and modern AI systems. Verified against original credential issuers.
+            Verified certifications from Oracle, Infosys, Tata, and industry programs.
           </p>
         </div>
 
@@ -62,7 +68,7 @@ export const CertificationsSection: React.FC = () => {
           </span>
         </div>
 
-        {/* 5 Real Certificate Cards Grid */}
+        {/* Real Certificate Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {verifiedCertifications.map((cert, idx) => (
             <motion.div
@@ -77,19 +83,26 @@ export const CertificationsSection: React.FC = () => {
               className="group rounded-2xl bg-[#0A0A1A] border border-slate-800/90 hover:border-emerald-500/50 backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/60 flex flex-col justify-between transition-all duration-300 cursor-pointer relative"
             >
               <div>
-                {/* Document Thumbnail Preview (Preserving Aspect Ratio) */}
+                {/* Document Thumbnail Preview (Or Clean Fallback) */}
                 <div className="h-52 bg-slate-950 p-4 relative flex items-center justify-center overflow-hidden border-b border-slate-800/80 group-hover:bg-slate-900/60 transition-colors">
-                  <img
-                    src={cert.image}
-                    alt={cert.title}
-                    className="max-h-full max-w-full object-contain rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
+                  {cert.image ? (
+                    <img
+                      src={cert.image}
+                      alt={cert.title}
+                      className="max-h-full max-w-full object-contain rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center p-6 text-center space-y-2 text-slate-500 group-hover:text-emerald-400/80 transition-colors">
+                      <Award className="w-10 h-10 stroke-[1.5]" />
+                      <span className="text-xs font-mono text-slate-400">Certificate image coming soon</span>
+                    </div>
+                  )}
                   
                   {/* Hover Overlay Badge */}
                   <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-opacity flex items-center justify-center">
                     <span className="px-4 py-2 rounded-xl bg-emerald-600 text-white font-mono text-xs font-bold flex items-center gap-2 shadow-xl shadow-emerald-600/30">
-                      <ZoomIn className="w-4 h-4" /> View Certificate
+                      <ZoomIn className="w-4 h-4" /> View Details
                     </span>
                   </div>
                 </div>
@@ -116,7 +129,7 @@ export const CertificationsSection: React.FC = () => {
                   {cert.credentialId && (
                     <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-400 pt-1">
                       <Key className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                      <span className="truncate">ID: {cert.credentialId}</span>
+                      <span className="truncate">Credential ID: {cert.credentialId}</span>
                     </div>
                   )}
 
@@ -132,7 +145,7 @@ export const CertificationsSection: React.FC = () => {
                   <CheckCircle2 className="w-3.5 h-3.5" /> VERIFIED
                 </span>
                 <span className="text-slate-400 group-hover:text-white flex items-center gap-1 transition-colors">
-                  <span>EXPAND</span>
+                  <span>DETAILS</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </span>
               </div>
@@ -183,13 +196,37 @@ export const CertificationsSection: React.FC = () => {
                   </p>
                 </div>
 
-                {/* High-Resolution Document Display */}
-                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center max-h-[500px] overflow-hidden">
-                  <img
-                    src={selectedCert.image}
-                    alt={selectedCert.title}
-                    className="max-h-[460px] max-w-full object-contain rounded-xl shadow-2xl"
-                  />
+                {/* High-Resolution Document Display or Fallback */}
+                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center min-h-[300px] max-h-[520px] overflow-auto relative">
+                  {selectedCert.image ? (
+                    <>
+                      <div className="absolute top-3 right-3 z-10">
+                        <button
+                          onClick={() => setIsZoomed(!isZoomed)}
+                          className="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700 text-slate-300 hover:text-white text-xs font-mono flex items-center gap-1.5 backdrop-blur-md cursor-pointer"
+                        >
+                          {isZoomed ? <ZoomOut className="w-3.5 h-3.5" /> : <ZoomIn className="w-3.5 h-3.5" />}
+                          <span>{isZoomed ? 'Reset Zoom' : 'Zoom In'}</span>
+                        </button>
+                      </div>
+                      <img
+                        src={selectedCert.image}
+                        alt={selectedCert.title}
+                        className={`transition-all duration-300 object-contain rounded-xl shadow-2xl ${
+                          isZoomed ? 'max-w-none scale-125 cursor-zoom-out' : 'max-h-[460px] max-w-full cursor-zoom-in'
+                        }`}
+                        onClick={() => setIsZoomed(!isZoomed)}
+                      />
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center p-12 text-center space-y-3 text-slate-500">
+                      <Award className="w-16 h-16 text-emerald-400/60 stroke-[1.5]" />
+                      <span className="text-base font-mono text-slate-300 font-semibold">Certificate image coming soon</span>
+                      <p className="text-xs text-slate-400 max-w-md">
+                        Original certificate file is pending upload to public/certificates/. All credential metadata is verified.
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Metadata Details */}
@@ -234,7 +271,7 @@ export const CertificationsSection: React.FC = () => {
                 <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
                   <button
                     onClick={() => setSelectedCert(null)}
-                    className="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-mono"
+                    className="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-mono cursor-pointer"
                   >
                     CLOSE VIEWER
                   </button>
@@ -261,3 +298,4 @@ export const CertificationsSection: React.FC = () => {
     </section>
   );
 };
+
