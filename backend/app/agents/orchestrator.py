@@ -40,13 +40,13 @@ class MasterOrchestrator:
 
     def classify_intent(self, query: str) -> str:
         q_lower = query.lower()
-        if any(w in q_lower for w in ["project", "medintel", "pyspark", "duckdb", "architecture", "build"]):
+        if any(w in q_lower for w in ["project", "interviewai", "resume", "medintel", "crop", "pyspark", "duckdb", "architecture", "build"]):
             return "project"
         if any(w in q_lower for w in ["github", "repo", "stars", "commit", "code"]):
             return "github"
         if any(w in q_lower for w in ["role", "career", "engineer", "scientist", "align"]):
             return "career"
-        if any(w in q_lower for w in ["skill", "experience", "education", "degree"]):
+        if any(w in q_lower for w in ["skill", "experience", "education", "degree", "certif"]):
             return "profile"
         return "assistant"
 

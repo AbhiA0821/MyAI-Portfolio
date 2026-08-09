@@ -1,22 +1,29 @@
 # Projects Knowledge Base
 
-## Project 1: MyAI Portfolio & Multi-Agent Career Assistant
-- Description: Production-grade, zero-cost portfolio platform powered by a master AI orchestrator with 6 specialized agents, ChromaDB vector search, transparent job matching algorithms, and GitHub integration.
-- Problem Solved: Eliminates static portfolio limitations by creating a dynamic, real-time agentic system that answers portfolio questions and scores job suitability.
-- Stack: React 19, TypeScript, Tailwind CSS, FastAPI, Python, ChromaDB, Ollama, LangChain.
-- Metrics: Latency < 500ms TTFT, 6 Specialized Agents, $0 Infrastructure Cost.
-- GitHub: https://github.com/AbhiA0821/MyAiPortfolio
+## Project 1: MedIntel — Healthcare Data Pipeline
+- Description: [ONGOING] End-to-end healthcare data engineering pipeline designed to process patient vital sign records using DuckDB analytical schemas, PySpark transformations, and Apache Airflow orchestration (in progress).
+- Problem Solved: Processing patient vital records requires structured relational schemas, scalable PySpark transformations, and automated pipeline execution.
+- Stack: Python, PySpark, DuckDB, Pandas, Scikit-learn, Flask, Apache Airflow (in progress), Docker (planned).
+- Status: ONGOING (In Active Development).
+- GitHub: https://github.com/AbhiA0821/MedIntel
 
-## Project 2: MedIntel - Clinical Knowledge RAG System
-- Description: Enterprise RAG engine for medical researchers querying PubMed abstracts and clinical trial documentation with citation guarantees.
-- Problem Solved: Prevents LLM hallucinations in clinical literature lookup using hybrid dense + sparse retrieval and cross-encoder re-ranking.
-- Stack: Python, PyTorch, FastAPI, Qdrant, HuggingFace, Streamlit.
-- Metrics: Precision@5 of 92.1%, Hallucination Rate < 0.5%, 120 QPS.
-- GitHub: https://github.com/AbhiA0821/MedIntel-RAG
+## Project 2: Resume-Matcher — Smart Resume Analyzer & Job Matcher
+- Description: Smart resume analysis and job recommendation system using Python, Streamlit, Scikit-Learn (KNN + Random Forest), Plotly, SQLite, and PDFPlumber.
+- Problem Solved: Automatically parses PDF/DOCX resumes, extracts tech skills, predicts career domain classification, and visualizes skill breakdowns.
+- Stack: Python, Streamlit, Scikit-learn, Pandas, NumPy, Plotly, SQLite, PDFPlumber, Python-docx, Requests API.
+- Live Demo: https://resume-matcher-ypjig2msxnqn7dchb2ctg5.streamlit.app
+- GitHub: https://github.com/AbhiA0821/Resume-Matcher
 
-## Project 3: Real-Time Distributed Data Engine
-- Description: Scalable streaming data pipeline processing 100k+ events/sec using PySpark, Apache Kafka, and Delta Lake.
-- Problem Solved: Replaced slow batch ETL scripts with real-time stream processing writing directly to Delta Lake.
-- Stack: PySpark, Apache Kafka, Delta Lake, PostgreSQL, Docker, Python.
-- Metrics: Throughput of 120,000 Events/sec, P99 Latency < 1.5s.
-- GitHub: https://github.com/AbhiA0821/PySpark-Data-Engine
+## Project 3: Art-Generation — Neural Style Transfer
+- Description: Deep learning repository implementing Neural Style Transfer (NST) using Convolutional Neural Networks to blend artistic style representations with content images.
+- Problem Solved: Synthesizing artwork while maintaining underlying content structure using Gram matrix style loss optimization.
+- Stack: Python, PyTorch, TensorFlow, Jupyter Notebook, NumPy, Matplotlib, Pillow.
+- Status: Verified Open Source Repository.
+- GitHub: https://github.com/AbhiA0821/Art-Generation
+
+## Project 4: Data-Engineering — Learning & Hands-On Repository
+- Description: Structured learning and implementation repository documenting core data engineering principles, analytical SQL window queries, PySpark DataFrame operations, and DuckDB schemas.
+- Problem Solved: Practical hands-on implementations of modern SQL engines and distributed Spark transformations.
+- Stack: Python, SQL, PySpark, DuckDB, PostgreSQL, Git.
+- Status: Learning & Hands-On Repository.
+- GitHub: https://github.com/AbhiA0821/Data-Engineering

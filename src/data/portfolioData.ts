@@ -7,7 +7,6 @@ import type {
   EducationItem,
   CertificationItem,
   GitHubStats,
-  TimelineMilestone,
   StatItem,
   WorkflowStep
 } from '../types/portfolio';
@@ -28,26 +27,26 @@ export const profileData: Profile = {
 export const statsData: StatItem[] = [
   {
     id: "stat-1",
-    label: "Featured AI & Data Projects",
-    numericValue: 3,
-    suffix: "+",
-    description: "Production RAG, Multi-Agent & PySpark Systems",
+    label: "Verified Projects",
+    numericValue: 4,
+    suffix: "",
+    description: "MedIntel, Resume-Matcher, Art-Generation & Data-Engineering",
     iconName: "Cpu"
   },
   {
     id: "stat-2",
     label: "Core Stack Technologies",
-    numericValue: 20,
+    numericValue: 15,
     suffix: "+",
-    description: "Python, PySpark, FastAPI, Vector DBs, React",
+    description: "Python, PySpark, DuckDB, TensorFlow, React, SQL",
     iconName: "Layers"
   },
   {
     id: "stat-3",
-    label: "Verified Specializations",
-    numericValue: 2,
+    label: "Verified Certifications",
+    numericValue: 4,
     suffix: "",
-    description: "Generative AI & Data Engineering Certifications",
+    description: "Oracle OCI, AWS Forage & Tecspeak Industry Credentials",
     iconName: "Award"
   },
   {
@@ -55,14 +54,14 @@ export const statsData: StatItem[] = [
     label: "Public Repositories",
     numericValue: 9,
     suffix: "",
-    description: "Open source AI models, RAG engines & ETL tools",
+    description: "Verified open source GitHub repositories under AbhiA0821",
     iconName: "GitBranch"
   },
   {
     id: "stat-5",
-    label: "Multi-Agent System Nodes",
+    label: "MyAI Architecture",
     numericValue: 5,
-    suffix: " Agents",
+    suffix: " Nodes",
     description: "Autonomous routing, tool execution & memory engine",
     iconName: "Bot"
   }
@@ -94,7 +93,7 @@ export const expertiseData: ExpertiseItem[] = [
     iconName: "Bot",
     technologies: ["Agent Orchestration", "Intent Router", "State Machines", "GitHub Tools", "RAG Retriever"],
     proficiencyLabel: "Hands-on",
-    detailedOverview: "Designed MyAI Engine with 5 specialized agent nodes (Profile, Project, Career, GitHub, Assistant) operating under a central intent orchestrator.",
+    detailedOverview: "Designed MyAI Engine with 5 specialized agent nodes operating under a central intent orchestrator.",
     keyCapabilities: [
       "Natural language intent classification and query dispatching",
       "Agent state persistence and memory context propagation",
@@ -124,11 +123,11 @@ export const expertiseData: ExpertiseItem[] = [
     id: "exp-de",
     title: "04 Data Engineering",
     subtitle: "PySpark, SQL, DuckDB, Airflow & ETL",
-    description: "Constructing scalable batch and real-time streaming data ingestion pipelines using Apache Spark, SQL, and Airflow.",
+    description: "Constructing scalable batch and streaming data ingestion pipelines using Apache Spark, SQL, and Airflow.",
     iconName: "Server",
     technologies: ["PySpark", "Apache Spark", "SQL", "DuckDB", "Apache Airflow", "PostgreSQL", "ETL Pipelines"],
     proficiencyLabel: "Strong",
-    detailedOverview: "Experienced in handling high-volume event streams, distributed data processing in PySpark, writing Delta Lake tables, and SQL warehousing.",
+    detailedOverview: "Experienced in handling high-volume event streams, distributed data processing in PySpark, writing analytical queries, and SQL warehousing.",
     keyCapabilities: [
       "Distributed data extraction, transformation, and loading (ETL/ELT)",
       "PySpark DataFrame transformations and window aggregations",
@@ -141,7 +140,7 @@ export const expertiseData: ExpertiseItem[] = [
     id: "exp-apps",
     title: "05 AI Applications",
     subtitle: "FastAPI, Python, Streamlit, Next.js & AI Products",
-    description: "Building production-grade REST APIs, asynchronous microservices, and modern frontend user interfaces.",
+    description: "Building REST APIs, asynchronous microservices, and modern frontend user interfaces.",
     iconName: "Terminal",
     technologies: ["FastAPI", "Python 3.11+", "Streamlit", "React 19", "Next.js", "TypeScript", "Tailwind CSS"],
     proficiencyLabel: "Strong",
@@ -246,71 +245,6 @@ export const workflowStepsData: WorkflowStep[] = [
   }
 ];
 
-export const timelineData: TimelineMilestone[] = [
-  {
-    year: "2023",
-    title: "Computer Science & Data Science Foundation",
-    subtitle: "Core Algorithms, Python & Statistical Machine Learning",
-    description: "Mastered fundamental software engineering principles, core data structures, algorithms, SQL database management, and hands-on Python data analysis.",
-    highlights: [
-      "Built statistical machine learning models with Scikit-learn and Pandas.",
-      "Developed custom REST APIs and relational database schemas."
-    ],
-    technologies: ["Python", "SQL", "Scikit-Learn", "Pandas", "Git"],
-    status: "Completed"
-  },
-  {
-    year: "2024",
-    title: "Data Engineering & Distributed Computing",
-    subtitle: "PySpark, DuckDB & Big Data Pipelines",
-    description: "Expanded focus into large-scale data engineering, distributed computing with Apache Spark, high-performance in-memory processing with DuckDB, and API microservices.",
-    highlights: [
-      "Implemented distributed ETL pipelines processing multi-gigabyte datasets.",
-      "Created FastAPI microservices with AsyncIO and PostgreSQL warehousing.",
-      "Earned Databricks / DeepLearning.AI certifications."
-    ],
-    technologies: ["PySpark", "DuckDB", "FastAPI", "PostgreSQL", "Docker"],
-    status: "Completed"
-  },
-  {
-    year: "2025",
-    title: "Multi-Agent Systems & GenAI Engineering",
-    subtitle: "MedIntel Clinical RAG & MyAI Multi-Agent Engine",
-    description: "Engineered state-of-the-art Generative AI applications, hybrid RAG systems, local open-source LLM deployments, and autonomous multi-agent orchestration frameworks.",
-    highlights: [
-      "Developed MedIntel Clinical Knowledge RAG Engine with PubMed vector search.",
-      "Architected MyAI Multi-Agent Portfolio Engine with 5 specialized agent nodes.",
-      "Built interactive streaming React 19 UI with Framer Motion visual polish."
-    ],
-    technologies: ["LangChain", "LangGraph", "ChromaDB", "Ollama", "React 19", "TypeScript"],
-    status: "In Progress"
-  },
-  {
-    year: "2026",
-    title: "Production AI & Scalable Systems",
-    subtitle: "Enterprise Autonomous Agents & Data Infrastructure",
-    description: "Focusing on enterprise-grade AI production systems, multi-agent evaluation frameworks, zero-cost architecture deployment, and scalable backend pipelines.",
-    highlights: [
-      "Optimizing RAG retrieval precision and multi-agent intent routing.",
-      "Integrating personal private career automation and application telemetry."
-    ],
-    technologies: ["Multi-Agent Systems", "RAG Optimization", "Async Python", "System Design"],
-    status: "In Progress"
-  },
-  {
-    year: "Future",
-    title: "Senior AI System Architecture",
-    subtitle: "Designing Resilient Multi-Agent Platforms",
-    description: "Aiming to lead complex AI engineering initiatives, building resilient multi-agent platforms, and advancing production AI systems globally.",
-    highlights: [
-      "Driving multi-agent system standards and production LLM guardrails.",
-      "Designing fault-tolerant distributed data infrastructure."
-    ],
-    technologies: ["AI Architecture", "Distributed Systems", "Agentic Frameworks"],
-    status: "Future Focus"
-  }
-];
-
 export const skillCategoriesData: SkillCategory[] = [
   {
     category: "AI & Generative AI",
@@ -335,7 +269,7 @@ export const skillCategoriesData: SkillCategory[] = [
     category: "Deep Learning",
     skills: [
       { name: "PyTorch", level: "Working Knowledge", roles: ['ML Engineer', 'AI Engineer', 'Data Scientist'] },
-      { name: "TensorFlow & Keras", level: "Learning", roles: ['ML Engineer'] },
+      { name: "TensorFlow & Keras", level: "Working Knowledge", roles: ['ML Engineer'] },
       { name: "Neural Network Architectures", level: "Working Knowledge", roles: ['ML Engineer', 'Data Scientist'] }
     ]
   },
@@ -345,7 +279,7 @@ export const skillCategoriesData: SkillCategory[] = [
       { name: "PySpark & Apache Spark", level: "Strong", roles: ['Data Engineer', 'Data Scientist'] },
       { name: "DuckDB & SQL Warehousing", level: "Strong", roles: ['Data Engineer', 'AI Engineer', 'Data Scientist'] },
       { name: "ETL / ELT Pipeline Design", level: "Strong", roles: ['Data Engineer'] },
-      { name: "Apache Airflow Orchestration", level: "Working Knowledge", roles: ['Data Engineer'] },
+      { name: "Apache Airflow (In Progress)", level: "Working Knowledge", roles: ['Data Engineer'] },
       { name: "PostgreSQL & Relational DBs", level: "Strong", roles: ['Data Engineer', 'AI Engineer'] }
     ]
   },
@@ -369,112 +303,137 @@ export const skillCategoriesData: SkillCategory[] = [
     category: "Developer Tools",
     skills: [
       { name: "Git & GitHub Version Control", level: "Strong", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'] },
-      { name: "Docker Containerization", level: "Working Knowledge", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer'] },
-      { name: "GitHub MCP Tools Integration", level: "Hands-on", roles: ['AI Engineer'] }
+      { name: "Docker (Planned)", level: "Working Knowledge", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer'] }
     ]
   }
 ];
 
 export const projectsData: Project[] = [
   {
-    id: "proj-1",
-    slug: "myai-portfolio",
-    title: "MyAI Portfolio & Multi-Agent Career Assistant",
-    tagline: "Autonomous multi-agent system presenting an AI engineering profile with RAG and job application tracking.",
-    description: "A production-grade, zero-cost portfolio system powered by a master AI orchestrator with 5 specialized agents, ChromaDB vector search, career intelligence analysis, and GitHub integration.",
-    problem: "Static portfolios fail to demonstrate real-time AI system orchestration, tool calling, or multi-agent context routing.",
-    solution: "Engineered a multi-agent backend architecture using FastAPI, local open-source LLMs via Ollama/Groq, and RAG over candidate knowledge base to autonomously handle visitor queries and manage application tracking.",
+    id: "proj-medintel",
+    slug: "medintel",
+    title: "MedIntel — Healthcare Data Pipeline",
+    tagline: "ONGOING • Patient Vital Ingestion & Airflow Pipeline",
+    description: "An ongoing end-to-end healthcare data engineering pipeline designed to process patient vital signs, utilizing DuckDB analytical tables, PySpark transformations, and a Flask analytics dashboard.",
+    problem: "Processing patient vital records requires structured relational database schemas, scalable PySpark transformations, and automated pipeline execution.",
+    solution: "Architected a Python vital sign simulator and DuckDB database schema paired with PySpark ETL routines and Airflow scheduling.",
     architecture: [
-      "User Query -> AI Orchestrator (Intent Classifier)",
-      "Specialized Agent Routing (Profile, Project, Career, GitHub, Assistant)",
-      "RAG Retriever over ChromaDB Vector Engine (Top K = 4, Similarity Threshold >= 0.72)",
-      "FastAPI Stream Adapter -> React Streaming Chat UI"
+      "Patient Vitals Simulator -> DuckDB In-Memory Relational Schema",
+      "PySpark Data Processing & Validation",
+      "Apache Airflow Orchestration (In Progress)",
+      "Flask Analytics Dashboard"
     ],
     pipelineDiagram: [
-      { step: "1. Visitor Query", description: "Natural language query input via UI", tech: "React 19 / TypeScript" },
-      { step: "2. Master Orchestrator", description: "Classifies intent into 5 specialized agents", tech: "FastAPI / Python" },
-      { step: "3. RAG Retrieval", description: "Metadata-filtered vector search over portfolio knowledge", tech: "ChromaDB / FastEmbed" },
-      { step: "4. LLM Generation", description: "Streamed answer synthesis without hallucinations", tech: "Ollama Qwen2.5 / Groq" }
+      { step: "1. Vitals Simulation", description: "Simulates patient vital sign data", tech: "Python" },
+      { step: "2. DuckDB Storage", description: "Patients & vital signs relational tables", tech: "DuckDB / SQL" },
+      { step: "3. PySpark ETL", description: "Data cleaning, transformation & validation", tech: "PySpark" },
+      { step: "4. Orchestration", description: "Pipeline DAG runs (In Progress)", tech: "Apache Airflow" }
     ],
-    technologies: ["React 19", "TypeScript", "Tailwind CSS", "FastAPI", "Python", "ChromaDB", "Ollama", "LangChain"],
-    aiTechniques: ["Multi-Agent System", "RAG Pipeline", "Tool Calling", "Intent Classification", "Career Intelligence"],
+    technologies: ["Python", "PySpark", "DuckDB", "Pandas", "Scikit-learn", "Flask", "Apache Airflow (In Progress)", "Docker (Planned)"],
+    aiTechniques: ["PySpark ETL Processing", "DuckDB Analytical SQL", "Vital Sign Classification", "Data Validation"],
     metrics: {
-      "Latency": "< 500ms TTFT",
-      "Agents": "5 Specialized Agents",
-      "Cost": "$0 (Zero-Cost Local Stack)",
-      "RAG Precision": "98.4%"
+      "Project Status": "ONGOING",
+      "Engine": "PySpark + DuckDB",
+      "Orchestration": "Airflow (In Progress)"
     },
-    githubUrl: "https://github.com/AbhiA0821/MyAI-Portfolio",
-    demoUrl: "#",
-    featured: true,
-    targetRoles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'],
-    category: "AI / GenAI"
-  },
-  {
-    id: "proj-2",
-    slug: "medintel-rag",
-    title: "MedIntel: Clinical Knowledge RAG Engine",
-    tagline: "Medical literature and clinical trial vector search engine with source provenance and hallucination guards.",
-    description: "An enterprise-grade Retrieval-Augmented Generation system designed for medical researchers to query PubMed abstracts and clinical trial documentation with strict citation guarantees.",
-    problem: "Generic LLMs frequently hallucinate medical claims and lack reliable domain citations.",
-    solution: "Engineered a domain-customized RAG pipeline with FastEmbed dense embeddings, PySpark ETL processing, DuckDB analytical querying, and citation synthesis guardrails.",
-    architecture: [
-      "Data Sources (PubMed XML / ClinicalTrials.gov API)",
-      "PySpark Data Transformation & Cleaning",
-      "DuckDB High-Performance Vector Querying",
-      "AI / LLM Citation Synthesis Layer",
-      "Researcher Analytics Dashboard"
-    ],
-    pipelineDiagram: [
-      { step: "1. Data", description: "PubMed XML & ClinicalTrials.gov API feeds", tech: "REST API / XML" },
-      { step: "2. PySpark", description: "Ingestion, cleaning & chunking", tech: "PySpark / Python" },
-      { step: "3. Transformation", description: "FastEmbed dense vector embedding", tech: "FastEmbed / PyTorch" },
-      { step: "4. DuckDB", description: "In-memory analytical vector search & SQL filter", tech: "DuckDB / SQL" },
-      { step: "5. AI / LLM", description: "Reranked semantic context & citation synthesis", tech: "Ollama / Groq" },
-      { step: "6. Dashboard", description: "Interactive clinical lookup interface", tech: "FastAPI / React" }
-    ],
-    technologies: ["Python", "PySpark", "DuckDB", "PyTorch", "FastAPI", "Qdrant", "HuggingFace"],
-    aiTechniques: ["Hybrid RAG Search", "Cross-Encoder Re-Ranking", "Hallucination Defense", "Document Chunking"],
-    metrics: {
-      "Precision@5": "92.1%",
-      "Hallucination Rate": "< 0.5%",
-      "Query Throughput": "120 QPS"
-    },
-    githubUrl: "https://github.com/AbhiA0821/MedIntel-RAG",
-    featured: true,
-    targetRoles: ['AI Engineer', 'ML Engineer', 'Data Scientist'],
-    category: "AI / GenAI"
-  },
-  {
-    id: "proj-3",
-    slug: "pyspark-realtime-etl",
-    title: "Real-Time Distributed Data Engine",
-    tagline: "Scalable streaming pipeline processing 100k+ events/sec with PySpark, Kafka, and Delta Lake.",
-    description: "High-throughput data engineering architecture for ingesting, transforming, and serving large-scale streaming datasets.",
-    problem: "Legacy batch ETL pipelines caused high latency in analytics dashboards.",
-    solution: "Implemented Apache Kafka event streaming coupled with PySpark Structured Streaming writing directly into Delta Lake with schema evolution.",
-    architecture: [
-      "Kafka Producer Cluster -> Distributed Event Topics",
-      "PySpark Streaming Pipeline with Watermarking",
-      "Delta Lake Storage with ACID Transactions",
-      "PostgreSQL Data Warehouse for BI Analytics"
-    ],
-    pipelineDiagram: [
-      { step: "1. Event Ingestion", description: "Distributed event streaming streams", tech: "Apache Kafka" },
-      { step: "2. PySpark Streaming", description: "Windowed aggregation & stream watermarking", tech: "PySpark" },
-      { step: "3. Delta Lake", description: "ACID compliant data lake storage", tech: "Delta Lake / Parquet" },
-      { step: "4. Analytics Store", description: "Low-latency SQL serving for BI dashboards", tech: "PostgreSQL" }
-    ],
-    technologies: ["PySpark", "Apache Kafka", "Delta Lake", "PostgreSQL", "Docker", "Python"],
-    aiTechniques: ["Stream Processing", "Distributed Computing", "ACID Data Lake", "Schema Enforcement"],
-    metrics: {
-      "Throughput": "120,000 Events/sec",
-      "P99 Latency": "< 1.5s",
-      "Deduplication": "99.99%"
-    },
-    githubUrl: "https://github.com/AbhiA0821/PySpark-Data-Engine",
+    githubUrl: "https://github.com/AbhiA0821/MedIntel",
     featured: true,
     targetRoles: ['Data Engineer', 'ML Engineer'],
+    category: "Data Engineering"
+  },
+  {
+    id: "proj-resume-matcher",
+    slug: "resume-matcher",
+    title: "Resume-Matcher — Smart Resume Analyzer & Job Matcher",
+    tagline: "AI-Powered Resume Analysis & Job Recommendation System",
+    description: "An intelligent Streamlit application that parses PDF/DOCX resumes, automatically extracts technical skills, predicts domain classification using KNN & Random Forest models, and visualizes skill breakdowns.",
+    problem: "Job seekers struggle to extract structured skill sets from resumes and identify matching engineering domains.",
+    solution: "Built Resume-Matcher using PDFPlumber/docx text extraction, KNN and Random Forest classification models, and interactive Streamlit analytics.",
+    architecture: [
+      "PDF/DOCX Resume Upload -> Text Extraction",
+      "Skill Parsing & Domain Classification (KNN + Random Forest)",
+      "Interactive Streamlit Dashboard & Analytics"
+    ],
+    pipelineDiagram: [
+      { step: "1. Document Parsing", description: "Extracts text from PDF/DOCX resumes", tech: "Python / PDFPlumber" },
+      { step: "2. Feature Extraction", description: "Identifies tech skills & experience indicators", tech: "Scikit-Learn" },
+      { step: "3. ML Classification", description: "KNN & Random Forest domain prediction", tech: "Machine Learning" },
+      { step: "4. Analytics", description: "Skill breakdown & Streamlit dashboard", tech: "Streamlit / Plotly" }
+    ],
+    technologies: ["Python", "Streamlit", "Scikit-learn", "Pandas", "NumPy", "Plotly", "SQLite", "PDFPlumber", "Python-docx", "Requests API"],
+    aiTechniques: ["KNN Classification", "Random Forest", "Resume Skill Parsing", "Domain Prediction"],
+    metrics: {
+      "ML Models": "KNN + Random Forest",
+      "Parser": "PDFPlumber / Docx",
+      "Interface": "Streamlit App"
+    },
+    githubUrl: "https://github.com/AbhiA0821/Resume-Matcher",
+    demoUrl: "https://resume-matcher-ypjig2msxnqn7dchb2ctg5.streamlit.app",
+    featured: true,
+    targetRoles: ['ML Engineer', 'Data Scientist', 'AI Engineer'],
+    category: "Machine Learning"
+  },
+  {
+    id: "proj-art-generation",
+    slug: "art-generation",
+    title: "Art-Generation — Neural Style Transfer",
+    tagline: "Deep Learning Image Synthesis & Neural Style Transfer",
+    description: "Deep learning repository implementing Neural Style Transfer (NST) using Convolutional Neural Networks to synthesize images by combining content structure with artistic artwork style representations.",
+    problem: "Synthesizing artwork while maintaining underlying content structure requires deep layer feature extraction and loss optimization.",
+    solution: "Implemented Gram matrix style representations and feature loss optimizations in PyTorch/Jupyter Notebook environments.",
+    architecture: [
+      "Content & Style Image Input",
+      "Convolutional Neural Network Feature Extraction",
+      "Gram Matrix Style Computation & Loss Optimization",
+      "Synthesized Artwork Output"
+    ],
+    pipelineDiagram: [
+      { step: "1. Input Images", description: "Content photo & artwork style image", tech: "Pillow / TorchVision" },
+      { step: "2. CNN Features", description: "Extract deep feature activation maps", tech: "PyTorch" },
+      { step: "3. Style Representation", description: "Compute Gram matrices for style loss", tech: "NumPy / PyTorch" },
+      { step: "4. Optimization", description: "Iterative pixel gradient updates", tech: "Deep Learning" }
+    ],
+    technologies: ["Python", "PyTorch", "TensorFlow", "Jupyter Notebook", "NumPy", "Matplotlib", "Pillow"],
+    aiTechniques: ["Neural Style Transfer", "Convolutional Neural Networks", "Gram Matrix Style Loss", "Feature Optimization"],
+    metrics: {
+      "Architecture": "CNN Neural Style Transfer",
+      "Environment": "Jupyter Notebook / PyTorch",
+      "Domain": "Generative Deep Learning"
+    },
+    githubUrl: "https://github.com/AbhiA0821/Art-Generation",
+    featured: true,
+    targetRoles: ['ML Engineer', 'AI Engineer'],
+    category: "AI / GenAI"
+  },
+  {
+    id: "proj-data-engineering",
+    slug: "data-engineering",
+    title: "Data-Engineering — Learning & Hands-On Repository",
+    tagline: "Structured Learning Repository: SQL, PySpark & DuckDB",
+    description: "A structured learning and implementation repository documenting core data engineering principles, analytical SQL window queries, PySpark DataFrame transformations, and DuckDB schemas.",
+    problem: "Mastering data engineering tools requires practical hands-on implementations of SQL analytical queries and Spark transformations.",
+    solution: "Maintains clean code modules covering analytical SQL queries, PySpark data operations, and DuckDB analytical processing.",
+    architecture: [
+      "Analytical SQL & DuckDB Relational Schemas",
+      "PySpark DataFrame Transformations & Aggregations",
+      "PostgreSQL Ingestion & Data Engineering Exercises"
+    ],
+    pipelineDiagram: [
+      { step: "1. Core SQL", description: "Analytical window functions & schemas", tech: "SQL / PostgreSQL" },
+      { step: "2. Spark Operations", description: "PySpark transformations & aggregations", tech: "PySpark" },
+      { step: "3. Analytical Engine", description: "In-memory SQL analytical queries", tech: "DuckDB" },
+      { step: "4. Open Source", description: "Hands-on data engineering modules", tech: "Git / GitHub" }
+    ],
+    technologies: ["Python", "SQL", "PySpark", "DuckDB", "PostgreSQL", "Git"],
+    aiTechniques: ["Distributed Data Processing", "Analytical SQL Warehousing", "DataFrame Transformations"],
+    metrics: {
+      "Type": "Learning Repository",
+      "Focus": "Data Engineering",
+      "Stack": "SQL + PySpark + DuckDB"
+    },
+    githubUrl: "https://github.com/AbhiA0821/Data-Engineering",
+    featured: true,
+    targetRoles: ['Data Engineer'],
     category: "Data Engineering"
   }
 ];
@@ -482,16 +441,16 @@ export const projectsData: Project[] = [
 export const experienceData: ExperienceItem[] = [
   {
     id: "exp-1",
-    company: "AI & Data Solutions Lab",
-    role: "AI Engineering & Data Science Specialist",
+    company: "AI & Data Engineering Projects",
+    role: "AI & Data Science Specialist",
     period: "2024 - Present",
     location: "Pune, India",
     description: [
-      "Architected multi-agent orchestration frameworks for automated document synthesis and intent routing.",
-      "Developed custom RAG systems utilizing vector databases and local LLM deployment with Ollama.",
-      "Built end-to-end data processing scripts and RESTful APIs using Python, FastAPI, DuckDB, and PostgreSQL."
+      "Engineered smart resume skill parsing algorithms and domain classification models using KNN and Random Forest.",
+      "Developed healthcare ETL scripts and vital sign simulation pipelines using Python, PySpark, DuckDB, and SQL.",
+      "Implemented neural style transfer models and deep learning image synthesis pipelines in PyTorch."
     ],
-    technologies: ["Python", "FastAPI", "LangChain", "ChromaDB", "PySpark", "DuckDB", "Git"],
+    technologies: ["Python", "PySpark", "DuckDB", "PyTorch", "Scikit-Learn", "Streamlit", "Flask", "SQL", "Git"],
     targetRoles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist']
   }
 ];
@@ -499,14 +458,14 @@ export const experienceData: ExperienceItem[] = [
 export const educationData: EducationItem[] = [
   {
     id: "edu-1",
-    institution: "Pune University / Affiliated Institute",
     degree: "Bachelor of Technology (B.Tech)",
     field: "Computer Science & Engineering / Data Science",
+    institution: "Pune University / Affiliated Institute",
     period: "2021 - 2025",
     grade: "First Class Distinction",
     highlights: [
       "Specialized coursework in Machine Learning, Deep Learning, Database Management Systems, and Distributed Computing.",
-      "Led technical capstone project on multi-agent LLM systems and automated data pipelines."
+      "Developed hands-on capstone projects in resume matching, healthcare data engineering, and neural style transfer."
     ]
   }
 ];
@@ -514,55 +473,79 @@ export const educationData: EducationItem[] = [
 export const certificationsData: CertificationItem[] = [
   {
     id: "cert-1",
-    title: "Generative AI & LLM Systems Specialist",
-    issuer: "DeepLearning.AI / Coursera",
-    date: "2024",
-    skills: ["Generative AI", "RAG", "Prompt Engineering", "LangChain"],
-    verifyUrl: "https://github.com/AbhiA0821/MyAI-Portfolio"
+    title: "Oracle OCI 2025 Certified Generative AI Professional",
+    issuer: "Oracle University",
+    date: "2025",
+    skills: ["Generative AI", "OCI GenAI Services", "RAG", "LLMs"],
+    verifyUrl: "https://mylearn.oracle.com/ou/certification"
   },
   {
     id: "cert-2",
-    title: "Data Engineering with PySpark & Apache Spark",
-    issuer: "Databricks / Udemy",
-    date: "2024",
-    skills: ["PySpark", "Data Engineering", "Delta Lake", "ETL Pipelines"],
-    verifyUrl: "https://github.com/AbhiA0821/MyAI-Portfolio"
+    title: "Oracle OCI 2025 Certified Data Science Professional",
+    issuer: "Oracle University",
+    date: "2025",
+    skills: ["Machine Learning", "Data Science", "OCI Data Science", "AutoML"],
+    verifyUrl: "https://mylearn.oracle.com/ou/certification"
+  },
+  {
+    id: "cert-3",
+    title: "Solutions Architecture (AWS) Job Simulation",
+    issuer: "Forage Capstone",
+    date: "2025",
+    skills: ["AWS", "Solutions Architecture", "Cloud Architecture", "System Design"],
+    verifyUrl: "https://www.theforage.com"
+  },
+  {
+    id: "cert-4",
+    title: "Database (SQL) Internship Completion Certificate",
+    issuer: "Tecspeak IT Solutions",
+    date: "2025",
+    skills: ["SQL", "Relational Databases", "Database Management", "Query Optimization"],
+    verifyUrl: "https://mylearn.oracle.com/ou/certification"
   }
 ];
 
 export const githubStatsData: GitHubStats = {
   publicRepos: 9,
-  starsCount: 35,
+  starsCount: 5,
   commitsThisYear: 142,
   topLanguages: [
-    { name: "TypeScript", percentage: 45, color: "#3178C6" },
-    { name: "Python", percentage: 40, color: "#3572A5" },
-    { name: "SQL / Shell", percentage: 15, color: "#e38c00" }
+    { name: "Python", percentage: 55, color: "#3572A5" },
+    { name: "TypeScript", percentage: 30, color: "#3178C6" },
+    { name: "Jupyter / SQL", percentage: 15, color: "#DA5B0A" }
   ],
   featuredRepos: [
     {
-      name: "MyAI-Portfolio",
-      description: "AI-Powered Personal Portfolio & Multi-Agent Career Assistant",
-      language: "TypeScript",
-      stars: 12,
-      url: "https://github.com/AbhiA0821/MyAI-Portfolio",
-      updatedAt: "Today"
+      name: "MedIntel",
+      description: "[ONGOING] Healthcare Data Pipeline using DuckDB, PySpark & Apache Airflow",
+      language: "Python",
+      stars: 3,
+      url: "https://github.com/AbhiA0821/MedIntel",
+      updatedAt: "Verified"
     },
     {
-      name: "MedIntel-RAG",
-      description: "Clinical literature RAG search engine with PySpark & DuckDB",
+      name: "Resume-Matcher",
+      description: "Smart Resume Analyzer & Job Recommendation System using KNN + Random Forest",
       language: "Python",
-      stars: 14,
-      url: "https://github.com/AbhiA0821/MedIntel-RAG",
-      updatedAt: "2 days ago"
+      stars: 1,
+      url: "https://github.com/AbhiA0821/Resume-Matcher",
+      updatedAt: "Verified"
     },
     {
-      name: "PySpark-Data-Engine",
-      description: "Real-time streaming data pipeline using Kafka, PySpark, and Delta Lake",
+      name: "Art-Generation",
+      description: "Deep Learning Neural Style Transfer using CNNs in PyTorch & Jupyter",
+      language: "Jupyter Notebook",
+      stars: 0,
+      url: "https://github.com/AbhiA0821/Art-Generation",
+      updatedAt: "Verified"
+    },
+    {
+      name: "Data-Engineering",
+      description: "Structured Learning Repository: Analytical SQL, PySpark & DuckDB",
       language: "Python",
-      stars: 9,
-      url: "https://github.com/AbhiA0821/PySpark-Data-Engine",
-      updatedAt: "1 week ago"
+      stars: 1,
+      url: "https://github.com/AbhiA0821/Data-Engineering",
+      updatedAt: "Verified"
     }
   ]
 };

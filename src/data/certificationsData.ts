@@ -8,7 +8,7 @@ export interface VerifiedCertification {
   credentialUrl?: string;
   verificationCode?: string;
   category: 'Generative AI' | 'Data Science & ML' | 'Artificial Intelligence' | 'Data Engineering & Analytics' | 'Databases & SQL';
-  image: string;
+  image?: string;
   description: string;
   skills: string[];
   featured: boolean;
@@ -23,8 +23,8 @@ export const verifiedCertifications: VerifiedCertification[] = [
     credentialId: "322687563OCI25GAIOCP",
     credentialUrl: "https://mylearn.oracle.com/ou/certification",
     category: "Generative AI",
-    image: "/certificates/oracle-genai-2025.svg",
-    description: "Official professional certification validating expertise in Oracle Cloud Infrastructure Generative AI services, LLM fine-tuning, retrieval-augmented generation (RAG), and prompt engineering.",
+    image: "/certificates/oracle-generative-ai.png",
+    description: "Official professional certification validating expertise in Oracle Cloud Infrastructure Generative AI services, LLMs, fine-tuning, RAG, and prompt engineering.",
     skills: ["Generative AI", "OCI GenAI Services", "RAG Pipelines", "LLMs", "Prompt Engineering"],
     featured: true
   },
@@ -37,34 +37,22 @@ export const verifiedCertifications: VerifiedCertification[] = [
     credentialId: "322687563OCI25DSOCP",
     credentialUrl: "https://mylearn.oracle.com/ou/certification",
     category: "Data Science & ML",
-    image: "/certificates/oracle-datascience-2025.svg",
-    description: "Professional recognition for end-to-end Machine Learning model training, evaluation, automated ML (AutoML), and MLOps deployment on Oracle Cloud Infrastructure.",
+    image: "/certificates/oracle-data-science.png",
+    description: "Professional recognition for end-to-end Machine Learning model training, evaluation, AutoML, and MLOps deployment on Oracle Cloud Infrastructure.",
     skills: ["Machine Learning", "Data Science", "OCI Data Science", "MLOps", "AutoML"],
     featured: true
   },
   {
-    id: "cert-infosys-ai",
-    title: "Artificial Intelligence",
-    issuer: "Infosys Springboard",
-    issueDate: "April 23, 2026",
-    credentialUrl: "https://verify.onwingspan.com",
-    category: "Artificial Intelligence",
-    image: "/certificates/infosys-ai-2026.svg",
-    description: "Comprehensive course completion certification covering AI algorithms, deep learning neural networks, natural language processing, and AI ethics.",
-    skills: ["Artificial Intelligence", "Deep Learning", "NLP", "Neural Networks"],
-    featured: true
-  },
-  {
-    id: "cert-tata-datavis",
-    title: "Data Visualisation: Empowering Business with Effective Insights",
-    issuer: "Tata / Forage Capstone",
+    id: "cert-aws-sa",
+    title: "Solutions Architecture (AWS) Job Simulation",
+    issuer: "Forage Capstone",
     issueDate: "August 12, 2025",
     verificationCode: "WS8SeyBivQbGWGry5",
     category: "Data Engineering & Analytics",
-    image: "/certificates/tata-datavis-2025.svg",
-    description: "Practical simulation completing business scenario framing, data preparation, chart selection, and executive analytical visualization.",
-    skills: ["Data Visualization", "Business Analytics", "Dashboard Design", "Data Insights"],
-    featured: false
+    image: "/certificates/aws-solutions-architect.png",
+    description: "Completed practical tasks in designing simple, scalable, hosting architecture on AWS infrastructure.",
+    skills: ["AWS", "Solutions Architecture", "Cloud Architecture", "System Design"],
+    featured: true
   },
   {
     id: "cert-tecspeak-sql",
@@ -72,9 +60,11 @@ export const verifiedCertifications: VerifiedCertification[] = [
     issuer: "Tecspeak IT Solutions",
     issueDate: "July 09, 2025",
     category: "Databases & SQL",
-    image: "/certificates/tecspeak-sql-2025.svg",
-    description: "Verified industry internship completion for SQL database administration, relational schema optimization, query writing, and data manipulation.",
+    image: "/certificates/tecspeak-sql.png",
+    description: "Verified industry internship completion certificate for SQL database queries, relational schema optimization, and data manipulation.",
     skills: ["SQL", "Relational Databases", "Database Management", "Query Optimization"],
     featured: false
   }
 ];
+
+
