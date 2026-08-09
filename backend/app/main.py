@@ -2,13 +2,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.core.config import settings
 from backend.app.api.v1.chat import router as chat_router
-from backend.app.api.v1.agent import router as agent_router
+from backend.app.api.v1.admin import router as admin_router
 from backend.app.db.agent_db import init_db
+from backend.app.core.security import ensure_default_admin_user
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Backend API Gateway for MyAI Portfolio, Multi-Agent Orchestration, RAG, and Job Matching Engine"
+    description="Backend API Gateway for MyAI Portfolio, Multi-Agent Orchestration, RAG, and Private Job Agent Control Center"
 )
 
 # CORS Configuration
@@ -23,9 +24,10 @@ app.add_middleware(
 @app.on_event("startup")
 def on_startup():
     init_db()
+    ensure_default_admin_user()
 
 app.include_router(chat_router, prefix=settings.API_V1_STR)
-app.include_router(agent_router, prefix=settings.API_V1_STR)
+app.include_router(admin_router, prefix=settings.API_V1_STR)
 
 @app.get("/")
 async def root():

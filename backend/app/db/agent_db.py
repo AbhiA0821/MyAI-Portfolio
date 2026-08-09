@@ -53,6 +53,29 @@ def init_db():
         );
     """)
 
+    # Admin Users Table (Requirement 2 & 12)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS admin_users (
+            id TEXT PRIMARY KEY,
+            email TEXT UNIQUE NOT NULL,
+            password_hash TEXT NOT NULL,
+            salt TEXT NOT NULL,
+            full_name TEXT NOT NULL,
+            role TEXT NOT NULL DEFAULT 'Administrator',
+            created_at TEXT NOT NULL
+        );
+    """)
+
+    # Admin Sessions Table (Requirement 2 & 12)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS admin_sessions (
+            token TEXT PRIMARY KEY,
+            email TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            expires_at TEXT NOT NULL
+        );
+    """)
+
     conn.commit()
     conn.close()
 
@@ -76,7 +99,13 @@ def get_agent_settings() -> Dict[str, Any]:
         "last_email_sent_at": None
     }
 
-def update_agent_settings(agent_enabled: Optional[bool] = None, last_run: Optional[str] = None, next_run: Optional[str] = None, last_email_status: Optional[str] = None, last_email_sent_at: Optional[str] = None):
+def update_agent_settings(
+    agent_enabled: Optional[bool] = None,
+    last_run: Optional[str] = None,
+    next_run: Optional[str] = None,
+    last_email_status: Optional[str] = None,
+    last_email_sent_at: Optional[str] = None
+):
     init_db()
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
@@ -111,7 +140,6 @@ def get_applications_today_count() -> int:
     today_str = get_ist_date_str()
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    # Count SUBMITTED applications where applied_at starts with today's date in IST
     cursor.execute("""
         SELECT COUNT(*) FROM applications
         WHERE status = 'SUBMITTED' AND applied_at LIKE ?;
@@ -151,18 +179,6 @@ def insert_application(app_data: Dict[str, Any]):
     conn.commit()
     conn.close()
 
-def update_application_status(app_id: str, status: str, failure_reason: Optional[str] = None, applied_at: Optional[str] = None):
-    init_db()
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("""
-        UPDATE applications
-        SET status = ?, failure_reason = ?, applied_at = COALESCE(?, applied_at)
-        WHERE id = ?;
-    """, (status, failure_reason, applied_at, app_id))
-    conn.commit()
-    conn.close()
-
 def find_duplicate_application(job_url: str, company: str, role: str) -> bool:
     init_db()
     conn = sqlite3.connect(DB_PATH)
@@ -184,5 +200,58 @@ def cancel_in_progress_applications():
         SET status = 'CANCELLED_BY_USER', failure_reason = 'Agent manually turned OFF by user'
         WHERE status IN ('DISCOVERED', 'VIEWED', 'READY', 'APPLYING');
     """)
+    conn.commit()
+    conn.close()
+
+# Admin User & Session DB Functions
+def get_admin_user_by_email(email: str) -> Optional[Dict[str, Any]]:
+    init_db()
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM admin_users WHERE LOWER(email) = LOWER(?);", (email.strip(),))
+    row = cursor.fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+def save_admin_user(user_id: str, email: str, password_hash: str, salt: str, full_name: str):
+    init_db()
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    now_iso = get_ist_now().isoformat()
+    cursor.execute("""
+        INSERT OR REPLACE INTO admin_users (id, email, password_hash, salt, full_name, role, created_at)
+        VALUES (?, ?, ?, ?, ?, 'Administrator', ?);
+    """, (user_id, email.lower().strip(), password_hash, salt, full_name, now_iso))
+    conn.commit()
+    conn.close()
+
+def save_admin_session(token: str, email: str, expires_at: str):
+    init_db()
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    now_iso = get_ist_now().isoformat()
+    cursor.execute("""
+        INSERT OR REPLACE INTO admin_sessions (token, email, created_at, expires_at)
+        VALUES (?, ?, ?, ?);
+    """, (token, email.lower().strip(), now_iso, expires_at))
+    conn.commit()
+    conn.close()
+
+def get_admin_session(token: str) -> Optional[Dict[str, Any]]:
+    init_db()
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM admin_sessions WHERE token = ?;", (token,))
+    row = cursor.fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+def delete_admin_session(token: str):
+    init_db()
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM admin_sessions WHERE token = ?;", (token,))
     conn.commit()
     conn.close()
