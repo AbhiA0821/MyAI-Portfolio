@@ -112,27 +112,27 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
             <ParallaxElement speed={-20} className="w-full">
               <div className="relative space-y-4">
                 
-                {/* 2.5D Floating Card 1: MedIntel RAG Status */}
+                {/* 2.5D Floating Card 1: Art-Generation */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="p-5 rounded-2xl bg-[#0A0A1A] border border-slate-800/90 shadow-2xl backdrop-blur-xl space-y-2 relative overflow-hidden"
+                  className="p-5 rounded-2xl bg-[#0A0A1A] border border-cyan-500/40 shadow-2xl backdrop-blur-xl space-y-2 relative overflow-hidden"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5" />
-                      MedIntel RAG Pipeline
+                      Art-Generation
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800">
-                      92.1% Precision@5
+                    <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold">
+                      Generative Deep Learning
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-300 font-semibold">Clinical Knowledge PubMed Abstract Vector Search</p>
+                  <p className="text-xs text-slate-300 font-semibold">Neural Style Transfer & Artistic Image Synthesis</p>
 
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    {['PySpark', 'FastEmbed', 'DuckDB', 'FastAPI'].map((t) => (
+                    {['Python', 'PyTorch', 'CNNs', 'Gram Matrix'].map((t) => (
                       <span key={t} className="px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-[10px] font-mono text-slate-300">
                         {t}
                       </span>
@@ -140,7 +140,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
                   </div>
                 </motion.div>
 
-                {/* 2.5D Floating Card 2: Multi-Agent Engine */}
+                {/* 2.5D Floating Card 2: ResumeAI Matcher */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -150,17 +150,17 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                       <Bot className="w-3.5 h-3.5" />
-                      MyAI Multi-Agent Engine
+                      ResumeAI Matcher
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-purple-950 text-purple-300 border border-purple-800 animate-pulse">
-                      5 Agent Nodes Active
+                    <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-purple-950 text-purple-300 border border-purple-800">
+                      KNN + Random Forest
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-300 font-semibold">Master Intent Orchestrator & RAG Retriever</p>
+                  <p className="text-xs text-slate-300 font-semibold">Smart Resume Skill Analyzer & Live Job Matcher</p>
 
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    {['Ollama Qwen2.5', 'ChromaDB', 'Intent Router', 'React 19'].map((t) => (
+                    {['Python', 'Streamlit', 'Scikit-Learn', 'JSearch API'].map((t) => (
                       <span key={t} className="px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-[10px] font-mono text-slate-300">
                         {t}
                       </span>
@@ -168,7 +168,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
                   </div>
                 </motion.div>
 
-                {/* 2.5D Floating Card 3: Distributed Data Engine */}
+                {/* 2.5D Floating Card 3: MedIntel Healthcare Data Pipeline */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -178,17 +178,17 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                       <Database className="w-3.5 h-3.5" />
-                      PySpark Data Engine
+                      MedIntel Data Pipeline
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800">
-                      Delta Lake Parquet
+                    <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-amber-950/80 text-amber-300 border border-amber-800 font-bold">
+                      ONGOING
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-300 font-semibold">Distributed Event Streaming & ETL Transformations</p>
+                  <p className="text-xs text-slate-300 font-semibold">Patient Vital Health Ingestion & Airflow Pipeline</p>
 
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    {['Apache Spark', 'SQL', 'PostgreSQL', 'Airflow'].map((t) => (
+                    {['Python', 'DuckDB', 'PySpark', 'Airflow', 'SQL'].map((t) => (
                       <span key={t} className="px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-[10px] font-mono text-slate-300">
                         {t}
                       </span>
