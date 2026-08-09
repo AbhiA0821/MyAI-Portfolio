@@ -4,7 +4,7 @@ import { Bot, Sparkles, Terminal, Database, GitBranch, ArrowRight, UserCheck, Br
 
 const agents = [
   { id: 'profile', name: 'Profile Agent', desc: 'Personal background & education', icon: <UserCheck className="w-4 h-4 text-blue-400" /> },
-  { id: 'project', name: 'Project Agent', desc: 'MedIntel RAG & PySpark engine', icon: <Terminal className="w-4 h-4 text-purple-400" /> },
+  { id: 'project', name: 'Project Agent', desc: 'MedIntel & Resume-Matcher repos', icon: <Terminal className="w-4 h-4 text-purple-400" /> },
   { id: 'career', name: 'Career Agent', desc: 'Alignment & background analysis', icon: <Briefcase className="w-4 h-4 text-pink-400" /> },
   { id: 'github', name: 'GitHub Agent', desc: 'Repos, commits & MCP tools', icon: <GitBranch className="w-4 h-4 text-emerald-400" /> },
   { id: 'portfolio', name: 'Portfolio Agent', desc: 'Navigation & general queries', icon: <Award className="w-4 h-4 text-cyan-400" /> }
@@ -40,7 +40,7 @@ export const SystemShowcase: React.FC = () => {
             </span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            How visitor queries are routed through a master intent orchestrator to 5 specialized domain agents backed by ChromaDB vector search and local LLM response streaming.
+            How visitor queries are routed through a master intent orchestrator to 5 specialized domain agents backed by ChromaDB vector search and LLM response streaming.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export const SystemShowcase: React.FC = () => {
                 01 • VISITOR QUERY
               </span>
               <h4 className="text-sm font-bold text-white">Natural Language Input</h4>
-              <p className="text-[11px] font-mono text-slate-400">"Tell me about MedIntel architecture"</p>
+              <p className="text-[11px] font-mono text-slate-400">"Tell me about Resume-Matcher architecture"</p>
             </div>
 
             {/* Pulsing Light Stream Line */}

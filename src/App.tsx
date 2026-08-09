@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react';
-import type { TargetRole } from './types/portfolio';
 import {
   profileData,
   skillCategoriesData,
   projectsData,
   experienceData,
   educationData,
-  certificationsData,
   githubStatsData,
   statsData,
-  expertiseData,
-  timelineData
+  expertiseData
 } from './data/portfolioData';
 
 import { CustomCursor } from './components/common/CustomCursor';
@@ -20,16 +17,16 @@ import { Hero } from './components/sections/Hero';
 import { TextMarqueeStrip } from './components/common/TextMarqueeStrip';
 import { StatsSection } from './components/sections/StatsSection';
 import { About } from './components/sections/About';
-import { ExpertiseSection } from './components/sections/ExpertiseSection';
-import { CertificationsSection } from './components/sections/CertificationsSection';
-import { TimelineSection } from './components/sections/TimelineSection';
 import { Skills } from './components/sections/Skills';
+import { ExpertiseSection } from './components/sections/ExpertiseSection';
+import { Experience } from './components/sections/Experience';
+import { Education } from './components/sections/Education';
+import { CertificationsSection } from './components/sections/CertificationsSection';
 import { ArsenalMarquee } from './components/sections/ArsenalMarquee';
 import { Projects } from './components/sections/Projects';
-import { SystemShowcase } from './components/sections/SystemShowcase';
-import { ScrollWorkflow } from './components/sections/ScrollWorkflow';
-import { Experience } from './components/sections/Experience';
 import { GitHubSection } from './components/sections/GitHubSection';
+import { ScrollWorkflow } from './components/sections/ScrollWorkflow';
+import { SystemShowcase } from './components/sections/SystemShowcase';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ChatWidget } from './components/ai/ChatWidget';
 import { ResumeModal } from './components/sections/ResumeModal';
@@ -62,7 +59,6 @@ const marqueeStrip2 = [
 ];
 
 export function App() {
-  const [selectedRole] = useState<TargetRole>('AI Engineer');
   const [isIntroComplete, setIsIntroComplete] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -90,7 +86,7 @@ export function App() {
       {/* Intelligent Custom Cursor */}
       <CustomCursor />
 
-      {/* 01. Cinematic Opening Experience */}
+      {/* 01. CINEMATIC INTRO (5.0 Seconds Exactly) */}
       {!isIntroComplete && (
         <IntroLoader onComplete={() => setIsIntroComplete(true)} />
       )}
@@ -121,7 +117,7 @@ export function App() {
           </div>
         ) : (
           <>
-            {/* 02. Personal Hero */}
+            {/* 02. HERO */}
             <Hero
               profile={profileData}
               onOpenChat={() => setIsChatOpen(true)}
@@ -133,53 +129,47 @@ export function App() {
             <TextMarqueeStrip items={marqueeStrip1} direction="left" speed={30} />
             <StatsSection stats={statsData} />
 
-            {/* 03. About Section */}
+            {/* 03. ABOUT */}
             <About profile={profileData} />
 
             {/* Transition: About -> Skills */}
             <SectionTransition />
 
-            {/* 04. Technical Skills & Ecosystem */}
-            <Skills
-              skillCategories={skillCategoriesData}
-              selectedRole={selectedRole}
-            />
-
-            {/* "WHAT I BUILD" Expertise Areas */}
+            {/* 04. SKILLS */}
+            <Skills skillCategories={skillCategoriesData} />
             <ExpertiseSection expertiseList={expertiseData} />
 
-            {/* Transition: Skills -> Experience & Certifications */}
+            {/* Transition: Skills -> Experience */}
             <SectionTransition />
 
-            {/* 05. Experience & Verified Certifications */}
+            {/* 05. EXPERIENCE */}
+            <Experience experiences={experienceData} />
+
+            {/* 06. EDUCATION */}
+            <Education education={educationData} />
+
+            {/* 07. CERTIFICATIONS */}
             <CertificationsSection />
-            <TimelineSection timeline={timelineData} />
-            <Experience
-              experiences={experienceData}
-              education={educationData}
-              certifications={certificationsData}
-              selectedRole={selectedRole}
-            />
 
             {/* Technology Arsenal Marquee */}
             <ArsenalMarquee />
 
-            {/* Transition: Experience -> Projects */}
+            {/* Transition: Certifications -> Projects */}
             <SectionTransition />
 
-            {/* 06. Projects Engineering Case Studies */}
+            {/* 08. FEATURED PROJECTS */}
             <Projects projects={projectsData} />
 
             {/* Transition: Projects -> GitHub */}
             <SectionTransition />
 
-            {/* 07. GitHub Repositories & Stats */}
+            {/* 09. GITHUB */}
             <GitHubSection stats={githubStatsData} />
 
             {/* Transition: GitHub -> MyAI */}
             <SectionTransition />
 
-            {/* 08. MyAI Visual Architecture & Workflow */}
+            {/* 10. MYAI */}
             <ScrollWorkflow />
             <SystemShowcase />
 
@@ -194,7 +184,6 @@ export function App() {
       <ChatWidget
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
-        selectedRole={selectedRole}
       />
 
       {/* Resume Preview Modal */}
@@ -204,7 +193,7 @@ export function App() {
         onClose={() => setIsResumeOpen(false)}
       />
 
-      {/* 09. Footer & Contact CTA */}
+      {/* 11. CONTACT */}
       <footer id="contact" className="py-16 bg-[#050505] border-t border-slate-800/80 text-center text-xs font-mono text-slate-400 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 space-y-8 relative z-10">
           

@@ -41,7 +41,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
             className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-heading justify-center"
           />
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Case studies covering production Multi-Agent systems, clinical PubMed RAG search engines, and PySpark streaming data pipelines.
+            Verified projects covering AI platform engineering, ML resume analysis, healthcare data engineering, and deep learning implementations.
           </p>
         </div>
 

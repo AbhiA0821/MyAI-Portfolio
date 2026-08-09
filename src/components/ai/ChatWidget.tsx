@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, X, Send, User, RefreshCw, Sparkles, Database } from 'lucide-react';
 import type { TargetRole } from '../../types/portfolio';
+import { projectsData } from '../../data/portfolioData';
+import { verifiedCertifications } from '../../data/certificationsData';
 
 interface Message {
   id: string;
@@ -22,7 +24,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
     {
       id: '1',
       sender: 'assistant',
-      text: `Hello! I am Abhishek's AI Portfolio Assistant. Ask me anything about his projects (MedIntel, PySpark Data Engine), verified Oracle & Infosys certifications, technical skills, or GitHub repositories!`,
+      text: `Hello! I am Abhishek's AI Portfolio Assistant. Ask me anything about his verified projects (MedIntel [ONGOING], Resume-Matcher, Art-Generation, Data-Engineering), Oracle & industry certifications, technical skills, or GitHub repositories!`,
       agentName: 'Portfolio Assistant Agent',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
@@ -35,8 +37,8 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
   const suggestedQuestions = [
     "What projects has Abhishek built?",
     "What technologies does he use?",
-    "Tell me about his certifications.",
-    "Explain MedIntel architecture.",
+    "What certifications does Abhishek have?",
+    "Tell me about MedIntel.",
     "What is his GitHub profile?"
   ];
 
@@ -117,28 +119,30 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
         throw new Error('API Unavailable');
       }
     } catch {
-      // Deterministic Grounded RAG Fallback Response (No Hallucinations)
-      let fallbackText = "I don't have verified information about that yet.";
+      // Grounded Fallback Engine using exact portfolioData / certificationsData source of truth
+      let fallbackText = "I don't have verified information about that project.";
       const qLower = query.toLowerCase();
 
-      if (qLower.includes("medintel")) {
-        fallbackText = `MedIntel is a Clinical Knowledge RAG Search Engine built with PySpark ETL, FastEmbed dense vector embeddings, DuckDB in-memory analytical querying, and FastAPI. Achieves 92.1% Precision@5 on PubMed abstracts.`;
-      } else if (qLower.includes("project") || qLower.includes("built")) {
-        fallbackText = `Abhishek's verified GitHub projects (https://github.com/AbhiA0821) include:
-1. MyAI Portfolio & Multi-Agent Assistant
-2. MedIntel: Clinical Knowledge RAG Engine
-3. PySpark Real-Time Distributed Data Engine`;
-      } else if (qLower.includes("certif")) {
-        fallbackText = `Abhishek holds 5 verified credentials:
-1. Oracle OCI 2025 Certified Generative AI Professional (Sept 30, 2025)
-2. Oracle OCI 2025 Certified Data Science Professional (Oct 13, 2025)
-3. Infosys Springboard Artificial Intelligence (April 23, 2026)
-4. Tata / Forage Data Visualisation (Aug 12, 2025)
-5. Tecspeak SQL Database Internship (July 9, 2025)`;
-      } else if (qLower.includes("skill") || qLower.includes("technolog")) {
-        fallbackText = `Abhishek's verified competencies cover Generative AI (LLMs, RAG, ChromaDB, Ollama), Machine Learning (Scikit-Learn, PyTorch, XGBoost), Data Engineering (PySpark, DuckDB, SQL, Airflow), and FastAPI microservices.`;
-      } else if (qLower.includes("github")) {
-        fallbackText = `Abhishek's verified GitHub profile is https://github.com/AbhiA0821 with 9 repositories and active open-source contributions.`;
+      if (qLower.includes('interviewai')) {
+        fallbackText = "I don't have verified information about that project.";
+      } else {
+        const matchedProj = projectsData.find(
+          (p) => qLower.includes(p.slug.toLowerCase()) || qLower.includes(p.title.toLowerCase()) || (p.slug === 'medintel' && qLower.includes('medintel'))
+        );
+
+        if (matchedProj) {
+          fallbackText = `${matchedProj.title}: ${matchedProj.description} Technologies: ${matchedProj.technologies.join(', ')}. GitHub: ${matchedProj.githubUrl}`;
+        } else if (qLower.includes("project") || qLower.includes("built") || qLower.includes("work")) {
+          const realProjectsList = projectsData.map((p, idx) => `${idx + 1}. ${p.title} (${p.githubUrl})`).join('\n');
+          fallbackText = `Abhishek's verified GitHub projects (https://github.com/AbhiA0821) are:\n${realProjectsList}`;
+        } else if (qLower.includes("certif")) {
+          const realCertsList = verifiedCertifications.map((c, idx) => `${idx + 1}. ${c.title} — ${c.issuer} (${c.issueDate})`).join('\n');
+          fallbackText = `Abhishek's verified certifications are:\n${realCertsList}`;
+        } else if (qLower.includes("skill") || qLower.includes("technolog")) {
+          fallbackText = `Abhishek's verified skills include Python, SQL, PySpark, DuckDB, PyTorch, Scikit-Learn, Streamlit, FastAPI, Docker, and Apache Airflow.`;
+        } else if (qLower.includes("github")) {
+          fallbackText = `Abhishek's verified GitHub profile is https://github.com/AbhiA0821 containing 9 public repositories.`;
+        }
       }
 
       setMessages((prev) => [

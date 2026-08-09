@@ -8,12 +8,14 @@ interface NavbarProps {
 }
 
 const navLinks = [
-  { name: 'Home', href: '#hero' },
+  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Expertise', href: '#expertise' },
   { name: 'Skills', href: '#skills' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Education', href: '#education' },
+  { name: 'Certifications', href: '#certifications' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Journey', href: '#timeline' },
+  { name: 'GitHub', href: '#github' },
   { name: 'MyAI', href: '#inside-myai' },
   { name: 'Contact', href: '#contact' }
 ];
@@ -40,7 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           
           {/* Brand Logo */}
           <div className="flex items-center gap-3">
-            <a href="#hero" className="flex items-center gap-2.5 group">
+            <a href="#home" className="flex items-center gap-2.5 group">
               <div className="p-2 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500 shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
                 <Bot className="w-5 h-5 text-white" />
               </div>
@@ -56,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7">
+          <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <button
                 key={link.name}
