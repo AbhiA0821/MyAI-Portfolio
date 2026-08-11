@@ -1,6 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import type { ExperienceItem } from '../../types/portfolio';
-import { Briefcase, Calendar, MapPin, CheckCircle } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 
 interface ExperienceProps {
   experiences: ExperienceItem[];
@@ -27,29 +28,48 @@ export const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
             </span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Hands-on technical engineering experience across Machine Learning algorithms, healthcare ETL data pipelines, and deep learning architectures.
+            Verified industry experience and virtual internships across Machine Learning, PySpark, DuckDB, and SQL database management.
           </p>
         </div>
 
-        {/* Experience Cards Grid */}
-        <div className="max-w-4xl mx-auto space-y-6">
-          {experiences.map((exp) => (
-            <div
+        {/* Experience Cards Timeline with Framer Motion */}
+        <div className="max-w-4xl mx-auto space-y-8 relative">
+          {/* Vertical Timeline Line */}
+          <div className="absolute top-0 bottom-0 left-6 sm:left-8 w-[2px] bg-gradient-to-b from-blue-600 via-purple-600 to-slate-900 pointer-events-none hidden sm:block" />
+
+          {experiences.map((exp, index) => (
+            <motion.div
               key={exp.id}
-              className="p-6 sm:p-8 rounded-2xl bg-[#0A0A1A] border border-slate-800/90 backdrop-blur-xl shadow-2xl space-y-5"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              className="p-6 sm:p-8 rounded-3xl bg-[#0A0A1A] border border-slate-800/90 hover:border-purple-500/40 backdrop-blur-xl shadow-2xl space-y-5 transition-all group relative"
             >
               <div className="flex flex-wrap items-start justify-between gap-4 border-b border-slate-800/80 pb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white font-heading">{exp.role}</h3>
-                  <p className="text-sm font-semibold text-blue-400 font-mono pt-1">{exp.company}</p>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-white font-heading group-hover:text-blue-400 transition-colors">
+                      {exp.role}
+                    </h3>
+                    {exp.role.toLowerCase().includes('intern') && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-950/80 text-purple-300 border border-purple-800 font-semibold uppercase">
+                        INTERNSHIP
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm font-semibold text-purple-400 font-mono pt-1">
+                    {exp.company}
+                  </p>
                 </div>
+
                 <div className="text-right text-xs font-mono text-slate-400 space-y-1">
-                  <div className="flex items-center gap-1.5 justify-end">
-                    <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="flex items-center gap-1.5 justify-end text-cyan-300">
+                    <Calendar className="w-3.5 h-3.5 text-cyan-400" />
                     <span>{exp.period}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 justify-end">
-                    <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="flex items-center gap-1.5 justify-end text-slate-300">
+                    <MapPin className="w-3.5 h-3.5 text-purple-400" />
                     <span>{exp.location}</span>
                   </div>
                 </div>
@@ -57,10 +77,17 @@ export const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
 
               <ul className="space-y-3 text-xs sm:text-sm text-slate-300">
                 {exp.description.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <motion.li
+                    key={idx}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: index * 0.15 + idx * 0.05 }}
+                    className="flex items-start gap-2.5"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <span className="leading-relaxed">{item}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
@@ -68,13 +95,13 @@ export const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
                 {exp.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300"
+                    className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 group-hover:border-slate-700 transition-colors"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
