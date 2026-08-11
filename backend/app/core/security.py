@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 security_scheme = HTTPBearer(auto_error=False)
 
 DEFAULT_ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "ainapureabhi0821@gmail.com")
-DEFAULT_ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "Abhi@2026")
+DEFAULT_ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "Abhi@0821")
 SESSION_DURATION_HOURS = 24
 
 def hash_password(password: str, salt_bytes: Optional[bytes] = None) -> tuple[str, str]:
@@ -36,9 +36,9 @@ def verify_password(password: str, stored_hash_hex: str, stored_salt_hex: str) -
 
 def ensure_default_admin_user():
     existing = get_admin_user_by_email(DEFAULT_ADMIN_EMAIL)
-    if not existing:
+    if not existing or not verify_password(DEFAULT_ADMIN_PASSWORD, existing["password_hash"], existing["salt"]):
         hash_hex, salt_hex = hash_password(DEFAULT_ADMIN_PASSWORD)
-        user_id = str(uuid.uuid4())
+        user_id = existing["id"] if existing else str(uuid.uuid4())
         save_admin_user(
             user_id=user_id,
             email=DEFAULT_ADMIN_EMAIL,
@@ -46,7 +46,7 @@ def ensure_default_admin_user():
             salt=salt_hex,
             full_name="Abhishek Ainapure"
         )
-        logger.info("Default admin user initialized for %s", DEFAULT_ADMIN_EMAIL)
+        logger.info("Default admin user initialized/updated for %s", DEFAULT_ADMIN_EMAIL)
 
 def authenticate_admin(email: str, password: str) -> Optional[Dict[str, Any]]:
     ensure_default_admin_user()

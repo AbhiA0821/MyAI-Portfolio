@@ -203,6 +203,25 @@ def cancel_in_progress_applications():
     conn.commit()
     conn.close()
 
+def update_application_status(app_id: str, status: str, failure_reason: Optional[str] = None, applied_at: Optional[str] = None):
+    init_db()
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    if applied_at:
+        cursor.execute("""
+            UPDATE applications
+            SET status = ?, failure_reason = ?, applied_at = ?
+            WHERE id = ?;
+        """, (status, failure_reason, applied_at, app_id))
+    else:
+        cursor.execute("""
+            UPDATE applications
+            SET status = ?, failure_reason = ?
+            WHERE id = ?;
+        """, (status, failure_reason, app_id))
+    conn.commit()
+    conn.close()
+
 # Admin User & Session DB Functions
 def get_admin_user_by_email(email: str) -> Optional[Dict[str, Any]]:
     init_db()

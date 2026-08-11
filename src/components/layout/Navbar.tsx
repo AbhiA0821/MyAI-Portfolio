@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Bot, Menu, X, Sparkles } from 'lucide-react';
+import { Bot, Menu, X, Sparkles, Lock } from 'lucide-react';
 
 interface NavbarProps {
   onOpenChat: () => void;
   onOpenResume?: () => void;
+  onOpenAdmin?: () => void;
 }
 
 const navLinks = [
@@ -21,7 +22,8 @@ const navLinks = [
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenChat,
-  onOpenResume
+  onOpenResume,
+  onOpenAdmin
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -86,10 +88,32 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Sparkles className="w-3.5 h-3.5" />
               <span>Ask MyAI</span>
             </button>
+
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                title="Protected Job Application Agent Gateway (10 Applications/Day Cap)"
+                aria-label="Protected Job Agent Control"
+                className="p-2 rounded-xl text-slate-400 hover:text-purple-400 hover:bg-purple-950/40 border border-slate-800/80 hover:border-purple-800/50 transition-all cursor-pointer group relative"
+              >
+                <Lock className="w-4 h-4 transition-transform group-hover:scale-110" />
+                <span className="sr-only">Job Agent Gateway</span>
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                title="Protected Job Agent Gateway"
+                aria-label="Protected Job Agent Gateway"
+                className="p-2 rounded-lg text-slate-400 hover:text-purple-400 bg-slate-900 border border-slate-800"
+              >
+                <Lock className="w-4 h-4" />
+              </button>
+            )}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-slate-300 hover:text-white bg-slate-900 border border-slate-800"
@@ -116,27 +140,42 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          <div className="flex items-center gap-3 pt-3">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenChat();
-              }}
-              className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-mono text-xs font-semibold flex items-center justify-center gap-2 shadow-lg"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>Ask MyAI</span>
-            </button>
-
-            {onOpenResume && (
+          <div className="flex flex-col items-center gap-2.5 pt-3">
+            <div className="flex items-center gap-2 w-full">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenResume();
+                  onOpenChat();
                 }}
-                className="w-full py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-mono text-xs font-semibold"
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-mono text-xs font-semibold flex items-center justify-center gap-2 shadow-lg"
               >
-                RESUME
+                <Sparkles className="w-4 h-4" />
+                <span>Ask MyAI</span>
+              </button>
+
+              {onOpenResume && (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenResume();
+                  }}
+                  className="w-full py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-mono text-xs font-semibold"
+                >
+                  RESUME
+                </button>
+              )}
+            </div>
+
+            {onOpenAdmin && (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenAdmin();
+                }}
+                className="w-full py-2.5 rounded-xl bg-purple-950/40 border border-purple-800/50 text-purple-300 font-mono text-xs font-semibold flex items-center justify-center gap-2"
+              >
+                <Lock className="w-3.5 h-3.5 text-purple-400" />
+                <span>Job Application Agent Gateway (10/Day Cap)</span>
               </button>
             )}
           </div>
