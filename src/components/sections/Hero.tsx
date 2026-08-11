@@ -120,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
                 onClick={scrollToProjects}
                 className="px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold text-xs font-mono flex items-center gap-2 shadow-xl shadow-blue-500/25 cursor-pointer"
               >
-                <span>WHAT I BUILT</span>
+                <span>EXPLORE PROJECTS</span>
                 <ArrowRight className="w-4 h-4" />
               </MagneticButton>
             </motion.div>
