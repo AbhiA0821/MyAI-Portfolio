@@ -32,19 +32,19 @@ export const GitHubSection: React.FC<GitHubSectionProps> = ({ stats }) => {
           }
         }
 
-        const reposRes = await fetch('https://api.github.com/users/AbhiA0821/repos');
+        const reposRes = await fetch('https://api.github.com/users/AbhiA0821/repos?per_page=100');
         if (reposRes.ok) {
           const reposData = await reposRes.json();
           if (isMounted && Array.isArray(reposData)) {
             const totalStars = reposData.reduce((acc: number, r: { stargazers_count?: number }) => acc + (r.stargazers_count || 0), 0);
             setLiveStats((prev) => ({
               ...prev,
-              starsCount: Math.max(totalStars, 5) // Verified static profile stars = 5
+              starsCount: totalStars
             }));
           }
         }
       } catch {
-        // Fallback to static verified profile numbers if API fails/rate-limited
+        // Use static verified numbers from GitHub profile if API is offline
       }
     }
 
