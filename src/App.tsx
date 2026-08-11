@@ -6,8 +6,7 @@ import {
   experienceData,
   educationData,
   githubStatsData,
-  statsData,
-  expertiseData
+  statsData
 } from './data/portfolioData';
 
 import { CustomCursor } from './components/common/CustomCursor';
@@ -18,7 +17,6 @@ import { TextMarqueeStrip } from './components/common/TextMarqueeStrip';
 import { StatsSection } from './components/sections/StatsSection';
 import { About } from './components/sections/About';
 import { Skills } from './components/sections/Skills';
-import { ExpertiseSection } from './components/sections/ExpertiseSection';
 import { Experience } from './components/sections/Experience';
 import { Education } from './components/sections/Education';
 import { CertificationsSection } from './components/sections/CertificationsSection';
@@ -161,7 +159,6 @@ export function App() {
 
             {/* 03. SKILLS */}
             <Skills skillCategories={skillCategoriesData} />
-            <ExpertiseSection expertiseList={expertiseData} />
 
             <SectionTransition />
 
