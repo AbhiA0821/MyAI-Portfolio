@@ -14,12 +14,14 @@ export interface VerifiedCertification {
   featured: boolean;
 }
 
+// Verified certifications matching authoritative resume & LinkedIn credentials.
+// SQL Internship belongs under Work Experience and is omitted from Certifications.
 export const verifiedCertifications: VerifiedCertification[] = [
   {
     id: "cert-oracle-genai",
     title: "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
-    issuer: "Oracle University / Oracle Certified Professional",
-    issueDate: "September 30, 2025",
+    issuer: "Oracle University",
+    issueDate: "September 2025",
     credentialId: "322687563OCI25GAIOCP",
     credentialUrl: "https://mylearn.oracle.com/ou/certification",
     category: "Generative AI",
@@ -31,9 +33,9 @@ export const verifiedCertifications: VerifiedCertification[] = [
   {
     id: "cert-oracle-ds",
     title: "Oracle Cloud Infrastructure 2025 Certified Data Science Professional",
-    issuer: "Oracle University / Oracle Certified Professional",
-    issueDate: "October 13, 2025",
-    validUntil: "October 13, 2027",
+    issuer: "Oracle University",
+    issueDate: "October 2025",
+    validUntil: "October 2027",
     credentialId: "322687563OCI25DSOCP",
     credentialUrl: "https://mylearn.oracle.com/ou/certification",
     category: "Data Science & ML",
@@ -43,27 +45,15 @@ export const verifiedCertifications: VerifiedCertification[] = [
     featured: true
   },
   {
-    id: "cert-aws-sa",
-    title: "Solutions Architecture (AWS) Job Simulation",
-    issuer: "Forage Capstone",
-    issueDate: "August 12, 2025",
-    verificationCode: "WS8SeyBivQbGWGry5",
-    category: "Data Engineering & Analytics",
-    image: "/certificates/aws-solutions-architect.png",
-    description: "Completed practical tasks in designing simple, scalable, hosting architecture on AWS infrastructure.",
-    skills: ["AWS", "Solutions Architecture", "Cloud Architecture", "System Design"],
+    id: "cert-infosys-ai",
+    title: "Artificial Intelligence – Infosys Springboard",
+    issuer: "Infosys Springboard",
+    issueDate: "April 2026",
+    category: "Artificial Intelligence",
+    credentialUrl: "https://infyspringboard.onwingspan.com",
+    description: "Artificial Intelligence certification from Infosys Springboard covering core machine learning, deep learning concepts, and AI application development.",
+    skills: ["Artificial Intelligence", "Machine Learning", "Python", "Data Science"],
     featured: true
-  },
-  {
-    id: "cert-tecspeak-sql",
-    title: "Database (SQL) Internship Completion Certificate",
-    issuer: "Tecspeak IT Solutions",
-    issueDate: "July 09, 2025",
-    category: "Databases & SQL",
-    image: "/certificates/tecspeak-sql.png",
-    description: "Verified industry internship completion certificate for SQL database queries, relational schema optimization, and data manipulation.",
-    skills: ["SQL", "Relational Databases", "Database Management", "Query Optimization"],
-    featured: false
   }
 ];
 
