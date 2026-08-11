@@ -110,6 +110,10 @@ export function App() {
         <Navbar
           onOpenChat={() => setIsChatOpen(true)}
           onOpenResume={() => setIsResumeOpen(true)}
+          onOpenAdmin={() => {
+            window.history.pushState({}, '', '/admin');
+            setIsAdminView(true);
+          }}
         />
       )}
 
@@ -139,32 +143,34 @@ export function App() {
           </div>
         ) : (
           <>
-            {/* 02. HERO */}
+            {/* 01. HERO */}
             <Hero
               profile={profileData}
               onOpenChat={() => setIsChatOpen(true)}
               onOpenResume={() => setIsResumeOpen(true)}
             />
 
-            {/* Transition: Hero -> About */}
             <SectionTransition />
             <TextMarqueeStrip items={marqueeStrip1} direction="left" speed={30} />
             <StatsSection stats={statsData} />
 
-            {/* 03. ABOUT */}
+            {/* 02. ABOUT */}
             <About profile={profileData} />
 
-            {/* Transition: About -> Skills */}
             <SectionTransition />
 
-            {/* 04. SKILLS */}
+            {/* 03. SKILLS */}
             <Skills skillCategories={skillCategoriesData} />
             <ExpertiseSection expertiseList={expertiseData} />
 
-            {/* Transition: Skills -> Experience */}
             <SectionTransition />
 
-            {/* 05. EXPERIENCE */}
+            {/* 04. WHAT I BUILT (SINGLE PROJECT SHOWCASE) */}
+            <Projects projects={projectsData} />
+
+            <SectionTransition />
+
+            {/* 05. WORK EXPERIENCE */}
             <Experience experiences={experienceData} />
 
             {/* 06. EDUCATION */}
@@ -176,26 +182,17 @@ export function App() {
             {/* Technology Arsenal Marquee */}
             <ArsenalMarquee />
 
-            {/* Transition: Certifications -> Projects */}
             <SectionTransition />
 
-            {/* 08. FEATURED PROJECTS */}
-            <Projects projects={projectsData} />
-
-            {/* Transition: Projects -> GitHub */}
-            <SectionTransition />
-
-            {/* 09. GITHUB */}
+            {/* 08. GITHUB & OPEN SOURCE */}
             <GitHubSection stats={githubStatsData} />
 
-            {/* Transition: GitHub -> MyAI */}
             <SectionTransition />
 
-            {/* 10. MYAI */}
+            {/* MYAI ARCHITECTURE */}
             <ScrollWorkflow />
             <SystemShowcase />
 
-            {/* Transition: MyAI -> Contact */}
             <SectionTransition />
             <TextMarqueeStrip items={marqueeStrip2} direction="right" speed={35} />
           </>
@@ -275,7 +272,20 @@ export function App() {
                 </a>
               </div>
 
-              <p>© {new Date().getFullYear()} Abhishek Ainapure. Zero-Cost Architecture.</p>
+              <div className="flex items-center gap-2">
+                <p>© {new Date().getFullYear()} Abhishek Ainapure. Zero-Cost Architecture.</p>
+                <button
+                  onClick={() => {
+                    window.history.pushState({}, '', '/admin');
+                    setIsAdminView(true);
+                  }}
+                  title="Protected Job Agent Gateway"
+                  aria-label="Job Agent Control Gateway"
+                  className="p-1 text-slate-700 hover:text-purple-400 transition-colors cursor-pointer"
+                >
+                  <Lock className="w-3 h-3" />
+                </button>
+              </div>
             </div>
 
           </div>

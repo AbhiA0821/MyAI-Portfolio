@@ -13,10 +13,10 @@ import type {
 
 export const profileData: Profile = {
   name: "Abhishek Ainapure",
-  title: "AI & Data Science Specialist | GenAI & Agentic Systems",
-  tagline: "Building intelligent systems with Machine Learning, Generative AI and modern data technologies.",
-  bio: "Passionate AI & Data Science specialist dedicated to developing cutting-edge Generative AI solutions, autonomous multi-agent workflows, and high-performance data pipelines. Experienced in bridging the gap between theoretical machine learning models and robust software systems.",
-  location: "Pune, India (Open to Global / Remote Roles)",
+  title: "AI & Data Science Specialist | Python, Machine Learning & Data Engineering",
+  tagline: "Building scalable data pipelines, AI-powered applications, and intelligent data solutions.",
+  bio: "B.Tech Artificial Intelligence and Data Science student with hands-on experience in Python, Machine Learning, Data Engineering, and AI application development. Skilled in PySpark, DuckDB, SQL, Apache Airflow, Flask, and Streamlit. Passionate about building scalable data pipelines, AI-powered applications, and intelligent data solutions.",
+  location: "Ichalkaranji, Maharashtra, India",
   email: "ainapureabhi0821@gmail.com",
   githubUrl: "https://github.com/AbhiA0821",
   linkedinUrl: "https://linkedin.com/in/abhishek-ainapure",
@@ -30,23 +30,23 @@ export const statsData: StatItem[] = [
     label: "Verified Projects",
     numericValue: 4,
     suffix: "",
-    description: "MedIntel, Resume-Matcher, Art-Generation & Data-Engineering",
+    description: "Resume-Matcher, MedIntel, Art-Generation & Data-Engineering",
     iconName: "Cpu"
   },
   {
     id: "stat-2",
     label: "Core Stack Technologies",
-    numericValue: 15,
+    numericValue: 12,
     suffix: "+",
-    description: "Python, PySpark, DuckDB, TensorFlow, React, SQL",
+    description: "Python, PySpark, DuckDB, SQL, Airflow, PyTorch, Scikit-learn",
     iconName: "Layers"
   },
   {
     id: "stat-3",
     label: "Verified Certifications",
-    numericValue: 4,
+    numericValue: 3,
     suffix: "",
-    description: "Oracle OCI, AWS Forage & Tecspeak Industry Credentials",
+    description: "Oracle OCI GenAI, Oracle OCI Data Science & Infosys AI Credentials",
     iconName: "Award"
   },
   {
@@ -108,12 +108,12 @@ export const expertiseData: ExpertiseItem[] = [
     subtitle: "ML, Deep Learning, Computer Vision & NLP",
     description: "Training, evaluating, and deploying statistical ML models, NLP text pipelines, and deep learning architectures.",
     iconName: "Brain",
-    technologies: ["Scikit-Learn", "PyTorch", "XGBoost", "NLP", "Deep Learning", "Pandas", "NumPy"],
+    technologies: ["Scikit-Learn", "PyTorch", "KNN", "Random Forest", "CycleGAN", "Pandas", "NumPy"],
     proficiencyLabel: "Proficient",
     detailedOverview: "Applied supervised and unsupervised ML techniques for classification, regression, and natural language processing tasks with rigorous evaluation metrics.",
     keyCapabilities: [
-      "Feature engineering, text tokenization, and vectorization",
-      "PyTorch neural network design and training loops",
+      "Skill parsing and domain classification using KNN & Random Forest",
+      "CycleGAN generator/discriminator training for style transfer",
       "Cross-validation, hyperparameter tuning, and ROC/AUC analysis",
       "Statistical inference and exploratory data analytics"
     ],
@@ -127,29 +127,29 @@ export const expertiseData: ExpertiseItem[] = [
     iconName: "Server",
     technologies: ["PySpark", "Apache Spark", "SQL", "DuckDB", "Apache Airflow", "PostgreSQL", "ETL Pipelines"],
     proficiencyLabel: "Strong",
-    detailedOverview: "Experienced in handling high-volume event streams, distributed data processing in PySpark, writing analytical queries, and SQL warehousing.",
+    detailedOverview: "Experienced in handling patient vital record streams, distributed data processing in PySpark, writing analytical queries, and SQL warehousing.",
     keyCapabilities: [
       "Distributed data extraction, transformation, and loading (ETL/ELT)",
       "PySpark DataFrame transformations and window aggregations",
       "DuckDB in-memory analytical SQL processing",
-      "Schema enforcement and stream watermarking"
+      "Airflow pipeline orchestration and DAG execution"
     ],
     targetRoles: ['Data Engineer', 'Data Scientist', 'ML Engineer']
   },
   {
     id: "exp-apps",
     title: "05 AI Applications",
-    subtitle: "FastAPI, Python, Streamlit, Next.js & AI Products",
-    description: "Building REST APIs, asynchronous microservices, and modern frontend user interfaces.",
+    subtitle: "FastAPI, Python, Streamlit & Web APIs",
+    description: "Building REST APIs, asynchronous microservices, and interactive Streamlit analytics dashboards.",
     iconName: "Terminal",
-    technologies: ["FastAPI", "Python 3.11+", "Streamlit", "React 19", "Next.js", "TypeScript", "Tailwind CSS"],
+    technologies: ["FastAPI", "Python", "Streamlit", "Flask", "SQLite", "RapidAPI", "REST APIs"],
     proficiencyLabel: "Strong",
-    detailedOverview: "Developing end-to-end full-stack AI applications combining Python API backends with responsive React/TypeScript interfaces.",
+    detailedOverview: "Developing end-to-end full-stack AI applications combining Python API backends with interactive Streamlit dashboards.",
     keyCapabilities: [
       "FastAPI AsyncIO RESTful microservice development",
-      "Server-Sent Events (SSE) streaming API adapters",
-      "Modern React 19 UI component architecture",
-      "Containerization with Docker"
+      "Streamlit real-time interactive UI dashboards",
+      "RapidAPI integration for live job postings and data",
+      "SQLite embedded database management"
     ],
     targetRoles: ['AI Engineer', 'Data Engineer']
   }
@@ -176,22 +176,23 @@ export const marqueeTechnologiesRow2 = [
 ];
 
 export const marqueeTechnologiesRow3 = [
-  "TENSORFLOW",
   "PYTORCH",
   "SCIKIT-LEARN",
+  "CYCLEGAN",
+  "RANDOM FOREST",
+  "KNN",
   "PANDAS",
-  "NUMPY",
-  "XGBOOST"
+  "NUMPY"
 ];
 
 export const marqueeTechnologiesRow4 = [
-  "NEXT.JS",
+  "STREAMLIT",
+  "FLASK",
+  "REST APIS",
   "TYPESCRIPT",
   "REACT 19",
-  "TAILWIND CSS",
   "GIT",
-  "GITHUB",
-  "DOCKER"
+  "GITHUB"
 ];
 
 export const workflowStepsData: WorkflowStep[] = [
@@ -199,173 +200,103 @@ export const workflowStepsData: WorkflowStep[] = [
     stepNumber: "01",
     title: "Understand",
     subtitle: "Problem & Requirements",
-    description: "Analyze core problem scope, user requirements, data schemas, latency thresholds, and accuracy criteria before writing code.",
+    description: "Deconstruct user goals into structured requirements and domain context.",
     techStack: ["Problem Scoping", "Data Schema Definition", "Target Alignment"],
     statusBadge: "STAGE 01"
   },
   {
     stepNumber: "02",
-    title: "Design",
+    title: "Architect",
     subtitle: "Architecture & Data Flow",
-    description: "Architect high-level data flow, multi-agent communication topology, vector database indexes, and REST API contracts.",
+    description: "Design modular schemas, data transformation pipelines, and agent graphs.",
     techStack: ["System Architecture", "Pipeline Diagrams", "API Contracts"],
     statusBadge: "STAGE 02"
   },
   {
     stepNumber: "03",
-    title: "Build",
+    title: "Execute",
     subtitle: "Models, APIs & AI Systems",
-    description: "Write clean, modular Python and TypeScript code implementing FastAPI endpoints, LLM tool wrappers, and PySpark transformations.",
-    techStack: ["Python 3.11+", "FastAPI", "React 19 / TS", "Ollama"],
+    description: "Implement clean code using Python, PySpark, DuckDB, PyTorch & FastAPI.",
+    techStack: ["Python", "PySpark", "DuckDB", "PyTorch", "FastAPI"],
     statusBadge: "STAGE 03"
   },
   {
     stepNumber: "04",
-    title: "Integrate",
-    subtitle: "RAG & Knowledge Grounding",
-    description: "Implement document chunking, dense vector embeddings, top-K reranking, and context injection to ground AI responses.",
-    techStack: ["ChromaDB", "FastEmbed", "Metadata Filtering"],
-    statusBadge: "STAGE 04"
-  },
-  {
-    stepNumber: "05",
-    title: "Evaluate",
+    title: "Verify",
     subtitle: "Quality, Accuracy & Reliability",
-    description: "Benchmark precision, latency, hallucination rates, and error recovery using automated assertion tests and validation datasets.",
+    description: "Validate performance, system accuracy, and automated test coverage.",
     techStack: ["RAG Precision Metrics", "Latency Benchmarks", "Unit Tests"],
-    statusBadge: "STAGE 05"
-  },
-  {
-    stepNumber: "06",
-    title: "Deploy",
-    subtitle: "Production & Monitoring",
-    description: "Containerize system components, setup background task orchestration, configure environment variables, and establish audit telemetry.",
-    techStack: ["Docker", "Async Workers", "Audit Logging"],
-    statusBadge: "STAGE 06"
+    statusBadge: "STAGE 04"
   }
 ];
 
 export const skillCategoriesData: SkillCategory[] = [
   {
-    category: "AI & Generative AI",
-    skills: [
-      { name: "Multi-Agent Orchestration", level: "Hands-on", roles: ['AI Engineer', 'ML Engineer'] },
-      { name: "RAG & Vector DBs (ChromaDB)", level: "Strong", roles: ['AI Engineer', 'ML Engineer', 'Data Scientist'] },
-      { name: "Prompt Engineering & Function Calling", level: "Strong", roles: ['AI Engineer', 'ML Engineer'] },
-      { name: "LangChain / LangGraph", level: "Proficient", roles: ['AI Engineer'] },
-      { name: "Local LLM Deployment (Ollama)", level: "Hands-on", roles: ['AI Engineer', 'ML Engineer'] }
-    ]
-  },
-  {
-    category: "Machine Learning",
-    skills: [
-      { name: "Scikit-Learn & XGBoost", level: "Proficient", roles: ['ML Engineer', 'Data Scientist'] },
-      { name: "Statistical Modeling & Inference", level: "Working Knowledge", roles: ['Data Scientist'] },
-      { name: "Natural Language Processing (NLP)", level: "Strong", roles: ['AI Engineer', 'ML Engineer', 'Data Scientist'] },
-      { name: "Model Evaluation & Metrics", level: "Proficient", roles: ['AI Engineer', 'ML Engineer', 'Data Scientist'] }
-    ]
-  },
-  {
-    category: "Deep Learning",
-    skills: [
-      { name: "PyTorch", level: "Working Knowledge", roles: ['ML Engineer', 'AI Engineer', 'Data Scientist'] },
-      { name: "TensorFlow & Keras", level: "Working Knowledge", roles: ['ML Engineer'] },
-      { name: "Neural Network Architectures", level: "Working Knowledge", roles: ['ML Engineer', 'Data Scientist'] }
-    ]
-  },
-  {
     category: "Data Engineering",
     skills: [
-      { name: "PySpark & Apache Spark", level: "Strong", roles: ['Data Engineer', 'Data Scientist'] },
-      { name: "DuckDB & SQL Warehousing", level: "Strong", roles: ['Data Engineer', 'AI Engineer', 'Data Scientist'] },
-      { name: "ETL / ELT Pipeline Design", level: "Strong", roles: ['Data Engineer'] },
-      { name: "Apache Airflow (In Progress)", level: "Working Knowledge", roles: ['Data Engineer'] },
-      { name: "PostgreSQL & Relational DBs", level: "Strong", roles: ['Data Engineer', 'AI Engineer'] }
+      { name: "PySpark", level: "Proficient", roles: ['Data Engineer', 'ML Engineer'] },
+      { name: "DuckDB", level: "Proficient", roles: ['Data Engineer', 'Data Scientist'] },
+      { name: "Apache Airflow", level: "Working Knowledge", roles: ['Data Engineer'] },
+      { name: "ETL Pipelines", level: "Proficient", roles: ['Data Engineer'] }
     ]
   },
   {
-    category: "Backend & Programming",
+    category: "Data Science & AI",
     skills: [
-      { name: "Python 3.11+", level: "Strong", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'] },
-      { name: "FastAPI & AsyncIO", level: "Strong", roles: ['AI Engineer', 'Data Engineer'] },
-      { name: "RESTful API Architecture", level: "Strong", roles: ['AI Engineer', 'Data Engineer'] }
+      { name: "Machine Learning", level: "Proficient", roles: ['ML Engineer', 'Data Scientist'] },
+      { name: "LLMs & Generative AI", level: "Proficient", roles: ['AI Engineer', 'ML Engineer'] },
+      { name: "CycleGAN / Deep Learning", level: "Hands-on", roles: ['AI Engineer', 'ML Engineer'] },
+      { name: "KNN & Random Forest", level: "Proficient", roles: ['ML Engineer', 'Data Scientist'] }
     ]
   },
   {
-    category: "Frontend",
+    category: "Programming Languages & Libraries",
     skills: [
-      { name: "TypeScript & React 19", level: "Proficient", roles: ['AI Engineer'] },
-      { name: "Tailwind CSS & Modern UI", level: "Strong", roles: ['AI Engineer'] },
-      { name: "Framer Motion & Glassmorphism UI", level: "Proficient", roles: ['AI Engineer'] }
+      { name: "Python", level: "Advanced", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'] },
+      { name: "SQL", level: "Proficient", roles: ['Data Engineer', 'Data Scientist'] },
+      { name: "Java (Basic)", level: "Basic", roles: ['AI Engineer'] },
+      { name: "NumPy & Pandas", level: "Advanced", roles: ['Data Scientist', 'ML Engineer'] },
+      { name: "Scikit-Learn & Matplotlib", level: "Proficient", roles: ['ML Engineer', 'Data Scientist'] }
     ]
   },
   {
-    category: "Developer Tools",
+    category: "Frameworks & Developer Tools",
     skills: [
-      { name: "Git & GitHub Version Control", level: "Strong", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'] },
-      { name: "Docker (Planned)", level: "Working Knowledge", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer'] }
+      { name: "Streamlit", level: "Proficient", roles: ['AI Engineer', 'ML Engineer'] },
+      { name: "Flask", level: "Proficient", roles: ['AI Engineer', 'Data Engineer'] },
+      { name: "REST APIs", level: "Proficient", roles: ['AI Engineer', 'Data Engineer'] },
+      { name: "Git & GitHub", level: "Proficient", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'] }
     ]
   }
 ];
 
 export const projectsData: Project[] = [
   {
-    id: "proj-medintel",
-    slug: "medintel",
-    title: "MedIntel — Healthcare Data Pipeline",
-    tagline: "ONGOING • Patient Vital Ingestion & Airflow Pipeline",
-    description: "An ongoing end-to-end healthcare data engineering pipeline designed to process patient vital signs, utilizing DuckDB analytical tables, PySpark transformations, and a Flask analytics dashboard.",
-    problem: "Processing patient vital records requires structured relational database schemas, scalable PySpark transformations, and automated pipeline execution.",
-    solution: "Architected a Python vital sign simulator and DuckDB database schema paired with PySpark ETL routines and Airflow scheduling.",
-    architecture: [
-      "Patient Vitals Simulator -> DuckDB In-Memory Relational Schema",
-      "PySpark Data Processing & Validation",
-      "Apache Airflow Orchestration (In Progress)",
-      "Flask Analytics Dashboard"
-    ],
-    pipelineDiagram: [
-      { step: "1. Vitals Simulation", description: "Simulates patient vital sign data", tech: "Python" },
-      { step: "2. DuckDB Storage", description: "Patients & vital signs relational tables", tech: "DuckDB / SQL" },
-      { step: "3. PySpark ETL", description: "Data cleaning, transformation & validation", tech: "PySpark" },
-      { step: "4. Orchestration", description: "Pipeline DAG runs (In Progress)", tech: "Apache Airflow" }
-    ],
-    technologies: ["Python", "PySpark", "DuckDB", "Pandas", "Scikit-learn", "Flask", "Apache Airflow (In Progress)", "Docker (Planned)"],
-    aiTechniques: ["PySpark ETL Processing", "DuckDB Analytical SQL", "Vital Sign Classification", "Data Validation"],
-    metrics: {
-      "Project Status": "ONGOING",
-      "Engine": "PySpark + DuckDB",
-      "Orchestration": "Airflow (In Progress)"
-    },
-    githubUrl: "https://github.com/AbhiA0821/MedIntel",
-    featured: true,
-    targetRoles: ['Data Engineer', 'ML Engineer'],
-    category: "Data Engineering"
-  },
-  {
     id: "proj-resume-matcher",
     slug: "resume-matcher",
-    title: "Resume-Matcher — Smart Resume Analyzer & Job Matcher",
-    tagline: "AI-Powered Resume Analysis & Job Recommendation System",
-    description: "An intelligent Streamlit application that parses PDF/DOCX resumes, automatically extracts technical skills, predicts domain classification using KNN & Random Forest models, and visualizes skill breakdowns.",
-    problem: "Job seekers struggle to extract structured skill sets from resumes and identify matching engineering domains.",
-    solution: "Built Resume-Matcher using PDFPlumber/docx text extraction, KNN and Random Forest classification models, and interactive Streamlit analytics.",
+    title: "AI Resume Analyzer & Live Job Matcher",
+    tagline: "AI-Powered Resume Analysis & Machine Learning Job Recommendation System",
+    description: "Developed an AI-powered resume analyzer for skill extraction and domain classification using KNN and Random Forest models. Integrated real-time job listings using RapidAPI and deployed the application on Streamlit Cloud.",
+    problem: "Job seekers struggle to extract structured skill sets from resumes and identify matching engineering domains accurately.",
+    solution: "Built Resume-Matcher using PDFPlumber text extraction, KNN & Random Forest domain classification models, SQLite data persistence, and interactive Streamlit analytics.",
     architecture: [
-      "PDF/DOCX Resume Upload -> Text Extraction",
-      "Skill Parsing & Domain Classification (KNN + Random Forest)",
-      "Interactive Streamlit Dashboard & Analytics"
+      "PDF Resume Upload -> Skill & Text Extraction (PDFPlumber)",
+      "Feature Engineering -> KNN & Random Forest ML Domain Classification",
+      "RapidAPI Integration -> Real-time Live Job Listings Search",
+      "Interactive Analytics Dashboard (Streamlit Cloud)"
     ],
     pipelineDiagram: [
-      { step: "1. Document Parsing", description: "Extracts text from PDF/DOCX resumes", tech: "Python / PDFPlumber" },
+      { step: "1. Resume Parsing", description: "Extracts text from PDF/DOCX resumes", tech: "Python / PDFPlumber" },
       { step: "2. Feature Extraction", description: "Identifies tech skills & experience indicators", tech: "Scikit-Learn" },
       { step: "3. ML Classification", description: "KNN & Random Forest domain prediction", tech: "Machine Learning" },
-      { step: "4. Analytics", description: "Skill breakdown & Streamlit dashboard", tech: "Streamlit / Plotly" }
+      { step: "4. Live Job Match", description: "RapidAPI real-time job listings search", tech: "Streamlit Cloud" }
     ],
-    technologies: ["Python", "Streamlit", "Scikit-learn", "Pandas", "NumPy", "Plotly", "SQLite", "PDFPlumber", "Python-docx", "Requests API"],
-    aiTechniques: ["KNN Classification", "Random Forest", "Resume Skill Parsing", "Domain Prediction"],
+    technologies: ["Python", "Streamlit", "Scikit-learn", "KNN", "Random Forest", "SQLite", "RapidAPI", "PDFPlumber", "Pandas", "NumPy"],
+    aiTechniques: ["KNN Classification", "Random Forest", "Resume Skill Parsing", "Domain Classification"],
     metrics: {
+      "Rank": "01 (Featured)",
       "ML Models": "KNN + Random Forest",
-      "Parser": "PDFPlumber / Docx",
-      "Interface": "Streamlit App"
+      "Interface": "Streamlit Cloud"
     },
     githubUrl: "https://github.com/AbhiA0821/Resume-Matcher",
     demoUrl: "https://resume-matcher-ypjig2msxnqn7dchb2ctg5.streamlit.app",
@@ -374,31 +305,63 @@ export const projectsData: Project[] = [
     category: "Machine Learning"
   },
   {
-    id: "proj-art-generation",
-    slug: "art-generation",
-    title: "Art-Generation — Neural Style Transfer",
-    tagline: "Deep Learning Image Synthesis & Neural Style Transfer",
-    description: "Deep learning repository implementing Neural Style Transfer (NST) using Convolutional Neural Networks to synthesize images by combining content structure with artistic artwork style representations.",
-    problem: "Synthesizing artwork while maintaining underlying content structure requires deep layer feature extraction and loss optimization.",
-    solution: "Implemented Gram matrix style representations and feature loss optimizations in PyTorch/Jupyter Notebook environments.",
+    id: "proj-medintel",
+    slug: "medintel",
+    title: "MedIntel — AI Healthcare Data Pipeline",
+    tagline: "ONGOING • Patient Vital Record Processing & Monitoring Pipeline",
+    description: "Developing an AI-powered healthcare data pipeline for processing and monitoring patient vital data. Building scalable ETL workflows using PySpark, DuckDB, and Apache Airflow for healthcare data processing, paired with a Streamlit dashboard and LLM insights.",
+    problem: "Processing patient vital sign records requires structured relational schemas, scalable PySpark transformations, and automated Airflow pipeline orchestration.",
+    solution: "Architected a Python vital sign simulator and DuckDB database schema paired with PySpark ETL routines and Apache Airflow DAG scheduling.",
     architecture: [
-      "Content & Style Image Input",
-      "Convolutional Neural Network Feature Extraction",
-      "Gram Matrix Style Computation & Loss Optimization",
-      "Synthesized Artwork Output"
+      "Patient Vitals Simulator -> DuckDB In-Memory Relational Schema",
+      "PySpark Data Cleaning, Transformation & Validation",
+      "Apache Airflow Pipeline Orchestration",
+      "Streamlit Analytics Dashboard & LLM Insights Integration"
     ],
     pipelineDiagram: [
-      { step: "1. Input Images", description: "Content photo & artwork style image", tech: "Pillow / TorchVision" },
-      { step: "2. CNN Features", description: "Extract deep feature activation maps", tech: "PyTorch" },
-      { step: "3. Style Representation", description: "Compute Gram matrices for style loss", tech: "NumPy / PyTorch" },
-      { step: "4. Optimization", description: "Iterative pixel gradient updates", tech: "Deep Learning" }
+      { step: "1. Vitals Simulation", description: "Simulates patient vital sign data", tech: "Python" },
+      { step: "2. DuckDB Storage", description: "Patients & vital signs relational tables", tech: "DuckDB / SQL" },
+      { step: "3. PySpark ETL", description: "Data cleaning, transformation & validation", tech: "PySpark" },
+      { step: "4. Pipeline DAG", description: "Automated workflow runs", tech: "Apache Airflow" }
     ],
-    technologies: ["Python", "PyTorch", "TensorFlow", "Jupyter Notebook", "NumPy", "Matplotlib", "Pillow"],
-    aiTechniques: ["Neural Style Transfer", "Convolutional Neural Networks", "Gram Matrix Style Loss", "Feature Optimization"],
+    technologies: ["Python", "PySpark", "DuckDB", "Apache Airflow", "LLM", "Streamlit", "Pandas", "SQL"],
+    aiTechniques: ["PySpark ETL Processing", "DuckDB Analytical SQL", "Vital Sign Monitoring", "LLM Insights"],
     metrics: {
-      "Architecture": "CNN Neural Style Transfer",
-      "Environment": "Jupyter Notebook / PyTorch",
-      "Domain": "Generative Deep Learning"
+      "Rank": "02 (Ongoing)",
+      "Engine": "PySpark + DuckDB",
+      "Orchestration": "Apache Airflow"
+    },
+    githubUrl: "https://github.com/AbhiA0821/MedIntel",
+    featured: true,
+    targetRoles: ['Data Engineer', 'ML Engineer'],
+    category: "Data Engineering"
+  },
+  {
+    id: "proj-art-generation",
+    slug: "art-generation",
+    title: "Art Generation Using CycleGAN",
+    tagline: "Generative Deep Learning & CycleGAN Artwork Synthesis",
+    description: "Developed a CycleGAN-based deep learning model to convert real-world images into Ghibli-style artwork. Implemented custom Generator and Discriminator networks with image preprocessing and adversarial training on unpaired datasets.",
+    problem: "Converting real-world photographs to stylized artwork requires unpaired image-to-image translation without explicit image pairs.",
+    solution: "Implemented custom CycleGAN Generator and Discriminator neural networks in PyTorch with cycle-consistency loss optimization.",
+    architecture: [
+      "Unpaired Real Photo & Ghibli Style Image Datasets",
+      "Generator (Image-to-Image Translation) & Discriminator (Adversarial Validation)",
+      "Cycle-Consistency & Adversarial Loss Optimization",
+      "High-Quality Stylized Artwork Output"
+    ],
+    pipelineDiagram: [
+      { step: "1. Input Datasets", description: "Unpaired photo & artwork datasets", tech: "Pillow / TorchVision" },
+      { step: "2. Generator Network", description: "Deep residual generator network", tech: "PyTorch" },
+      { step: "3. Discriminator Network", description: "PatchGAN adversarial discriminator", tech: "Deep Learning" },
+      { step: "4. Training Loop", description: "Cycle-consistency loss optimization", tech: "GANs" }
+    ],
+    technologies: ["Python", "PyTorch", "Deep Learning", "CycleGAN", "GANs", "NumPy", "Matplotlib"],
+    aiTechniques: ["CycleGAN Architecture", "Adversarial Training", "Cycle-Consistency Loss", "Image Preprocessing"],
+    metrics: {
+      "Rank": "03",
+      "Architecture": "CycleGAN Deep Learning",
+      "Framework": "PyTorch"
     },
     githubUrl: "https://github.com/AbhiA0821/Art-Generation",
     featured: true,
@@ -408,26 +371,26 @@ export const projectsData: Project[] = [
   {
     id: "proj-data-engineering",
     slug: "data-engineering",
-    title: "Data-Engineering — Learning & Hands-On Repository",
-    tagline: "Structured Learning Repository: SQL, PySpark & DuckDB",
-    description: "A structured learning and implementation repository documenting core data engineering principles, analytical SQL window queries, PySpark DataFrame transformations, and DuckDB schemas.",
-    problem: "Mastering data engineering tools requires practical hands-on implementations of SQL analytical queries and Spark transformations.",
+    title: "Data-Engineering — SQL, PySpark & DuckDB Repository",
+    tagline: "Structured Learning Repository: Analytical SQL, PySpark & DuckDB",
+    description: "A structured learning and implementation repository documenting core data engineering principles, analytical SQL window queries, PySpark DataFrame transformations, and DuckDB analytical schemas.",
+    problem: "Mastering scalable data engineering requires hands-on implementations of SQL analytical queries and Spark distributed transformations.",
     solution: "Maintains clean code modules covering analytical SQL queries, PySpark data operations, and DuckDB analytical processing.",
     architecture: [
       "Analytical SQL & DuckDB Relational Schemas",
       "PySpark DataFrame Transformations & Aggregations",
-      "PostgreSQL Ingestion & Data Engineering Exercises"
+      "Data Ingestion & Engineering Code Exercises"
     ],
     pipelineDiagram: [
-      { step: "1. Core SQL", description: "Analytical window functions & schemas", tech: "SQL / PostgreSQL" },
+      { step: "1. Core SQL", description: "Analytical window functions & schemas", tech: "SQL" },
       { step: "2. Spark Operations", description: "PySpark transformations & aggregations", tech: "PySpark" },
       { step: "3. Analytical Engine", description: "In-memory SQL analytical queries", tech: "DuckDB" },
       { step: "4. Open Source", description: "Hands-on data engineering modules", tech: "Git / GitHub" }
     ],
-    technologies: ["Python", "SQL", "PySpark", "DuckDB", "PostgreSQL", "Git"],
+    technologies: ["Python", "SQL", "PySpark", "DuckDB", "Apache Airflow", "Git"],
     aiTechniques: ["Distributed Data Processing", "Analytical SQL Warehousing", "DataFrame Transformations"],
     metrics: {
-      "Type": "Learning Repository",
+      "Rank": "04",
       "Focus": "Data Engineering",
       "Stack": "SQL + PySpark + DuckDB"
     },
@@ -440,108 +403,136 @@ export const projectsData: Project[] = [
 
 export const experienceData: ExperienceItem[] = [
   {
-    id: "exp-1",
-    company: "AI & Data Engineering Projects",
-    role: "AI & Data Science Specialist",
-    period: "2024 - Present",
-    location: "Pune, India",
+    id: "exp-infosys",
+    company: "Infosys Springboard 7.0",
+    role: "AI Virtual Intern",
+    period: "Starting August 2026",
+    location: "Remote / Virtual Internship",
     description: [
-      "Engineered smart resume skill parsing algorithms and domain classification models using KNN and Random Forest.",
-      "Developed healthcare ETL scripts and vital sign simulation pipelines using Python, PySpark, DuckDB, and SQL.",
-      "Implemented neural style transfer models and deep learning image synthesis pipelines in PyTorch."
+      "Selected for the Infosys Springboard 7.0 AI Virtual Internship.",
+      "Working on an industry-oriented AI project involving Python and Data Engineering.",
+      "Focus areas include Machine Learning, PySpark, DuckDB, and real-world AI applications."
     ],
-    technologies: ["Python", "PySpark", "DuckDB", "PyTorch", "Scikit-Learn", "Streamlit", "Flask", "SQL", "Git"],
-    targetRoles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist']
+    technologies: ["Python", "Machine Learning", "PySpark", "DuckDB", "Data Engineering"],
+    targetRoles: ['AI Engineer', 'ML Engineer', 'Data Engineer']
+  },
+  {
+    id: "exp-tecspeak",
+    company: "TecSpeak IT Solutions, Sangli",
+    role: "Database (SQL) Intern",
+    period: "June 2025 – July 2025",
+    location: "Sangli, Maharashtra, India",
+    description: [
+      "Completed hands-on training in SQL and relational database concepts.",
+      "Practiced writing SQL queries for data retrieval and manipulation.",
+      "Gained practical understanding of database management and SQL fundamentals."
+    ],
+    technologies: ["SQL", "Relational Databases", "Database Management", "Query Writing"],
+    targetRoles: ['Data Engineer', 'Data Scientist']
   }
 ];
 
 export const educationData: EducationItem[] = [
   {
-    id: "edu-1",
-    degree: "Bachelor of Technology (B.Tech)",
-    field: "Computer Science & Engineering / Data Science",
-    institution: "Pune University / Affiliated Institute",
-    period: "2021 - 2025",
-    grade: "First Class Distinction",
+    id: "edu-btech",
+    degree: "B.Tech in Artificial Intelligence & Data Science",
+    field: "Artificial Intelligence and Data Science",
+    institution: "Annasaheb Dange College of Engineering & Technology",
+    period: "2023 – Present",
+    grade: "CGPA: 8.26 / 10",
     highlights: [
-      "Specialized coursework in Machine Learning, Deep Learning, Database Management Systems, and Distributed Computing.",
-      "Developed hands-on capstone projects in resume matching, healthcare data engineering, and neural style transfer."
+      "Specialized coursework in Machine Learning, Deep Learning, Database Management Systems, and Distributed Data Engineering.",
+      "Built practical projects in resume matching, healthcare data engineering, and generative image synthesis."
+    ]
+  },
+  {
+    id: "edu-hsc",
+    degree: "HSC (Science)",
+    field: "Higher Secondary Certificate (Science)",
+    institution: "State Board",
+    period: "2021 – 2023",
+    grade: "81%",
+    highlights: [
+      "Completed Higher Secondary Education focusing on Physics, Chemistry, Mathematics, and Computer Science."
+    ]
+  },
+  {
+    id: "edu-ssc",
+    degree: "SSC (CBSE)",
+    field: "Secondary School Certificate",
+    institution: "CBSE Board",
+    period: "2021",
+    grade: "89%",
+    highlights: [
+      "Strong foundation in Mathematics, Science, and Information Technology."
     ]
   }
 ];
 
 export const certificationsData: CertificationItem[] = [
   {
-    id: "cert-1",
-    title: "Oracle OCI 2025 Certified Generative AI Professional",
+    id: "cert-oci-genai",
+    title: "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
     issuer: "Oracle University",
-    date: "2025",
-    skills: ["Generative AI", "OCI GenAI Services", "RAG", "LLMs"],
+    date: "September 2025",
+    skills: ["Generative AI", "OCI GenAI Services", "RAG", "LLMs", "Prompt Engineering"],
     verifyUrl: "https://mylearn.oracle.com/ou/certification"
   },
   {
-    id: "cert-2",
-    title: "Oracle OCI 2025 Certified Data Science Professional",
+    id: "cert-oci-ds",
+    title: "Oracle Cloud Infrastructure 2025 Certified Data Science Professional",
     issuer: "Oracle University",
-    date: "2025",
+    date: "October 2025",
     skills: ["Machine Learning", "Data Science", "OCI Data Science", "AutoML"],
     verifyUrl: "https://mylearn.oracle.com/ou/certification"
   },
   {
-    id: "cert-3",
-    title: "Solutions Architecture (AWS) Job Simulation",
-    issuer: "Forage Capstone",
-    date: "2025",
-    skills: ["AWS", "Solutions Architecture", "Cloud Architecture", "System Design"],
-    verifyUrl: "https://www.theforage.com"
-  },
-  {
-    id: "cert-4",
-    title: "Database (SQL) Internship Completion Certificate",
-    issuer: "Tecspeak IT Solutions",
-    date: "2025",
-    skills: ["SQL", "Relational Databases", "Database Management", "Query Optimization"],
-    verifyUrl: "https://mylearn.oracle.com/ou/certification"
+    id: "cert-infosys-ai",
+    title: "Artificial Intelligence – Infosys Springboard",
+    issuer: "Infosys Springboard",
+    date: "April 2026",
+    skills: ["Artificial Intelligence", "Machine Learning", "Python", "Data Science"],
+    verifyUrl: "https://infyspringboard.onwingspan.com"
   }
 ];
 
 export const githubStatsData: GitHubStats = {
   publicRepos: 9,
-  starsCount: 5,
-  commitsThisYear: 142,
+  starsCount: 4,
+  commitsThisYear: 120,
   topLanguages: [
-    { name: "Python", percentage: 55, color: "#3572A5" },
-    { name: "TypeScript", percentage: 30, color: "#3178C6" },
-    { name: "Jupyter / SQL", percentage: 15, color: "#DA5B0A" }
+    { name: "Python", percentage: 65, color: "#3572A5" },
+    { name: "Jupyter Notebook", percentage: 25, color: "#DA5B0A" },
+    { name: "SQL", percentage: 10, color: "#e38c00" }
   ],
   featuredRepos: [
     {
-      name: "MedIntel",
-      description: "[ONGOING] Healthcare Data Pipeline using DuckDB, PySpark & Apache Airflow",
-      language: "Python",
-      stars: 3,
-      url: "https://github.com/AbhiA0821/MedIntel",
-      updatedAt: "Verified"
-    },
-    {
       name: "Resume-Matcher",
-      description: "Smart Resume Analyzer & Job Recommendation System using KNN + Random Forest",
+      description: "AI-powered resume analyzer & machine learning job recommendation system",
       language: "Python",
       stars: 1,
       url: "https://github.com/AbhiA0821/Resume-Matcher",
       updatedAt: "Verified"
     },
     {
+      name: "MedIntel",
+      description: "AI Healthcare Data Pipeline using DuckDB, PySpark & Apache Airflow",
+      language: "Python",
+      stars: 1,
+      url: "https://github.com/AbhiA0821/MedIntel",
+      updatedAt: "Verified"
+    },
+    {
       name: "Art-Generation",
-      description: "Deep Learning Neural Style Transfer using CNNs in PyTorch & Jupyter",
+      description: "CycleGAN deep learning model to convert real-world images into Ghibli-style artwork",
       language: "Jupyter Notebook",
-      stars: 0,
+      stars: 1,
       url: "https://github.com/AbhiA0821/Art-Generation",
       updatedAt: "Verified"
     },
     {
       name: "Data-Engineering",
-      description: "Structured Learning Repository: Analytical SQL, PySpark & DuckDB",
+      description: "Structured learning repository: Analytical SQL, PySpark & DuckDB implementations",
       language: "Python",
       stars: 1,
       url: "https://github.com/AbhiA0821/Data-Engineering",
