@@ -232,40 +232,50 @@ export const workflowStepsData: WorkflowStep[] = [
 
 export const skillCategoriesData: SkillCategory[] = [
   {
+    category: "AI / Machine Learning",
+    skills: [
+      { name: "Machine Learning", level: "Proficient", roles: ['ML Engineer', 'AI Engineer'] },
+      { name: "PyTorch", level: "Hands-on", roles: ['AI Engineer', 'ML Engineer'] },
+      { name: "Deep Learning", level: "Hands-on", roles: ['AI Engineer', 'ML Engineer'] },
+      { name: "GANs", level: "Hands-on", roles: ['AI Engineer', 'ML Engineer'] }
+    ]
+  },
+  {
+    category: "Generative AI",
+    skills: [
+      { name: "Generative AI", level: "Proficient", roles: ['AI Engineer', 'ML Engineer'] },
+      { name: "LLM API Integration", level: "Proficient", roles: ['AI Engineer'] },
+      { name: "RAG", level: "Proficient", roles: ['AI Engineer'] }
+    ]
+  },
+  {
     category: "Data Engineering",
     skills: [
       { name: "PySpark", level: "Proficient", roles: ['Data Engineer', 'ML Engineer'] },
-      { name: "DuckDB", level: "Proficient", roles: ['Data Engineer', 'Data Scientist'] },
       { name: "Apache Airflow", level: "Working Knowledge", roles: ['Data Engineer'] },
-      { name: "ETL Pipelines", level: "Proficient", roles: ['Data Engineer'] }
+      { name: "DuckDB", level: "Proficient", roles: ['Data Engineer'] },
+      { name: "ETL Pipelines", level: "Proficient", roles: ['Data Engineer'] },
+      { name: "Kafka", level: "Working Knowledge", roles: ['Data Engineer'] },
+      { name: "SQL", level: "Proficient", roles: ['Data Engineer', 'Data Scientist'] }
     ]
   },
   {
-    category: "Data Science & AI",
+    category: "Backend",
     skills: [
-      { name: "Machine Learning", level: "Proficient", roles: ['ML Engineer', 'Data Scientist'] },
-      { name: "LLMs & Generative AI", level: "Proficient", roles: ['AI Engineer', 'ML Engineer'] },
-      { name: "CycleGAN / Deep Learning", level: "Hands-on", roles: ['AI Engineer', 'ML Engineer'] },
-      { name: "KNN & Random Forest", level: "Proficient", roles: ['ML Engineer', 'Data Scientist'] }
-    ]
-  },
-  {
-    category: "Programming Languages & Libraries",
-    skills: [
-      { name: "Python", level: "Advanced", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'] },
-      { name: "SQL", level: "Proficient", roles: ['Data Engineer', 'Data Scientist'] },
-      { name: "Java (Basic)", level: "Working Knowledge", roles: ['AI Engineer'] },
-      { name: "NumPy & Pandas", level: "Advanced", roles: ['Data Scientist', 'ML Engineer'] },
-      { name: "Scikit-Learn & Matplotlib", level: "Proficient", roles: ['ML Engineer', 'Data Scientist'] }
-    ]
-  },
-  {
-    category: "Frameworks & Developer Tools",
-    skills: [
-      { name: "Streamlit", level: "Proficient", roles: ['AI Engineer', 'ML Engineer'] },
+      { name: "FastAPI", level: "Proficient", roles: ['AI Engineer', 'Data Engineer'] },
       { name: "Flask", level: "Proficient", roles: ['AI Engineer', 'Data Engineer'] },
       { name: "REST APIs", level: "Proficient", roles: ['AI Engineer', 'Data Engineer'] },
-      { name: "Git & GitHub", level: "Proficient", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'] }
+      { name: "JWT Authentication", level: "Proficient", roles: ['AI Engineer'] },
+      { name: "Firebase Authentication", level: "Working Knowledge", roles: ['AI Engineer'] }
+    ]
+  },
+  {
+    category: "Application / Tools",
+    skills: [
+      { name: "Streamlit", level: "Proficient", roles: ['AI Engineer', 'ML Engineer'] },
+      { name: "Git", level: "Proficient", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer'] },
+      { name: "GitHub", level: "Proficient", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer'] },
+      { name: "MySQL", level: "Proficient", roles: ['Data Engineer', 'AI Engineer'] }
     ]
   }
 ];

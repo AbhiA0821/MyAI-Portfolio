@@ -9,12 +9,11 @@ interface SkillsProps {
 }
 
 const techChains: Record<string, string[]> = {
-  'Python 3.11+': ['Python 3.11+', 'FastAPI', 'LLMs', 'RAG', 'Vector DBs'],
-  'FastAPI & AsyncIO': ['FastAPI', 'AsyncIO', 'REST APIs', 'SSE Streams'],
-  'RAG & Vector DBs (ChromaDB)': ['RAG', 'ChromaDB', 'FastEmbed', 'Prompt Engineering', 'Ollama'],
-  'Multi-Agent Orchestration': ['Multi-Agent', 'Intent Router', 'LangGraph', 'Tool Calling'],
-  'PySpark & Apache Spark': ['PySpark', 'ETL Pipelines', 'Delta Lake', 'DuckDB', 'PostgreSQL'],
-  'Scikit-Learn & XGBoost': ['Scikit-Learn', 'XGBoost', 'Feature Engineering', 'Model Evaluation']
+  'RAG': ['RAG', 'LLM API Integration', 'Generative AI', 'FastAPI'],
+  'PySpark': ['PySpark', 'DuckDB', 'Apache Airflow', 'ETL Pipelines', 'SQL'],
+  'FastAPI': ['FastAPI', 'REST APIs', 'JWT Authentication', 'MySQL'],
+  'PyTorch': ['PyTorch', 'Deep Learning', 'GANs', 'CycleGAN'],
+  'Machine Learning': ['Machine Learning', 'Scikit-Learn', 'KNN', 'Random Forest']
 };
 
 const getBadgeStyle = (level: SkillProficiency) => {
