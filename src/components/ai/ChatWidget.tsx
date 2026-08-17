@@ -123,22 +123,26 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
       let fallbackText = "I don't have verified information about that question.";
       const qLower = query.toLowerCase();
 
-      const matchedProj = projectsData.find(
-        (p) => qLower.includes(p.slug.toLowerCase()) || qLower.includes(p.title.toLowerCase()) || (p.slug === 'medintel' && qLower.includes('medintel'))
-      );
+      if (qLower.includes("interviewai") || qLower.includes("interview ai")) {
+        fallbackText = "InterviewAI is not currently verified or featured as a flagship project in Abhishek's canonical portfolio showcase.";
+      } else {
+        const matchedProj = projectsData.find(
+          (p) => qLower.includes(p.slug.toLowerCase()) || qLower.includes(p.title.toLowerCase()) || (p.slug === 'medintel' && qLower.includes('medintel'))
+        );
 
-      if (matchedProj) {
-        fallbackText = `${matchedProj.title}: ${matchedProj.description} Technologies: ${matchedProj.technologies.join(', ')}. GitHub: ${matchedProj.githubUrl}`;
-      } else if (qLower.includes("project") || qLower.includes("built") || qLower.includes("work")) {
-        const realProjectsList = projectsData.map((p, idx) => `${idx + 1}. ${p.title} (${p.githubUrl})`).join('\n');
-        fallbackText = `Abhishek's verified GitHub projects (https://github.com/AbhiA0821) are:\n${realProjectsList}`;
-      } else if (qLower.includes("certif")) {
-        const realCertsList = verifiedCertifications.map((c, idx) => `${idx + 1}. ${c.title} — ${c.issuer} (${c.issueDate})`).join('\n');
-        fallbackText = `Abhishek's verified certifications are:\n${realCertsList}`;
-      } else if (qLower.includes("skill") || qLower.includes("technolog")) {
-        fallbackText = `Abhishek's verified skills include Python, SQL, PySpark, DuckDB, PyTorch, Scikit-Learn, Streamlit, Flask, and Apache Airflow.`;
-      } else if (qLower.includes("github")) {
-        fallbackText = `Abhishek's verified GitHub profile is https://github.com/AbhiA0821 containing 9 public repositories.`;
+        if (matchedProj) {
+          fallbackText = `${matchedProj.title}: ${matchedProj.description} Technologies: ${matchedProj.technologies.join(', ')}. GitHub: ${matchedProj.githubUrl}`;
+        } else if (qLower.includes("project") || qLower.includes("built") || qLower.includes("work")) {
+          const realProjectsList = projectsData.map((p, idx) => `${idx + 1}. ${p.title} (${p.githubUrl})`).join('\n');
+          fallbackText = `Abhishek's verified GitHub projects (https://github.com/AbhiA0821) are:\n${realProjectsList}`;
+        } else if (qLower.includes("certif")) {
+          const realCertsList = verifiedCertifications.map((c, idx) => `${idx + 1}. ${c.title} — ${c.issuer} (${c.issueDate})`).join('\n');
+          fallbackText = `Abhishek's verified certifications are:\n${realCertsList}`;
+        } else if (qLower.includes("skill") || qLower.includes("technolog")) {
+          fallbackText = `Abhishek's verified skills include Python, SQL, PySpark, DuckDB, PyTorch, Scikit-Learn, Streamlit, Flask, and Apache Airflow.`;
+        } else if (qLower.includes("github")) {
+          fallbackText = `Abhishek's verified GitHub profile is https://github.com/AbhiA0821 containing 9 public repositories.`;
+        }
       }
 
       setMessages((prev) => [

@@ -2,17 +2,31 @@
 
 ## General Information
 Name: Abhishek Ainapure
-Title: AI & Data Science Professional | GenAI & Agentic Systems Engineer
+Title: AI Engineer | Machine Learning | Generative AI | Data Engineering
 Email: ainapureabhi0821@gmail.com
+Phone: +91 9049424821
 GitHub: https://github.com/AbhiA0821
 LinkedIn: https://linkedin.com/in/abhishek-ainapure
-Location: Pune, India
+Location: Ichalkaranji, Maharashtra, India
+
+## Education
+- B.Tech in Artificial Intelligence & Data Science
+  Annasaheb Dange College of Engineering & Technology (2023 – Present)
+  CGPA: 8.26 / 10
+- HSC (Science): 81%
+- SSC (CBSE): 89%
 
 ## Professional Overview
-Abhishek Ainapure is an AI & Data Science specialist dedicated to developing cutting-edge Generative AI solutions, autonomous multi-agent workflows, and high-performance data pipelines. He has extensive experience in PySpark, PyTorch, FastAPI, ChromaDB, and multi-agent orchestration frameworks like LangChain and LangGraph.
+B.Tech Artificial Intelligence and Data Science student targeting backend / AI engineering roles, with hands-on experience building full-stack AI applications and data pipelines. Skilled in Python, FastAPI, MySQL, PySpark, DuckDB, and Apache Airflow, with practical experience integrating LLM APIs and RAG pipelines into production-style applications. Combines backend engineering with applied machine learning and data engineering to ship working systems, not just models.
 
-## Target Roles
-1. AI Engineer: Building LLM applications, RAG pipelines, agentic workflows, and tool execution.
-2. ML Engineer: Training, fine-tuning, evaluating, and deploying NLP & vision models with PyTorch.
-3. Data Engineer: Developing scalable streaming/batch pipelines with PySpark, Kafka, and Delta Lake.
-4. Data Scientist: Performing statistical modeling, feature engineering, predictive analytics, and ML research.
+## Experience
+1. TecSpeak IT Solutions (Sangli, Maharashtra, India) — Database (SQL) Intern (June 2025 – July 2025)
+   - Wrote and optimized SQL queries for data retrieval, filtering, joins, and manipulation across relational tables.
+   - Applied relational database design and normalization concepts on a live schema.
+2. Infosys Springboard 7.0 — AI Virtual Intern (Selected, starting August 2026)
+   - Selected for industry-oriented AI project using Python, PySpark, and DuckDB.
+
+## Certifications
+1. Oracle Cloud Infrastructure 2025 Certified Generative AI Professional (September 2025)
+2. Oracle Cloud Infrastructure 2025 Certified Data Science Professional (October 2025)
+3. Artificial Intelligence — Infosys Springboard (April 2026)
