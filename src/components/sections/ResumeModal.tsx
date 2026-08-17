@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Download, FileText, ExternalLink, Mail, Phone, MapPin, Briefcase, GraduationCap, Award, Code, FolderGit2 } from 'lucide-react';
+import { X, Download, FileText, Mail, Phone, MapPin, Briefcase, GraduationCap, Award, Code, FolderGit2 } from 'lucide-react';
 import type { Profile } from '../../types/portfolio';
 import { GithubIcon, LinkedinIcon } from '../common/SocialIcons';
 
@@ -9,7 +9,7 @@ interface ResumeModalProps {
   onClose: () => void;
 }
 
-export const ResumeModal: React.FC<ResumeModalProps> = ({ profile, isOpen, onClose }) => {
+export const ResumeModal: React.FC<ResumeModalProps> = ({ profile: _profile, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handlePrint = () => {

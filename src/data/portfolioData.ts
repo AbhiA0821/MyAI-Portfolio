@@ -254,7 +254,7 @@ export const skillCategoriesData: SkillCategory[] = [
     skills: [
       { name: "Python", level: "Advanced", roles: ['AI Engineer', 'ML Engineer', 'Data Engineer', 'Data Scientist'] },
       { name: "SQL", level: "Proficient", roles: ['Data Engineer', 'Data Scientist'] },
-      { name: "Java (Basic)", level: "Basic", roles: ['AI Engineer'] },
+      { name: "Java (Basic)", level: "Working Knowledge", roles: ['AI Engineer'] },
       { name: "NumPy & Pandas", level: "Advanced", roles: ['Data Scientist', 'ML Engineer'] },
       { name: "Scikit-Learn & Matplotlib", level: "Proficient", roles: ['ML Engineer', 'Data Scientist'] }
     ]

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GitBranch, ExternalLink, Cpu, Info } from 'lucide-react';
+import { GitBranch, ExternalLink, Info } from 'lucide-react';
 import type { Project } from '../../types/portfolio';
 import { ProjectModal } from './ProjectModal';
 import { RevealText } from '../motion/RevealText';

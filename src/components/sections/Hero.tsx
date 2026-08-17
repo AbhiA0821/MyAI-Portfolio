@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bot, Sparkles, FileText, ArrowRight, Database } from 'lucide-react';
+import { Bot, FileText, ArrowRight, Database } from 'lucide-react';
 import type { Profile } from '../../types/portfolio';
 import { RevealText } from '../motion/RevealText';
 import { MagneticButton } from '../motion/MagneticButton';

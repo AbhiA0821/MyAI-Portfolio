@@ -5,56 +5,26 @@ import {
   projectsData,
   experienceData,
   educationData,
-  githubStatsData,
-  statsData
+  githubStatsData
 } from './data/portfolioData';
 
 import { CustomCursor } from './components/common/CustomCursor';
 import { IntroLoader } from './components/common/IntroLoader';
 import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/sections/Hero';
-import { TextMarqueeStrip } from './components/common/TextMarqueeStrip';
-import { StatsSection } from './components/sections/StatsSection';
 import { About } from './components/sections/About';
 import { Skills } from './components/sections/Skills';
 import { Experience } from './components/sections/Experience';
 import { Education } from './components/sections/Education';
 import { CertificationsSection } from './components/sections/CertificationsSection';
-import { ArsenalMarquee } from './components/sections/ArsenalMarquee';
 import { Projects } from './components/sections/Projects';
 import { GitHubSection } from './components/sections/GitHubSection';
-import { ScrollWorkflow } from './components/sections/ScrollWorkflow';
-import { SystemShowcase } from './components/sections/SystemShowcase';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ChatWidget } from './components/ai/ChatWidget';
 import { ResumeModal } from './components/sections/ResumeModal';
 import { SectionTransition } from './components/motion/SectionTransition';
 import { Bot, Mail, ArrowUpRight, Lock } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './components/common/SocialIcons';
-
-const marqueeStrip1 = [
-  "MACHINE LEARNING",
-  "GENERATIVE AI",
-  "RAG",
-  "MULTI-AGENT SYSTEMS",
-  "PYSPARK",
-  "DATA ENGINEERING",
-  "LLM APPLICATIONS",
-  "OLLAMA",
-  "FASTAPI"
-];
-
-const marqueeStrip2 = [
-  "PYTHON",
-  "FASTAPI",
-  "LANGGRAPH",
-  "CHROMADB",
-  "OLLAMA",
-  "DUCKDB",
-  "AIRFLOW",
-  "REACT 19",
-  "TYPESCRIPT"
-];
 
 export function App() {
   const [isIntroComplete, setIsIntroComplete] = useState(false);
@@ -149,15 +119,13 @@ export function App() {
             />
 
             <SectionTransition />
-            <TextMarqueeStrip items={marqueeStrip1} direction="left" speed={30} />
-            <StatsSection stats={statsData} />
 
             {/* 02. ABOUT */}
             <About profile={profileData} />
 
             <SectionTransition />
 
-            {/* 03. SKILLS */}
+            {/* 03. TECHNICAL SKILLS */}
             <Skills skillCategories={skillCategoriesData} />
 
             <SectionTransition />
@@ -170,28 +138,20 @@ export function App() {
             {/* 05. WORK EXPERIENCE */}
             <Experience experiences={experienceData} />
 
+            <SectionTransition />
+
             {/* 06. EDUCATION */}
             <Education education={educationData} />
 
-            {/* 07. CERTIFICATIONS */}
+            <SectionTransition />
+
+            {/* 07. CERTIFICATIONS & ACHIEVEMENTS */}
             <CertificationsSection />
 
-            {/* Technology Arsenal Marquee */}
-            <ArsenalMarquee />
-
             <SectionTransition />
 
-            {/* 08. GITHUB & OPEN SOURCE */}
+            {/* 08. GITHUB / OPEN SOURCE */}
             <GitHubSection stats={githubStatsData} />
-
-            <SectionTransition />
-
-            {/* MYAI ARCHITECTURE */}
-            <ScrollWorkflow />
-            <SystemShowcase />
-
-            <SectionTransition />
-            <TextMarqueeStrip items={marqueeStrip2} direction="right" speed={35} />
           </>
         )}
       </main>
