@@ -284,34 +284,34 @@ export const projectsData: Project[] = [
   {
     id: "proj-resume-matcher",
     slug: "resume-matcher",
-    title: "AI Resume Analyzer & Live Job Matcher",
-    tagline: "AI-Powered Resume Analysis & Machine Learning Job Recommendation System",
-    description: "Developed an AI-powered resume analyzer for skill extraction and domain classification using KNN and Random Forest models. Integrated real-time job listings using RapidAPI and deployed the application on Streamlit Cloud.",
-    problem: "Job seekers struggle to extract structured skill sets from resumes and identify matching engineering domains accurately.",
-    solution: "Built Resume-Matcher using PDFPlumber text extraction, KNN & Random Forest domain classification models, SQLite data persistence, and interactive Streamlit analytics.",
+    title: "Resume-Matcher — AI Resume & Job Matcher",
+    tagline: "AI-Powered Resume Analysis & Job Matching Platform",
+    description: "Full-stack resume analysis and job-matching platform using FastAPI/Streamlit, MySQL data persistence, JWT/Firebase authentication, PDF/DOCX parsing, and machine learning skill-domain classification (KNN + Scikit-Learn).",
+    problem: "Job seekers need structured extraction of technical skills from resumes and accurate domain matching against live engineering roles.",
+    solution: "Architected a full-stack platform featuring resume ingestion, PDF/DOCX text parsing, KNN & Random Forest ML classification models, and interactive Streamlit analytics.",
     architecture: [
-      "PDF Resume Upload -> Skill & Text Extraction (PDFPlumber)",
-      "Feature Engineering -> KNN & Random Forest ML Domain Classification",
-      "RapidAPI Integration -> Real-time Live Job Listings Search",
-      "Interactive Analytics Dashboard (Streamlit Cloud)"
+      "Resume Ingestion -> Text Parsing & Skill Extraction (PDFPlumber / Python-docx)",
+      "Feature Vectorization -> KNN & Random Forest ML Domain Classification",
+      "Authentication & Storage -> JWT / Firebase Auth + MySQL / SQLite Database",
+      "Interactive Interface -> Streamlit Dashboard & RESTful APIs"
     ],
     pipelineDiagram: [
-      { step: "1. Resume Parsing", description: "Extracts text from PDF/DOCX resumes", tech: "Python / PDFPlumber" },
-      { step: "2. Feature Extraction", description: "Identifies tech skills & experience indicators", tech: "Scikit-Learn" },
-      { step: "3. ML Classification", description: "KNN & Random Forest domain prediction", tech: "Machine Learning" },
-      { step: "4. Live Job Match", description: "RapidAPI real-time job listings search", tech: "Streamlit Cloud" }
+      { step: "1. Ingestion", description: "PDF/DOCX text parsing & extraction", tech: "Python / PDFPlumber" },
+      { step: "2. Vectorization", description: "Feature engineering & skill mapping", tech: "Scikit-Learn / Pandas" },
+      { step: "3. ML Classification", description: "KNN domain prediction & scoring", tech: "Machine Learning" },
+      { step: "4. UI & Auth", description: "User dashboard & authentication", tech: "Streamlit / JWT" }
     ],
-    technologies: ["Python", "Streamlit", "Scikit-learn", "KNN", "Random Forest", "SQLite", "RapidAPI", "PDFPlumber", "Pandas", "NumPy"],
-    aiTechniques: ["KNN Classification", "Random Forest", "Resume Skill Parsing", "Domain Classification"],
+    technologies: ["Python", "FastAPI", "MySQL", "JWT", "Firebase Auth", "Streamlit", "REST APIs", "Scikit-Learn", "KNN", "PDFPlumber"],
+    aiTechniques: ["KNN Classification", "Random Forest", "Resume Skill Parsing", "RAG / Context Matching"],
     metrics: {
-      "Rank": "01 (Featured)",
-      "ML Models": "KNN + Random Forest",
-      "Interface": "Streamlit Cloud"
+      "Project": "01 (Flagship)",
+      "ML Stack": "KNN + Scikit-Learn",
+      "Deployment": "Streamlit Cloud"
     },
     githubUrl: "https://github.com/AbhiA0821/Resume-Matcher",
     demoUrl: "https://resume-matcher-ypjig2msxnqn7dchb2ctg5.streamlit.app",
     featured: true,
-    targetRoles: ['ML Engineer', 'Data Scientist', 'AI Engineer'],
+    targetRoles: ['ML Engineer', 'AI Engineer', 'Data Scientist'],
     category: "Machine Learning"
   },
   {
@@ -319,26 +319,26 @@ export const projectsData: Project[] = [
     slug: "medintel",
     title: "MedIntel — AI Healthcare Data Pipeline",
     tagline: "ONGOING • Patient Vital Record Processing & Monitoring Pipeline",
-    description: "Developing an AI-powered healthcare data pipeline for processing and monitoring patient vital data. Building scalable ETL workflows using PySpark, DuckDB, and Apache Airflow for healthcare data processing, paired with a Streamlit dashboard and LLM insights.",
-    problem: "Processing patient vital sign records requires structured relational schemas, scalable PySpark transformations, and automated Airflow pipeline orchestration.",
-    solution: "Architected a Python vital sign simulator and DuckDB database schema paired with PySpark ETL routines and Apache Airflow DAG scheduling.",
+    description: "Ongoing healthcare data engineering pipeline designed to ingest, process, and monitor patient vital-sign records end-to-end using PySpark transformations, DuckDB analytical storage, Apache Airflow DAG scheduling, and Streamlit monitoring with LLM integration.",
+    problem: "Processing continuous patient vital-sign records requires structured relational schemas, distributed data transformations, and automated pipeline orchestration.",
+    solution: "Architected a Python vital-sign simulator and DuckDB analytical schema paired with PySpark ETL routines and Apache Airflow DAG scheduling.",
     architecture: [
-      "Patient Vitals Simulator -> DuckDB In-Memory Relational Schema",
-      "PySpark Data Cleaning, Transformation & Validation",
-      "Apache Airflow Pipeline Orchestration",
-      "Streamlit Analytics Dashboard & LLM Insights Integration"
+      "Patient Vitals Ingestion -> DuckDB Relational Storage",
+      "Distributed ETL -> PySpark Data Cleaning & Aggregation",
+      "Pipeline Orchestration -> Apache Airflow Scheduled Workflows",
+      "User Interface -> Streamlit Dashboard & LLM Insights Integration"
     ],
     pipelineDiagram: [
-      { step: "1. Vitals Simulation", description: "Simulates patient vital sign data", tech: "Python" },
-      { step: "2. DuckDB Storage", description: "Patients & vital signs relational tables", tech: "DuckDB / SQL" },
-      { step: "3. PySpark ETL", description: "Data cleaning, transformation & validation", tech: "PySpark" },
-      { step: "4. Pipeline DAG", description: "Automated workflow runs", tech: "Apache Airflow" }
+      { step: "1. Vitals Simulator", description: "Patient vital-sign record generation", tech: "Python" },
+      { step: "2. Analytical Storage", description: "Relational storage & querying", tech: "DuckDB / SQL" },
+      { step: "3. PySpark ETL", description: "Distributed cleaning & transformation", tech: "PySpark" },
+      { step: "4. Workflow DAG", description: "Automated DAG execution", tech: "Apache Airflow" }
     ],
-    technologies: ["Python", "PySpark", "DuckDB", "Apache Airflow", "LLM", "Streamlit", "Pandas", "SQL"],
-    aiTechniques: ["PySpark ETL Processing", "DuckDB Analytical SQL", "Vital Sign Monitoring", "LLM Insights"],
+    technologies: ["Python", "PySpark", "DuckDB", "Apache Airflow", "LLM", "Streamlit", "SQL"],
+    aiTechniques: ["PySpark Distributed ETL", "DuckDB Analytical SQL", "Vital Sign Monitoring", "LLM Insights"],
     metrics: {
-      "Rank": "02 (Ongoing)",
-      "Engine": "PySpark + DuckDB",
+      "Project": "02 (Ongoing)",
+      "Processing Engine": "PySpark + DuckDB",
       "Orchestration": "Apache Airflow"
     },
     githubUrl: "https://github.com/AbhiA0821/MedIntel",
@@ -350,26 +350,26 @@ export const projectsData: Project[] = [
     id: "proj-art-generation",
     slug: "art-generation",
     title: "Art Generation Using CycleGAN",
-    tagline: "Generative Deep Learning & CycleGAN Artwork Synthesis",
-    description: "Developed a CycleGAN-based deep learning model to convert real-world images into Ghibli-style artwork. Implemented custom Generator and Discriminator networks with image preprocessing and adversarial training on unpaired datasets.",
-    problem: "Converting real-world photographs to stylized artwork requires unpaired image-to-image translation without explicit image pairs.",
-    solution: "Implemented custom CycleGAN Generator and Discriminator neural networks in PyTorch with cycle-consistency loss optimization.",
+    tagline: "Unpaired Image-to-Image Artwork Translation with PyTorch",
+    description: "Developed a CycleGAN-based deep learning model to translate real-world images into stylized artwork using unpaired image-to-image translation. Implemented custom Generator and Discriminator network architectures in PyTorch with cycle-consistency loss optimization.",
+    problem: "Converting real-world photographs to stylized artwork requires unpaired image-to-image translation without matched image pairs.",
+    solution: "Implemented custom CycleGAN Generator and Discriminator neural networks in PyTorch with adversarial training and cycle-consistency loss optimization.",
     architecture: [
-      "Unpaired Real Photo & Ghibli Style Image Datasets",
-      "Generator (Image-to-Image Translation) & Discriminator (Adversarial Validation)",
-      "Cycle-Consistency & Adversarial Loss Optimization",
-      "High-Quality Stylized Artwork Output"
+      "Unpaired Datasets -> Real-World Photos & Artwork Images",
+      "Generator Networks -> Residual Generator Architectures (G: X->Y, F: Y->X)",
+      "Discriminator Networks -> PatchGAN Adversarial Discriminators (Dx, Dy)",
+      "Training Loop -> Cycle-Consistency Loss Optimization in PyTorch"
     ],
     pipelineDiagram: [
-      { step: "1. Input Datasets", description: "Unpaired photo & artwork datasets", tech: "Pillow / TorchVision" },
-      { step: "2. Generator Network", description: "Deep residual generator network", tech: "PyTorch" },
-      { step: "3. Discriminator Network", description: "PatchGAN adversarial discriminator", tech: "Deep Learning" },
-      { step: "4. Training Loop", description: "Cycle-consistency loss optimization", tech: "GANs" }
+      { step: "1. Data Pipeline", description: "Unpaired image loading & preprocessing", tech: "TorchVision / Pillow" },
+      { step: "2. Generator", description: "Deep residual generator network", tech: "PyTorch" },
+      { step: "3. Discriminator", description: "PatchGAN adversarial validation", tech: "Deep Learning" },
+      { step: "4. Adversarial Loop", description: "Cycle-consistency loss training", tech: "CycleGAN / GANs" }
     ],
-    technologies: ["Python", "PyTorch", "Deep Learning", "CycleGAN", "GANs", "NumPy", "Matplotlib"],
+    technologies: ["Python", "PyTorch", "CycleGAN", "GANs", "Deep Learning"],
     aiTechniques: ["CycleGAN Architecture", "Adversarial Training", "Cycle-Consistency Loss", "Image Preprocessing"],
     metrics: {
-      "Rank": "03",
+      "Project": "03",
       "Architecture": "CycleGAN Deep Learning",
       "Framework": "PyTorch"
     },
@@ -382,25 +382,25 @@ export const projectsData: Project[] = [
     id: "proj-data-engineering",
     slug: "data-engineering",
     title: "Data-Engineering — SQL, PySpark & DuckDB Repository",
-    tagline: "Structured Learning Repository: Analytical SQL, PySpark & DuckDB",
+    tagline: "Analytical SQL, PySpark Transformations & DuckDB Repository",
     description: "A structured learning and implementation repository documenting core data engineering principles, analytical SQL window queries, PySpark DataFrame transformations, and DuckDB analytical schemas.",
-    problem: "Mastering scalable data engineering requires hands-on implementations of SQL analytical queries and Spark distributed transformations.",
+    problem: "Mastering scalable data engineering requires practical hands-on implementation of SQL queries, Spark transformations, and analytical schemas.",
     solution: "Maintains clean code modules covering analytical SQL queries, PySpark data operations, and DuckDB analytical processing.",
     architecture: [
-      "Analytical SQL & DuckDB Relational Schemas",
-      "PySpark DataFrame Transformations & Aggregations",
-      "Data Ingestion & Engineering Code Exercises"
+      "Analytical SQL -> Relational Schemas & Window Aggregations",
+      "PySpark Engine -> Spark DataFrame Operations & Transformations",
+      "Analytical Storage -> DuckDB In-Memory Query Engine"
     ],
     pipelineDiagram: [
-      { step: "1. Core SQL", description: "Analytical window functions & schemas", tech: "SQL" },
-      { step: "2. Spark Operations", description: "PySpark transformations & aggregations", tech: "PySpark" },
-      { step: "3. Analytical Engine", description: "In-memory SQL analytical queries", tech: "DuckDB" },
-      { step: "4. Open Source", description: "Hands-on data engineering modules", tech: "Git / GitHub" }
+      { step: "1. Core SQL", description: "Window functions & relational queries", tech: "SQL" },
+      { step: "2. Spark Processing", description: "DataFrame transformations & joins", tech: "PySpark" },
+      { step: "3. Analytical Engine", description: "In-memory analytical querying", tech: "DuckDB" },
+      { step: "4. Version Control", description: "Hands-on data engineering modules", tech: "Git / GitHub" }
     ],
     technologies: ["Python", "SQL", "PySpark", "DuckDB", "Apache Airflow", "Git"],
     aiTechniques: ["Distributed Data Processing", "Analytical SQL Warehousing", "DataFrame Transformations"],
     metrics: {
-      "Rank": "04",
+      "Project": "04",
       "Focus": "Data Engineering",
       "Stack": "SQL + PySpark + DuckDB"
     },
