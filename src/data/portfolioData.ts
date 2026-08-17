@@ -506,8 +506,8 @@ export const certificationsData: CertificationItem[] = [
 
 export const githubStatsData: GitHubStats = {
   publicRepos: 9,
-  starsCount: 4,
-  commitsThisYear: 120,
+  starsCount: 5,
+  commitsThisYear: 0,
   topLanguages: [
     { name: "Python", percentage: 65, color: "#3572A5" },
     { name: "Jupyter Notebook", percentage: 25, color: "#DA5B0A" },
