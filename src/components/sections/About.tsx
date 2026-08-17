@@ -44,7 +44,7 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white font-heading">Academic & Professional Identity</h3>
-                  <p className="text-xs font-mono text-purple-400">B.Tech Computer Science & Data Science • First Class Distinction</p>
+                  <p className="text-xs font-mono text-purple-400">B.Tech in Artificial Intelligence & Data Science • Annasaheb Dange College of Engineering & Technology (CGPA: 8.26/10)</p>
                 </div>
               </div>
               <p className="text-slate-300 text-sm leading-relaxed">
@@ -67,22 +67,26 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
                   <Target className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white font-heading">Current Focus</h3>
-                  <p className="text-xs font-mono text-slate-400">2026 Core Initiatives</p>
+                  <h3 className="text-lg font-bold text-white font-heading">Core Technical Focus</h3>
+                  <p className="text-xs font-mono text-slate-400">Hands-on Application</p>
                 </div>
               </div>
               <ul className="space-y-2.5 text-xs font-mono text-slate-300">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <span>Autonomous Multi-Agent Routing</span>
+                  <span>RAG & LLM API Integration</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                  <span>Dense Vector RAG Grounding</span>
+                  <span>Machine Learning (KNN, Random Forest, PyTorch)</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <span>PySpark Streaming Data Lakes</span>
+                  <span>PySpark & DuckDB Data Pipelines</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                  <span>FastAPI & Flask REST APIs</span>
                 </li>
               </ul>
             </TiltCard>
@@ -93,33 +97,33 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
                 <div className="p-3 rounded-2xl bg-cyan-950/80 border border-cyan-800 text-cyan-400">
                   <Cpu className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-white font-heading">Engineering Philosophy</h3>
+                <h3 className="text-lg font-bold text-white font-heading">Engineering Approach</h3>
               </div>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                "AI systems must be grounded in verified data, low-latency API contracts, and deterministic fallbacks. Model execution is only as strong as the data pipelines supporting it."
+                "Combining backend engineering with applied machine learning and data engineering to ship working systems, not just standalone models."
               </p>
             </TiltCard>
 
-            {/* Card 4: Verified Specializations */}
+            {/* Card 4: Verified Competencies */}
             <TiltCard className="md:col-span-6 p-6 sm:p-8 rounded-3xl bg-[#0A0A1A] border border-slate-800/90 backdrop-blur-xl shadow-2xl space-y-3">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-2xl bg-emerald-950/80 border border-emerald-800 text-emerald-400">
                   <Award className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-white font-heading">Verified Competencies</h3>
+                <h3 className="text-lg font-bold text-white font-heading">Verified Credentials & Experience</h3>
               </div>
               <div className="flex flex-wrap gap-2 text-xs font-mono">
                 <span className="px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-purple-300">
-                  Oracle OCI GenAI 2025
+                  Oracle OCI GenAI Professional (2025)
                 </span>
                 <span className="px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-blue-300">
-                  Oracle OCI Data Science 2025
+                  Oracle OCI Data Science Professional (2025)
                 </span>
                 <span className="px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-cyan-300">
-                  Infosys AI 2026
+                  Infosys Springboard AI (2026)
                 </span>
                 <span className="px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-emerald-300">
-                  Tecspeak SQL Internship
+                  TecSpeak Database (SQL) Intern (Sangli)
                 </span>
               </div>
             </TiltCard>
