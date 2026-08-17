@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bot, FileText, ArrowRight, Database } from 'lucide-react';
+import { Bot, FileText, Database } from 'lucide-react';
 import type { Profile } from '../../types/portfolio';
 import { RevealText } from '../motion/RevealText';
 import { MagneticButton } from '../motion/MagneticButton';
@@ -14,10 +14,6 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume }) => {
-  const scrollToProjects = () => {
-    const el = document.getElementById('projects');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#050505] border-b border-slate-800/80">
@@ -40,16 +36,16 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-xs font-mono text-slate-300 font-semibold">
-                Hello, I'm {profile.name}
+                AI & Data Science Student
               </span>
               <span className="text-slate-600">•</span>
-              <span className="text-xs font-mono text-purple-400">AI & Data Science Specialist</span>
+              <span className="text-xs font-mono text-cyan-400">Open to AI & Data Roles</span>
             </motion.div>
 
             {/* Main Headline Reveal */}
             <div className="space-y-2">
               <RevealText
-                text="Building Intelligent Systems with"
+                text="Hi, I'm Abhishek Ainapure"
                 as="h1"
                 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-heading leading-tight"
               />
@@ -57,9 +53,9 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-heading"
+                className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-heading"
               >
-                Machine Learning & GenAI
+                AI Engineer | Machine Learning | Generative AI | Data Engineering
               </motion.div>
             </div>
 
@@ -70,10 +66,10 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
-              Specializing in autonomous multi-agent workflows, dense vector RAG retrieval, PySpark distributed pipelines, and production FastAPI microservices.
+              B.Tech AI & Data Science student building practical AI applications, RAG systems, machine learning solutions, and scalable data pipelines.
             </motion.p>
 
-            {/* Action Buttons with Magnetic Tracking */}
+            {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -82,27 +78,19 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
             >
               <MagneticButton
                 onClick={onOpenResume}
-                className="px-5 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:border-purple-500 text-white font-semibold text-xs font-mono flex items-center gap-2 cursor-pointer shadow-lg"
+                className="px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold text-xs font-mono flex items-center gap-2 shadow-xl shadow-blue-500/25 cursor-pointer"
               >
-                <FileText className="w-4 h-4 text-purple-400" />
+                <FileText className="w-4 h-4 text-white" />
                 <span>VIEW RESUME</span>
-              </MagneticButton>
-
-              <MagneticButton
-                onClick={onOpenChat}
-                className="px-5 py-3 rounded-xl bg-[#0A0A1A] border border-slate-700 hover:border-cyan-500 text-slate-200 hover:text-white font-semibold text-xs font-mono flex items-center gap-2 backdrop-blur-xl shadow-lg cursor-pointer"
-              >
-                <Bot className="w-4 h-4 text-cyan-400" />
-                <span>ASK MYAI</span>
               </MagneticButton>
 
               <a
                 href={profile.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="px-5 py-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white font-semibold text-xs font-mono flex items-center gap-2 cursor-pointer transition-colors"
+                className="px-5 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-200 hover:text-white font-semibold text-xs font-mono flex items-center gap-2 cursor-pointer transition-colors shadow-lg"
               >
-                <GithubIcon className="w-4 h-4 text-slate-300" />
+                <GithubIcon className="w-4 h-4 text-slate-200" />
                 <span>GITHUB</span>
               </a>
 
@@ -110,18 +98,18 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
                 href={profile.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="px-5 py-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white font-semibold text-xs font-mono flex items-center gap-2 cursor-pointer transition-colors"
+                className="px-5 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-200 hover:text-white font-semibold text-xs font-mono flex items-center gap-2 cursor-pointer transition-colors shadow-lg"
               >
                 <LinkedinIcon className="w-4 h-4 text-blue-400" />
                 <span>LINKEDIN</span>
               </a>
 
               <MagneticButton
-                onClick={scrollToProjects}
-                className="px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold text-xs font-mono flex items-center gap-2 shadow-xl shadow-blue-500/25 cursor-pointer"
+                onClick={onOpenChat}
+                className="px-5 py-3 rounded-xl bg-[#0A0A1A] border border-slate-700 hover:border-cyan-500 text-slate-200 hover:text-white font-semibold text-xs font-mono flex items-center gap-2 backdrop-blur-xl shadow-lg cursor-pointer"
               >
-                <span>EXPLORE PROJECTS</span>
-                <ArrowRight className="w-4 h-4" />
+                <Bot className="w-4 h-4 text-cyan-400" />
+                <span>ASK MYAI</span>
               </MagneticButton>
             </motion.div>
 

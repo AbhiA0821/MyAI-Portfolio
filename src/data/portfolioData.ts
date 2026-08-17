@@ -13,9 +13,9 @@ import type {
 
 export const profileData: Profile = {
   name: "Abhishek Ainapure",
-  title: "AI & Data Science Specialist | Python, Machine Learning & Data Engineering",
-  tagline: "Building scalable data pipelines, AI-powered applications, and intelligent data solutions.",
-  bio: "B.Tech Artificial Intelligence and Data Science student with hands-on experience in Python, Machine Learning, Data Engineering, and AI application development. Skilled in PySpark, DuckDB, SQL, Apache Airflow, Flask, and Streamlit. Passionate about building scalable data pipelines, AI-powered applications, and intelligent data solutions.",
+  title: "AI Engineer | Machine Learning | Generative AI | Data Engineering",
+  tagline: "B.Tech AI & Data Science student building practical AI applications, RAG systems, machine learning solutions, and scalable data pipelines.",
+  bio: "B.Tech Artificial Intelligence and Data Science student at Annasaheb Dange College of Engineering & Technology (CGPA 8.26/10) with hands-on experience building practical AI applications, RAG systems, machine learning solutions, and scalable data pipelines using Python, PySpark, DuckDB, SQL, Apache Airflow, PyTorch, FastAPI, and Streamlit.",
   location: "Ichalkaranji, Maharashtra, India",
   email: "ainapureabhi0821@gmail.com",
   githubUrl: "https://github.com/AbhiA0821",
