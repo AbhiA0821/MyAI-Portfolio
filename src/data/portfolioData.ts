@@ -413,32 +413,30 @@ export const projectsData: Project[] = [
 
 export const experienceData: ExperienceItem[] = [
   {
-    id: "exp-infosys",
-    company: "Infosys Springboard 7.0",
-    role: "AI Virtual Intern",
-    period: "Starting August 2026",
-    location: "Remote / Virtual Internship",
-    description: [
-      "Selected for the Infosys Springboard 7.0 AI Virtual Internship.",
-      "Working on an industry-oriented AI project involving Python and Data Engineering.",
-      "Focus areas include Machine Learning, PySpark, DuckDB, and real-world AI applications."
-    ],
-    technologies: ["Python", "Machine Learning", "PySpark", "DuckDB", "Data Engineering"],
-    targetRoles: ['AI Engineer', 'ML Engineer', 'Data Engineer']
-  },
-  {
     id: "exp-tecspeak",
-    company: "TecSpeak IT Solutions, Sangli",
+    company: "TecSpeak IT Solutions",
     role: "Database (SQL) Intern",
     period: "June 2025 – July 2025",
     location: "Sangli, Maharashtra, India",
     description: [
-      "Completed hands-on training in SQL and relational database concepts.",
-      "Practiced writing SQL queries for data retrieval and manipulation.",
-      "Gained practical understanding of database management and SQL fundamentals."
+      "Wrote and optimized SQL queries for data retrieval, filtering, joins, and manipulation across relational tables, supporting the team's day-to-day data-access needs.",
+      "Applied relational database design and normalization concepts on a live schema, strengthening query-performance and data-integrity fundamentals used directly in later personal projects."
     ],
-    technologies: ["SQL", "Relational Databases", "Database Management", "Query Writing"],
-    targetRoles: ['Data Engineer', 'Data Scientist']
+    technologies: ["SQL", "Relational Databases", "Normalization", "Database Management", "Query Optimization"],
+    targetRoles: ['Data Engineer', 'Data Scientist', 'AI Engineer']
+  },
+  {
+    id: "exp-infosys",
+    company: "Infosys Springboard 7.0",
+    role: "AI Virtual Intern (Selected)",
+    period: "Starting August 2026",
+    location: "Virtual / Remote",
+    description: [
+      "Selected for the Infosys Springboard 7.0 AI Virtual Internship.",
+      "Working on an industry-oriented AI project using Python, PySpark, and DuckDB."
+    ],
+    technologies: ["Python", "PySpark", "DuckDB", "Artificial Intelligence", "Data Engineering"],
+    targetRoles: ['AI Engineer', 'ML Engineer', 'Data Engineer']
   }
 ];
 
@@ -446,13 +444,13 @@ export const educationData: EducationItem[] = [
   {
     id: "edu-btech",
     degree: "B.Tech in Artificial Intelligence & Data Science",
-    field: "Artificial Intelligence and Data Science",
+    field: "Artificial Intelligence & Data Science",
     institution: "Annasaheb Dange College of Engineering & Technology",
     period: "2023 – Present",
     grade: "CGPA: 8.26 / 10",
     highlights: [
       "Specialized coursework in Machine Learning, Deep Learning, Database Management Systems, and Distributed Data Engineering.",
-      "Built practical projects in resume matching, healthcare data engineering, and generative image synthesis."
+      "Building practical AI applications, RAG systems, machine learning solutions, and scalable data pipelines."
     ]
   },
   {
