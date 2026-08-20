@@ -5,6 +5,7 @@ import type { Profile } from '../../types/portfolio';
 import { RevealText } from '../motion/RevealText';
 import { MagneticButton } from '../motion/MagneticButton';
 import { GithubIcon, LinkedinIcon } from '../common/SocialIcons';
+import profilePic from '../../assets/abhishek-profile.jpg';
 
 interface HeroProps {
   profile: Profile;
@@ -20,10 +21,10 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-blue-600/15 via-purple-600/15 to-cyan-500/10 blur-[170px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
           
           {/* Left Side: Headline, Bio & Action CTAs */}
-          <div className="lg:col-span-7 text-center lg:text-left space-y-6">
+          <div className="md:col-span-7 lg:col-span-7 text-center md:text-left space-y-6">
             
             {/* Status Badge */}
             <motion.div
@@ -47,7 +48,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
               <RevealText
                 text="Abhishek Ainapure"
                 as="h1"
-                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-heading leading-tight justify-center lg:justify-start"
+                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-heading leading-tight justify-center md:justify-start"
               />
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -64,7 +65,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0"
+              className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto md:mx-0"
             >
               B.Tech Artificial Intelligence and Data Science student at Annasaheb Dange College of Engineering & Technology building practical AI applications, RAG pipelines, machine learning solutions, and scalable data engineering pipelines.
             </motion.p>
@@ -74,7 +75,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 font-mono text-xs"
+              className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1 font-mono text-xs"
             >
               <span className="px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/80 text-blue-300 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-blue-400" /> Generative AI & RAG
@@ -95,7 +96,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2"
+              className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2"
             >
               <MagneticButton
                 onClick={onOpenResume}
@@ -141,18 +142,18 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-5 flex justify-center order-first lg:order-last"
+            className="md:col-span-5 lg:col-span-5 flex justify-center order-first md:order-last"
           >
             <div className="relative group">
               
               {/* Outer Glowing Gradient Ring */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 rounded-full blur-xl opacity-70 group-hover:opacity-100 transition duration-700 group-hover:duration-200 animate-pulse" />
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-700 group-hover:duration-200 animate-pulse" />
               
               {/* Circular Container */}
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full p-1.5 bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-400 shadow-2xl overflow-hidden">
+              <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-76 lg:h-76 rounded-full p-1.5 bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-400 shadow-2xl overflow-hidden">
                 <div className="w-full h-full rounded-full overflow-hidden bg-slate-950 border-2 border-slate-900">
                   <img
-                    src="/abhishek-profile.jpg"
+                    src={profilePic}
                     alt="Abhishek Ainapure"
                     className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-500"
                   />
@@ -160,7 +161,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenChat, onOpenResume })
               </div>
 
               {/* Decorative Accent Tag */}
-              <div className="absolute -bottom-2 right-4 px-3.5 py-1.5 rounded-full bg-slate-900/95 border border-cyan-500/50 shadow-xl backdrop-blur-md flex items-center gap-2">
+              <div className="absolute -bottom-2 right-2 sm:right-4 px-3.5 py-1.5 rounded-full bg-slate-900/95 border border-cyan-500/50 shadow-xl backdrop-blur-md flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
                 <span className="text-[11px] font-mono font-bold text-cyan-300">Abhishek Ainapure</span>
               </div>
