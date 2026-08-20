@@ -6,6 +6,7 @@ export const CustomCursor: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [hoverType, setHoverType] = useState<'default' | 'button' | 'ai' | 'card'>('default');
   const [isVisible, setIsVisible] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     // Disable on touch devices or reduced motion
@@ -22,7 +23,16 @@ export const CustomCursor: React.FC = () => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const interactiveBtn = target.closest('button, a, input, textarea');
+      // If user is focused/typing in an input field or textarea (e.g. Chatbot query input), hide custom cursor
+      const isInputOrTextArea = target.closest('input, textarea, [contenteditable="true"]');
+      if (isInputOrTextArea) {
+        setIsVisible(false);
+        return;
+      } else if (!isTyping) {
+        setIsVisible(true);
+      }
+
+      const interactiveBtn = target.closest('button, a');
       const aiElement = target.closest('[data-ai-element="true"], .ai-node');
       const cardElement = target.closest('.group, [data-card="true"]');
 
@@ -41,21 +51,39 @@ export const CustomCursor: React.FC = () => {
       }
     };
 
+    const onFocusIn = (e: FocusEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+        setIsTyping(true);
+        setIsVisible(false);
+      }
+    };
+
+    const onFocusOut = () => {
+      setIsTyping(false);
+    };
+
     const onMouseLeave = () => setIsVisible(false);
-    const onMouseEnter = () => setIsVisible(true);
+    const onMouseEnter = () => {
+      if (!isTyping) setIsVisible(true);
+    };
 
     window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('focusin', onFocusIn);
+    window.addEventListener('focusout', onFocusOut);
     document.body.addEventListener('mouseleave', onMouseLeave);
     document.body.addEventListener('mouseenter', onMouseEnter);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('focusin', onFocusIn);
+      window.removeEventListener('focusout', onFocusOut);
       document.body.removeEventListener('mouseleave', onMouseLeave);
       document.body.removeEventListener('mouseenter', onMouseEnter);
     };
-  }, []);
+  }, [isTyping]);
 
-  if (!isVisible) return null;
+  if (!isVisible || isTyping) return null;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[999] overflow-hidden">

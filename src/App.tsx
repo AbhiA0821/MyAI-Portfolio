@@ -4,8 +4,7 @@ import {
   skillCategoriesData,
   projectsData,
   experienceData,
-  educationData,
-  githubStatsData
+  educationData
 } from './data/portfolioData';
 
 import { CustomCursor } from './components/common/CustomCursor';
@@ -18,7 +17,6 @@ import { Experience } from './components/sections/Experience';
 import { Education } from './components/sections/Education';
 import { CertificationsSection } from './components/sections/CertificationsSection';
 import { Projects } from './components/sections/Projects';
-import { GitHubSection } from './components/sections/GitHubSection';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ChatWidget } from './components/ai/ChatWidget';
 import { ResumeModal } from './components/sections/ResumeModal';
@@ -130,7 +128,7 @@ export function App() {
 
             <SectionTransition />
 
-            {/* 04. WHAT I BUILT (SINGLE PROJECT SHOWCASE) */}
+            {/* 04. PROJECTS */}
             <Projects projects={projectsData} />
 
             <SectionTransition />
@@ -145,13 +143,8 @@ export function App() {
 
             <SectionTransition />
 
-            {/* 07. CERTIFICATIONS & ACHIEVEMENTS */}
+            {/* 07. CERTIFICATIONS */}
             <CertificationsSection />
-
-            <SectionTransition />
-
-            {/* 08. GITHUB / OPEN SOURCE */}
-            <GitHubSection stats={githubStatsData} />
           </>
         )}
       </main>

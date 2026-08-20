@@ -3,9 +3,17 @@
 *.env
 .env.*
 
+# Virtual Environments
+venv/
+backend/venv/
+.venv/
+
 # Database & Cache
 *.sqlite
+*.sqlite*
 *.db
+qdrant_db/
+backend/qdrant_db/
 __pycache__/
 *.pyc
 

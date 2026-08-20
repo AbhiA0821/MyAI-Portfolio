@@ -50,8 +50,9 @@ export const verifiedCertifications: VerifiedCertification[] = [
     issuer: "Infosys Springboard",
     issueDate: "April 2026",
     category: "Artificial Intelligence",
-    credentialUrl: "https://infyspringboard.onwingspan.com",
-    description: "Artificial Intelligence certification from Infosys Springboard covering core machine learning, deep learning concepts, and AI application development.",
+    image: "/certificates/infosys-ai.png",
+    credentialUrl: "https://verify.onwingspan.com",
+    description: "Official Artificial Intelligence course completion certificate awarded by Infosys Springboard for completing the AI curriculum.",
     skills: ["Artificial Intelligence", "Machine Learning", "Python", "Data Science"],
     featured: true
   }

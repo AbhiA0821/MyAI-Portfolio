@@ -15,6 +15,7 @@ from backend.app.services.job_agent_service import (
     record_real_application,
     run_job_discovery_and_applications_workflow
 )
+from backend.app.rag.engine import rag_engine
 
 router = APIRouter(prefix="/admin", tags=["Private Admin Control Center"])
 
@@ -64,6 +65,38 @@ def read_admin_profile(current_admin: Dict[str, Any] = Depends(get_current_admin
         "email": current_admin["email"],
         "role": current_admin["role"],
         "status": "AUTHENTICATED"
+    }
+
+# Protected RAG Retrieval Debugging Endpoint
+@router.get("/rag/debug")
+def rag_debug_endpoint(
+    query: str = "Which college does Abhishek study at?",
+    current_admin: Dict[str, Any] = Depends(get_current_admin)
+) -> Dict[str, Any]:
+    query_meta = rag_engine.preprocess_query(query)
+    retrieved_docs = rag_engine.search(query, top_k=5)
+    formatted_context = rag_engine.format_context(retrieved_docs)
+    
+    return {
+        "query": query,
+        "preprocessed_query": query_meta["cleaned_query"],
+        "detected_category": query_meta["detected_category"],
+        "retrieved_count": len(retrieved_docs),
+        "total_documents_in_index": len(rag_engine.documents),
+        "retrieved_documents": retrieved_docs,
+        "formatted_context": formatted_context
+    }
+
+# Protected RAG Knowledge Base Reindex Endpoint
+@router.post("/rag/reindex")
+def rag_reindex_endpoint(
+    current_admin: Dict[str, Any] = Depends(get_current_admin)
+) -> Dict[str, Any]:
+    rag_engine._init_knowledge_base()
+    return {
+        "status": "success",
+        "message": f"Successfully reindexed {len(rag_engine.documents)} knowledge documents.",
+        "documents_count": len(rag_engine.documents)
     }
 
 # Requirement 3: Every Admin API Endpoint MUST verify authentication

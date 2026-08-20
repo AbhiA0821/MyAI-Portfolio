@@ -11,11 +11,10 @@ const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
-  { name: 'What I Built', href: '#projects' },
+  { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
   { name: 'Education', href: '#education' },
   { name: 'Certifications', href: '#certifications' },
-  { name: 'GitHub', href: '#github' },
   { name: 'Contact', href: '#contact' }
 ];
 

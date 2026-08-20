@@ -24,7 +24,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
     {
       id: '1',
       sender: 'assistant',
-      text: `Hello! I am Abhishek's AI Portfolio Assistant. Ask me anything about his verified projects (MedIntel [ONGOING], Resume-Matcher, Art-Generation, Data-Engineering), Oracle & industry certifications, technical skills, or GitHub repositories!`,
+      text: `Hello! I am Abhishek's AI Portfolio Assistant. Ask me anything about his verified projects (HireAgent [ONGOING], MedIntel [ONGOING], Art Generation Using CycleGAN), Oracle & Infosys certifications, technical skills, or GitHub repositories!`,
       agentName: 'Portfolio Assistant Agent',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
@@ -39,6 +39,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
     "What technologies does he use?",
     "What certifications does Abhishek have?",
     "Tell me about MedIntel.",
+    "Tell me about HireAgent.",
     "What is his GitHub profile?"
   ];
 
@@ -71,10 +72,16 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
     setTimeout(() => setActiveStep('GENERATING'), 800);
 
     try {
-      const res = await fetch('http://localhost:8000/api/v1/chat', {
+      const historyPayload = messages.map((m) => ({
+        role: m.sender,
+        content: m.text
+      }));
+
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+      const res = await fetch(`${backendUrl}/api/v1/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: query })
+        body: JSON.stringify({ message: query, history: historyPayload })
       });
 
       if (res.ok && res.body) {
@@ -119,30 +126,60 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
         throw new Error('API Unavailable');
       }
     } catch {
-      // Grounded Fallback Engine using exact portfolioData / certificationsData source of truth
-      let fallbackText = "I don't have verified information about that question.";
+      // Grounded Fallback Engine strictly using verified portfolioData / certificationsData source of truth
+      let fallbackText = "I don't have verified information about that in Abhishek's portfolio.";
       const qLower = query.toLowerCase();
 
-      if (qLower.includes("interviewai") || qLower.includes("interview ai")) {
-        fallbackText = "InterviewAI is not currently verified or featured as a flagship project in Abhishek's canonical portfolio showcase.";
-      } else {
-        const matchedProj = projectsData.find(
-          (p) => qLower.includes(p.slug.toLowerCase()) || qLower.includes(p.title.toLowerCase()) || (p.slug === 'medintel' && qLower.includes('medintel'))
-        );
-
-        if (matchedProj) {
-          fallbackText = `${matchedProj.title}: ${matchedProj.description} Technologies: ${matchedProj.technologies.join(', ')}. GitHub: ${matchedProj.githubUrl}`;
-        } else if (qLower.includes("project") || qLower.includes("built") || qLower.includes("work")) {
-          const realProjectsList = projectsData.map((p, idx) => `${idx + 1}. ${p.title} (${p.githubUrl})`).join('\n');
-          fallbackText = `Abhishek's verified GitHub projects (https://github.com/AbhiA0821) are:\n${realProjectsList}`;
-        } else if (qLower.includes("certif")) {
-          const realCertsList = verifiedCertifications.map((c, idx) => `${idx + 1}. ${c.title} — ${c.issuer} (${c.issueDate})`).join('\n');
-          fallbackText = `Abhishek's verified certifications are:\n${realCertsList}`;
-        } else if (qLower.includes("skill") || qLower.includes("technolog")) {
-          fallbackText = `Abhishek's verified skills include Python, SQL, PySpark, DuckDB, PyTorch, Scikit-Learn, Streamlit, Flask, and Apache Airflow.`;
-        } else if (qLower.includes("github")) {
-          fallbackText = `Abhishek's verified GitHub profile is https://github.com/AbhiA0821 containing 9 public repositories.`;
-        }
+      if (
+        qLower.includes("college") ||
+        qLower.includes("clg") ||
+        qLower.includes("study") ||
+        qLower.includes("studying") ||
+        qLower.includes("education") ||
+        qLower.includes("degree") ||
+        qLower.includes("adcet") ||
+        qLower.includes("cgpa")
+      ) {
+        fallbackText = `Abhishek is pursuing his B.Tech in Artificial Intelligence & Data Science at Annasaheb Dange College of Engineering & Technology (ADCET), Ashta (2023 – Present) with CGPA 8.26/10. HSC (Science): 81%, SSC (CBSE): 89%.\n\nSource: Resume / Education`;
+      } else if (
+        qLower.includes("intern") ||
+        qLower.includes("experience") ||
+        qLower.includes("tecspeak") ||
+        qLower.includes("infosys")
+      ) {
+        fallbackText = `Abhishek's verified experience includes:\n1. Infosys Springboard 7.0 – AI Virtual Internship (Starting August 2026)\n2. TecSpeak IT Solutions (Sangli, Maharashtra) — Database (SQL) Intern (June 2025 – July 2025)\n\nSource: Resume / Experience`;
+      } else if (
+        qLower.includes("project") ||
+        qLower.includes("built") ||
+        qLower.includes("made") ||
+        qLower.includes("work") ||
+        qLower.includes("medintel") ||
+        qLower.includes("hireagent") ||
+        qLower.includes("art")
+      ) {
+        const realProjectsList = projectsData
+          .map((p, idx) => `${idx + 1}. ${p.title} (${p.githubUrl}) [Status: ${p.tagline.includes('ONGOING') ? 'ONGOING' : 'Verified'}]`)
+          .join('\n');
+        fallbackText = `Verified projects built by Abhishek (https://github.com/AbhiA0821) include:\n${realProjectsList}\n\nSource: GitHub / Resume`;
+      } else if (qLower.includes("certif") || qLower.includes("oracle")) {
+        const realCertsList = verifiedCertifications
+          .map((c, idx) => `${idx + 1}. ${c.title} — ${c.issuer} (${c.issueDate})`)
+          .join('\n');
+        fallbackText = `Abhishek's verified certifications are:\n${realCertsList}\n\nSource: Certifications / Resume`;
+      } else if (
+        qLower.includes("skill") ||
+        qLower.includes("technolog") ||
+        qLower.includes("stack") ||
+        qLower.includes("python") ||
+        qLower.includes("sql") ||
+        qLower.includes("pyspark") ||
+        qLower.includes("duckdb")
+      ) {
+        fallbackText = `Abhishek's verified technical skills include:\n- Programming Languages: Python, SQL, Java (Basic)\n- AI & Generative AI: Machine Learning, Deep Learning, PyTorch, LLMs, RAG, Prompt Engineering, Multi-Agent Systems\n- Data Engineering: PySpark, DuckDB, Apache Airflow, ETL Pipelines, Kafka\n- Vector Databases: Qdrant\n- Frameworks: FastAPI, Flask, Streamlit, REST APIs, JWT, Firebase Auth\n- Tools: Git, GitHub\n\nSource: Resume / Skills`;
+      } else if (qLower.includes("github") || qLower.includes("repo")) {
+        fallbackText = `Abhishek's verified GitHub profile is https://github.com/AbhiA0821 containing 9 public repositories.\n\nSource: GitHub / Resume`;
+      } else if (qLower.includes("linkedin")) {
+        fallbackText = `Abhishek's verified LinkedIn profile is https://www.linkedin.com/in/abhishek-ainapure.\n\nSource: Resume / LinkedIn`;
       }
 
       setMessages((prev) => [

@@ -69,7 +69,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ profile: _profile, isO
               </a>
             </p>
             <p className="text-xs font-mono text-blue-400 print:text-black flex flex-wrap items-center justify-center gap-x-4">
-              <a href="https://linkedin.com/in/abhishek-ainapure" target="_blank" rel="noreferrer" className="hover:underline flex items-center gap-1">
+              <a href="https://www.linkedin.com/in/abhishek-ainapure" target="_blank" rel="noreferrer" className="hover:underline flex items-center gap-1">
                 <LinkedinIcon className="w-3.5 h-3.5 print:hidden" /> linkedin.com/in/abhishek-ainapure
               </a>
               <span>•</span>
@@ -85,7 +85,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ profile: _profile, isO
               <FileText className="w-4 h-4 print:hidden" /> PROFILE SUMMARY
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 print:text-black leading-relaxed">
-              B.Tech Artificial Intelligence and Data Science student with hands-on experience in Python, Machine Learning, Data Engineering, and AI application development. Skilled in PySpark, DuckDB, SQL, Apache Airflow, Flask, and Streamlit. Passionate about building scalable data pipelines, AI-powered applications, and intelligent data solutions.
+              B.Tech Artificial Intelligence and Data Science student with hands-on experience in Python, Machine Learning, Generative AI, and Computer Vision. Skilled in building LLM-powered applications, Retrieval-Augmented Generation (RAG) pipelines, and multi-agent AI systems, alongside scalable data engineering using PySpark, DuckDB, and Apache Airflow. Passionate about applying AI, GenAI, and intelligent automation to solve real-world problems, with a growing interest in robotics and autonomous systems.
             </p>
           </div>
 
@@ -96,8 +96,9 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ profile: _profile, isO
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300 print:text-black font-mono">
               <p><strong className="text-white print:text-black">Programming Languages:</strong> Python, SQL, Java (Basic)</p>
+              <p><strong className="text-white print:text-black">AI & Generative AI:</strong> Machine Learning, LLMs, RAG, Prompt Engineering, AI Agents, Multi-Agent Systems, Generative AI</p>
               <p><strong className="text-white print:text-black">Data Engineering:</strong> PySpark, DuckDB, Apache Airflow, ETL Pipelines</p>
-              <p><strong className="text-white print:text-black">Data Science & AI:</strong> Machine Learning, LLMs, Generative AI</p>
+              <p><strong className="text-white print:text-black">Vector Databases:</strong> Qdrant</p>
               <p><strong className="text-white print:text-black">Frameworks:</strong> Flask, Streamlit, REST APIs</p>
               <p><strong className="text-white print:text-black">Libraries:</strong> NumPy, Pandas, Matplotlib, Scikit-learn</p>
               <p><strong className="text-white print:text-black">Tools & Platforms:</strong> Git, GitHub</p>
@@ -114,7 +115,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ profile: _profile, isO
             <div className="space-y-1">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                 <h3 className="text-xs font-bold text-white print:text-black">
-                  Infosys Springboard 7.0 — AI Virtual Internship
+                  Infosys Springboard 7.0 – AI Virtual Internship
                 </h3>
                 <span className="text-[11px] font-mono text-slate-400 print:text-black">Starting August 2026</span>
               </div>
@@ -167,15 +168,15 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ profile: _profile, isO
             <div className="space-y-1 pt-2">
               <div className="flex items-center justify-between">
                 <h3 className="text-xs font-bold text-white print:text-black flex items-center gap-2">
-                  <span>AI Resume Analyzer & Live Job Matcher</span>
+                  <span>HireAgent – AI-Powered Multi-Agent Recruitment System (Ongoing)</span>
                   <a href="https://github.com/AbhiA0821/Resume-Matcher" target="_blank" rel="noreferrer" className="text-[10px] font-mono text-blue-400 underline print:no-underline">(GitHub)</a>
                 </h3>
               </div>
-              <p className="text-[11px] font-mono text-slate-400 print:text-black">Python | Streamlit | Scikit-learn | KNN | Random Forest | SQLite | RapidAPI</p>
+              <p className="text-[11px] font-mono text-slate-400 print:text-black">Python | LLMs | RAG | Qdrant | Multi-Agent Systems | Streamlit | Scikit-learn</p>
               <ul className="list-disc list-inside text-xs text-slate-300 print:text-black space-y-0.5 pl-1">
-                <li>Developed an AI-powered resume analyzer for skill extraction and domain classification.</li>
-                <li>Developed a machine learning-based job recommendation system using KNN and Random Forest.</li>
-                <li>Integrated real-time job listings using RapidAPI and deployed the application on Streamlit Cloud.</li>
+                <li>Developing a multi-agent AI system that uses LLMs and Retrieval-Augmented Generation (RAG) for automated resume analysis and job matching.</li>
+                <li>Implementing the Qdrant vector database for semantic search and context-aware resume-to-job matching.</li>
+                <li>Designing collaborative AI agents for skill extraction, domain classification, and job recommendation, with real-time job listings integrated via RapidAPI.</li>
               </ul>
             </div>
 
