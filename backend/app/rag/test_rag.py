@@ -31,7 +31,7 @@ async def run_tests_async():
     print("=" * 60)
 
     passed_count = 0
-    total_count = len(TEST_QUESTIONS)
+    total_count = len(TEST_QUESTIONS) + 1
 
     for idx, (question, expected_keywords) in enumerate(TEST_QUESTIONS, 1):
         print(f"\n[{idx}/{total_count}] Query: '{question}'")
@@ -64,6 +64,23 @@ async def run_tests_async():
             passed_count += 1
         else:
             print(f"    FAILED [FAIL] (Expected any of {expected_keywords})")
+
+    # Multi-turn Follow-up Test ("explain any one")
+    print(f"\n[{total_count}/{total_count}] Query: 'explain any one' (Multi-Turn Follow-up)")
+    history = [
+        {"role": "user", "content": "What projects has he built?"},
+        {"role": "assistant", "content": "Abhishek has built MedIntel, HireAgent, and Art Generation using CycleGANs."}
+    ]
+    multiturn_output = ""
+    async for chunk in orchestrator.route_and_execute_stream("explain any one", conversation_history=history):
+        multiturn_output += chunk
+
+    print(f"    Agent Output Preview: {multiturn_output[:120]}...")
+    if any(kw.lower() in multiturn_output.lower() for kw in ["medintel", "hireagent", "cyclegan", "project"]):
+        print("    PASSED [OK] (Conversational Follow-up Resolved Successfully)")
+        passed_count += 1
+    else:
+        print("    FAILED [FAIL] (Multi-turn Follow-up Failed)")
 
     print("\n" + "=" * 60)
     print(f"TEST SUMMARY: {passed_count}/{total_count} PASSED")

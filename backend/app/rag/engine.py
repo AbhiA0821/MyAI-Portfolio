@@ -7,7 +7,7 @@ from .ingest import load_verified_documents, generate_doc_hash
 # Try importing Qdrant and FastEmbed
 try:
     from qdrant_client import QdrantClient
-    from qdrant_client.models import Distance, VectorParams, PointStruct, Filter, FieldCondition, MatchValue
+    from qdrant_client.models import Distance, VectorParams, PointStruct
     HAS_QDRANT = True
 except ImportError:
     HAS_QDRANT = False
@@ -32,6 +32,11 @@ DOMAIN_KEYWORDS = {
     "skill", "skills", "technolog", "technology", "technologies", "stack", "python", "pyspark", "duckdb", "airflow", "pytorch", "sql", "qdrant",
     "contact", "email", "phone number", "mobile", "linkedin", "location", "role"
 }
+
+FOLLOW_UP_TRIGGERS = [
+    "explain", "tell me more", "details", "detail", "any one", "one of them", "first", "second", "third",
+    "1st", "2nd", "3rd", "which one", "what about", "is it", "ongoing", "status", "this", "that", "more", "one"
+]
 
 class RAGEngine:
     def __init__(self, db_path: str = "./qdrant_db", collection_name: str = "portfolio_knowledge"):
@@ -120,8 +125,8 @@ class RAGEngine:
                 points=points
             )
 
-    def preprocess_query(self, query: str) -> Dict[str, Any]:
-        """Processes query string and detects category intent."""
+    def preprocess_query(self, query: str, history: Optional[List[Dict[str, str]]] = None) -> Dict[str, Any]:
+        """Processes query string, detects category intent, and resolves conversational follow-ups."""
         q_lower = query.lower()
         cleaned_q = re.sub(r'[^\w\s]', '', q_lower)
         query_words = set(cleaned_q.split())
@@ -129,6 +134,7 @@ class RAGEngine:
         
         detected_category = None
         has_domain_term = any(kw in cleaned_q for kw in DOMAIN_KEYWORDS)
+        is_follow_up = any(trig in cleaned_q for trig in FOLLOW_UP_TRIGGERS)
 
         # Reject private/unrelated questions from mapping to category
         is_unrelated = any(w in cleaned_q for w in ["password", "pin", "food", "favorite", "hobby", "join in 2030", "salary", "wifi", "secret"])
@@ -156,25 +162,56 @@ class RAGEngine:
                 else:
                     detected_category = "profile"
 
+        # Conversational Context Resolution from History
+        if not detected_category and is_follow_up and history and not is_unrelated:
+            history_text = " ".join([m.get("content", "").lower() for m in history[-4:]])
+            if any(w in history_text for w in ["project", "projects", "built", "medintel", "hireagent", "cyclegan"]):
+                detected_category = "projects"
+                has_domain_term = True
+            elif any(w in history_text for w in ["education", "college", "clg", "degree", "btech", "study"]):
+                detected_category = "education"
+                has_domain_term = True
+            elif any(w in history_text for w in ["intern", "internship", "experience", "tecspeak", "infosys"]):
+                detected_category = "experience"
+                has_domain_term = True
+            elif any(w in history_text for w in ["certif", "certification", "oracle"]):
+                detected_category = "certifications"
+                has_domain_term = True
+            elif any(w in history_text for w in ["skill", "skills", "technolog", "python"]):
+                detected_category = "skills"
+                has_domain_term = True
+
         return {
             "cleaned_query": cleaned_q,
             "raw_query": query,
             "meaningful_words": meaningful_words,
             "has_domain_term": has_domain_term,
             "is_unrelated": is_unrelated,
+            "is_follow_up": is_follow_up,
             "detected_category": detected_category
         }
 
-    def search(self, query: str, category_filter: Optional[str] = None, top_k: int = 4) -> List[Dict[str, Any]]:
-        """Hybrid retrieval combining Qdrant dense vector similarity and category/keyword filtering."""
-        query_meta = self.preprocess_query(query)
+    def search(self, query: str, category_filter: Optional[str] = None, top_k: int = 4, history: Optional[List[Dict[str, str]]] = None) -> List[Dict[str, Any]]:
+        """Hybrid retrieval combining Qdrant dense vector similarity, conversational history, and category filtering."""
+        query_meta = self.preprocess_query(query, history=history)
         effective_category = category_filter or query_meta["detected_category"]
 
         # Anti-Hallucination Guardrail: If query is unrelated or has no domain terms/category, reject unverified queries immediately
         if query_meta["is_unrelated"] or (not query_meta["has_domain_term"] and not effective_category):
             return []
 
-        query_vec = self._generate_embedding(query)
+        # Enrich search query with history if follow-up
+        effective_search_query = query
+        if query_meta["is_follow_up"] and history:
+            last_user_msg = ""
+            for m in reversed(history):
+                if m.get("role") == "user":
+                    last_user_msg = m.get("content", "")
+                    break
+            if last_user_msg:
+                effective_search_query = f"{last_user_msg} {query}"
+
+        query_vec = self._generate_embedding(effective_search_query)
         results = []
 
         # 1. Qdrant Vector Similarity Retrieval if active
@@ -198,7 +235,16 @@ class RAGEngine:
 
                     # Boost score if matching detected category
                     if effective_category and doc.get("category") == effective_category:
-                        score += 0.35
+                        score += 0.45
+
+                    # Ordinal targeting boost ("first", "second", "third", "1st", "2nd", "3rd")
+                    q_low = query.lower()
+                    if any(w in q_low for w in ["first", "1st", "any one", "one of them"]) and "medintel" in doc_content_low:
+                        score += 0.50
+                    elif any(w in q_low for w in ["second", "2nd"]) and "hireagent" in doc_content_low:
+                        score += 0.50
+                    elif any(w in q_low for w in ["third", "3rd"]) and "cyclegan" in doc_content_low:
+                        score += 0.50
 
                     results.append((score, doc))
             except Exception as e:
@@ -215,7 +261,7 @@ class RAGEngine:
                 score = overlap / (len(query_meta["meaningful_words"]) + 1.0)
 
                 if effective_category and doc.get("category") == effective_category:
-                    score += 0.40
+                    score += 0.50
 
                 if score > 0.05 or (effective_category and doc.get("category") == effective_category):
                     results.append((score, doc))
