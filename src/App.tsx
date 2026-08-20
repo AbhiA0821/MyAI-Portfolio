@@ -32,6 +32,10 @@ export function App() {
 
   // Check URL pathname for /admin or /admin/login
   useEffect(() => {
+    // Silent background warmup ping to wake up Render backend immediately on page load
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+    fetch(`${backendUrl}/health`).catch(() => {});
+
     const handleOpenChat = () => setIsChatOpen(true);
     window.addEventListener('open-chat-widget', handleOpenChat);
 
