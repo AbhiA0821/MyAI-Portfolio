@@ -162,25 +162,21 @@ class RAGEngine:
                 else:
                     detected_category = "profile"
 
-        # Conversational Context Resolution from History or Default Follow-up
+        # Universal Conversational Context Resolution for ALL Categories
         if not detected_category and is_follow_up and not is_unrelated:
             has_domain_term = True
             history_text = " ".join([m.get("content", "").lower() for m in (history or [])])
             
             if any(w in history_text for w in ["project", "projects", "built", "medintel", "hireagent", "cyclegan"]):
                 detected_category = "projects"
+            elif any(w in history_text for w in ["education", "college", "clg", "degree", "btech", "study", "cgpa"]):
+                detected_category = "education"
             elif any(w in history_text for w in ["intern", "internship", "experience", "tecspeak", "infosys"]):
                 detected_category = "experience"
             elif any(w in history_text for w in ["certif", "certification", "oracle"]):
                 detected_category = "certifications"
             elif any(w in history_text for w in ["skill", "skills", "technolog", "python"]):
                 detected_category = "skills"
-            elif any(w in history_text for w in ["education", "college", "clg", "degree", "btech", "study"]):
-                # If follow up asks to "explain one", fallback to projects for detailed explanation
-                if any(w in cleaned_q for w in ["one", "explain", "detail", "more"]):
-                    detected_category = "projects"
-                else:
-                    detected_category = "education"
             else:
                 # Default follow-up resolution for ambiguous "explain any one" -> Projects
                 detected_category = "projects"
@@ -214,8 +210,8 @@ class RAGEngine:
                     break
             if last_user_msg:
                 effective_search_query = f"{last_user_msg} {query}"
-        elif query_meta["is_follow_up"] and effective_category == "projects":
-            effective_search_query = f"projects {query}"
+        elif query_meta["is_follow_up"] and effective_category:
+            effective_search_query = f"{effective_category} {query}"
 
         query_vec = self._generate_embedding(effective_search_query)
         results = []
@@ -245,11 +241,11 @@ class RAGEngine:
 
                     # Ordinal targeting boost ("first", "second", "third", "1st", "2nd", "3rd")
                     q_low = query.lower()
-                    if any(w in q_low for w in ["first", "1st", "any one", "one of them", "one"]) and "medintel" in doc_content_low:
+                    if any(w in q_low for w in ["first", "1st", "any one", "one of them", "one"]) and ("medintel" in doc_content_low or "b.tech" in doc_content_low or "tecspeak" in doc_content_low):
                         score += 0.50
-                    elif any(w in q_low for w in ["second", "2nd"]) and "hireagent" in doc_content_low:
+                    elif any(w in q_low for w in ["second", "2nd"]) and ("hireagent" in doc_content_low or "infosys" in doc_content_low or "hsc" in doc_content_low):
                         score += 0.50
-                    elif any(w in q_low for w in ["third", "3rd"]) and "cyclegan" in doc_content_low:
+                    elif any(w in q_low for w in ["third", "3rd"]) and ("cyclegan" in doc_content_low or "ssc" in doc_content_low or "oracle" in doc_content_low):
                         score += 0.50
 
                     results.append((score, doc))
